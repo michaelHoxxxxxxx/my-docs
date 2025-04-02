@@ -1,26 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-</head>
-<body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '',
-      repo: ''
-    }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-</body>
-</html>
-<!-->index.html<-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,8 +25,13 @@
       basePath: '/', // 资源相对路径
       name: '学习文档', // 文档标题，会显示在侧边栏顶部
       nameLink: '/', // 点击文档标题后的跳转地址
-      repo: 'lexmin0412/docsify-website-sample', // 有repo属性则右上角会展示github图标，点击可进入
+      repo: 'michaelHoxxxxxxx/my-docs', // 有repo属性则右上角会展示github图标，点击可进入
       loadSidebar: true, // 加载侧边栏
+      subMaxLevel: 2, 
+      sidebarCollapse: {
+    collapse: true,   // 默认折叠
+    autoOpen: false,  // 不自动展开
+  },
       externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
       cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
       routerMode: 'hash', // 路由方式 默认hash
@@ -73,7 +56,7 @@
       },
       plugins: [
         EditOnGithubPlugin.create(
-          'https://github.com/lexmin0412/docsify-website-sample/blob/master/docs/',
+          'https://github.com/michaelHoxxxxxxx/my-docs/blob/master/docs/',
           null,
           function ( file ) {
             if ( file.indexOf( 'en' ) === -1 ) {
@@ -124,6 +107,7 @@
     }
   </script>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
 <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
