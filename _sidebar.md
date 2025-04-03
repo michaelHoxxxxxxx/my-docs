@@ -29,3 +29,4 @@
   - [SurrealDB 简介](docs/surrealdb_intro.md)
   - [SurrealDB 安装与配置](docs/surrealdb_install.md)
   - [SurrealDB 基础概念](docs/surrealdb_basic-concepts.md)
+  - [SurrealDB 实用技巧](docs/surrealdb_advanced-concepts.md)
