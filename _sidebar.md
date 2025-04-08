@@ -1,4 +1,3 @@
-
 - **📖 n8n 学习文档**
   - [n8n 简介](docs/n8n_intro.md)
   - [n8n 安装与配置](docs/n8n_install.md)
@@ -33,3 +32,4 @@
 
 - **📖 Rust Supabase 认证与权限学习文档**
   - [Rust Supabase 认证与权限学习文档](docs/rust-supabase-auth-guide.md)
+  - [JWT (JSON Web Token) 简介](docs/jwt_intro.md)
