@@ -33,3 +33,11 @@
 - **📖 Rust Supabase 认证与权限学习文档**
   - [Rust Supabase 认证与权限学习文档](docs/rust-supabase-auth-guide.md)
   - [JWT (JSON Web Token) 简介](docs/jwt_intro.md)
+
+
+- **📖 彩虹城一体七翼学习文档**
+  - [彩虹城AI伴侣系统概述](docs/rainbowcity.md)
+  - [AI中央意识核心初始化](docs/rainbowcity1.md)
+  - [1-一体之1-身份叙事系统](docs/rainbowcity2.md)
+  - [2-一体之2-价值观矩阵](docs/rainbowcity3.md)
+  - [3-一体之3-人格信息系统](docs/rainbowcity4.md)
