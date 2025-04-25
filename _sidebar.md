@@ -41,3 +41,11 @@
   - [1-一体之1-身份叙事系统](docs/rainbowcity2.md)
   - [2-一体之2-价值观矩阵](docs/rainbowcity3.md)
   - [3-一体之3-人格信息系统](docs/rainbowcity4.md)
+  - [4-一体之4-关系网络系统](docs/rainbowcity5.md)
+  - [5-一体之5-能力系统](docs/rainbowcity6.md)
+  - [6-一体之6-AI技能系统](docs/rainbowcity7.md)
+
+
+- **📖 HawkinsDB学习文档**
+  - [HawkinsDB 简介](docs/hawkinsdb_intro.md)
+  
