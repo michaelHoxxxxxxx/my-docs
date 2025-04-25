@@ -57,3 +57,6 @@
 
 - **📖 NodeRAG学习文档**
   - [NodeRAG](docs/nodrag_intro.md)
+
+- **📖 Suna学习文档**
+  - [Suna](docs/suna_intro.md)
