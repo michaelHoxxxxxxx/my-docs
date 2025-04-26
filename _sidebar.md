@@ -30,7 +30,7 @@
   - [SurrealDB 基础概念](docs/surrealdb_basic-concepts.md)
   - [SurrealDB 实用技巧](docs/surrealdb_advanced-concepts.md)
 
-- **📖 Rust Supabase 认证与权限学习文档**
+- **📖 Rust Supabase 学习文档**
   - [Rust Supabase 认证与权限学习文档](docs/rust-supabase-auth-guide.md)
   - [JWT (JSON Web Token) 简介](docs/jwt_intro.md)
 
