@@ -50,8 +50,8 @@
   - [点击展开](docs/hawkinsdb_intro.md)
   
 - **📖 Agno学习文档**
-  - [点击展开](docs/agno_intro.md)
-  
+  - [介绍](docs/agno_intro.md)
+  - [对话流程实现](docs/agno_true.md)  
 - **📖 VoltAgent学习文档**
   - [点击展开](docs/voltagent_intro.md)
 
