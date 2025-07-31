@@ -5,7 +5,7 @@
 ## 📚 文档目录
 
 ### 🎯 入门指南
-1. [**E2B SDK 概述**](./01_e2b_sdk_overview.md)
+1. [**E2B SDK 概述**](./docs/e2b_study/01_e2b_sdk_overview.md)
    - E2B SDK 的基本介绍和核心概念
    - 核心组件分析：沙箱、文件系统、命令执行
    - 与 OpenAI 等 LLM 的集成方式

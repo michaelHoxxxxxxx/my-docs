@@ -65,5 +65,5 @@
   - [点击展开](docs/MEM0_使用指南.md)
 
 - **📖 e2b学习指南**
-  - [点击](docs/e2b_study/README.md.md)
+  - [点击展开](docs/e2b_study/README.md.md)
   - [](docs/e2b_study/01_e2b_sdk_overview.md)
