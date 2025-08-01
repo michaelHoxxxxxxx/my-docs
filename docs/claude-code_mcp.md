@@ -332,5 +332,4 @@ claude cache clear
 
 MCP 配置完成后，你可以：
 - [创建和使用专业化 Agent](claude-code_agents.md)
-- [探索高级工作流](claude-code_advanced.md)
-- [集成到 CI/CD 流程](claude-code_cicd.md)
+- 继续探索 MCP 的更多功能和集成方式
