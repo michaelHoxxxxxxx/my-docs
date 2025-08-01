@@ -1,13 +1,18 @@
 // 页面加载完成后的初始化
 window.addEventListener('load', function() {
   console.log('自定义脚本已加载');
+  console.log('用户代理:', navigator.userAgent);
+  console.log('是否为移动设备:', /Mobi|Android/i.test(navigator.userAgent));
   
   // 获取开始阅读按钮
   var startButton = document.getElementById('start-reading-btn');
   
   if (startButton) {
-    // 添加点击事件
-    startButton.addEventListener('click', function() {
+    // 添加多种事件监听器以支持移动端
+    function handleStartReading(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
       var customCover = document.getElementById('custom-cover');
       
       // 添加平滑过渡效果
@@ -18,7 +23,20 @@ window.addEventListener('load', function() {
       setTimeout(function() {
         customCover.style.display = 'none';
       }, 800);
+    }
+    
+    // 添加多种事件支持移动端
+    startButton.addEventListener('click', handleStartReading);
+    startButton.addEventListener('touchstart', handleStartReading);
+    startButton.addEventListener('touchend', function(e) {
+      e.preventDefault();
     });
+    
+    // 添加移动端样式
+    startButton.style.webkitTapHighlightColor = 'transparent';
+    startButton.style.webkitTouchCallout = 'none';
+    startButton.style.webkitUserSelect = 'none';
+    startButton.style.userSelect = 'none';
   }
   
   // 自定义返回顶部按钮功能

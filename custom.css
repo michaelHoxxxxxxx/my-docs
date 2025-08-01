@@ -49,6 +49,48 @@ body.dark .markdown-section {
     border-radius: 0 4px 4px 0;
   }
   
+  /* 封面页移动端优化 */
+  #custom-cover {
+    padding: 20px;
+  }
+  
+  #custom-cover h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  #custom-cover p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* 开始阅读按钮移动端优化 */
+  #start-reading-btn {
+    font-size: 18px !important;
+    padding: 14px 28px !important;
+    min-height: 48px !important;
+    min-width: 120px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(66, 185, 131, 0.3);
+    position: relative;
+    z-index: 9999;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  #start-reading-btn:hover,
+  #start-reading-btn:focus,
+  #start-reading-btn:active {
+    background-color: #369870 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(66, 185, 131, 0.4);
+  }
+  
+  #start-reading-btn:active {
+    transform: translateY(0);
+  }
+}
+  
   .content {
     padding-top: 20px;
     left: 0;
