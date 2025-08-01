@@ -73,6 +73,33 @@
     - 函数调用和高级功能
     - 错误处理和调试技巧
 
+### 🚀 高级集成
+12. [E2B LLM 集成示例大全](./docs/e2b_study/10_e2b_llm_integrations.md) 🆕
+    - OpenAI 系列模型集成（o1/o3-mini、GPT-4o）
+    - Anthropic Claude 3 代码解释器
+    - 开源模型集成（Llama、Qwen、DeepSeek）
+    - 企业级平台集成（WatsonX、Groq）
+
+13. [E2B AI 框架集成指南](./docs/e2b_study/11_e2b_ai_frameworks.md) 🆕
+    - LangChain 和 LangGraph 工作流集成
+    - Autogen 多代理系统
+    - Vercel AI SDK 和 AgentKit 集成
+    - 框架对比与选择指南
+
+### 🏗️ 部署运维
+14. [E2B 自托管部署指南](./docs/e2b_study/12_e2b_self_hosting.md) 🆕
+    - GCP、AWS、Azure 部署方案
+    - Kubernetes 和 Docker 部署
+    - 高可用配置和性能调优
+    - 监控运维和安全配置
+
+### 📱 实际应用
+15. [E2B 实际应用案例详解](./docs/e2b_study/13_e2b_real_world_applications.md) 🆕
+    - E2B AI Analyst 数据分析平台
+    - E2B Fragments 应用生成器
+    - E2B Surf 计算机使用代理
+    - 企业级和行业特定解决方案
+
 ## 🎯 学习路径建议
 
 ### 👶 初学者路径 (适合编程零基础)
@@ -83,20 +110,23 @@
 ### 🧑‍💻 开发者路径 (有编程经验)
 1. [E2B 完整使用指南](./docs/e2b_study/e2b_comprehensive_guide.md) - 快速上手
 2. [E2B 核心架构与技术实现](./docs/e2b_study/05_e2b_core_architecture.md) - 理解原理
-3. [E2B vs 其他方案对比](./docs/e2b_study/09_e2b_vs_alternatives.md) - 技术选型
-4. [E2B 代码示例分析](./docs/e2b_study/04_code_examples.md) - 实战演练
+3. [E2B LLM 集成示例大全](./docs/e2b_study/10_e2b_llm_integrations.md) - 模型集成
+4. [E2B AI 框架集成指南](./docs/e2b_study/11_e2b_ai_frameworks.md) - 框架应用
+5. [E2B 代码示例分析](./docs/e2b_study/04_code_examples.md) - 实战演练
 
 ### 🏗️ 架构师路径 (系统设计)
 1. [E2B 核心架构与技术实现](./docs/e2b_study/05_e2b_core_architecture.md) - 架构设计
 2. [E2B 安全模型与认证机制](./docs/e2b_study/07_e2b_security_authentication.md) - 安全设计
 3. [E2B 性能优化与资源管理](./docs/e2b_study/08_e2b_performance_optimization.md) - 性能设计
-4. [E2B 沙箱生命周期管理](./docs/e2b_study/06_e2b_sandbox_lifecycle.md) - 运维设计
+4. [E2B 自托管部署指南](./docs/e2b_study/12_e2b_self_hosting.md) - 部署运维
+5. [E2B 沙箱生命周期管理](./docs/e2b_study/06_e2b_sandbox_lifecycle.md) - 运维设计
 
 ### 🎓 深度研究路径 (技术专家)
 1. [E2B 与 Firecracker 集成分析](./docs/e2b_study/03_e2b_firecracker_integration.md) - 底层技术
 2. [E2B vs 其他方案对比](./docs/e2b_study/09_e2b_vs_alternatives.md) - 技术对比
 3. [E2B 性能优化与资源管理](./docs/e2b_study/08_e2b_performance_optimization.md) - 性能调优
-4. 源码研究和贡献
+4. [E2B 实际应用案例详解](./docs/e2b_study/13_e2b_real_world_applications.md) - 实战案例
+5. 源码研究和贡献
 
 ## 🛠️ 快速开始
 
