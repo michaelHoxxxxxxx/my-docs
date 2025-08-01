@@ -89,7 +89,6 @@ body.dark .markdown-section {
   #start-reading-btn:active {
     transform: translateY(0);
   }
-}
   
   .content {
     padding-top: 20px;
@@ -102,6 +101,7 @@ body.dark .markdown-section {
   body.close .sidebar {
     transform: translateX(300px);
   }
+}
   
   .markdown-section {
     padding: 1rem 0.8rem;

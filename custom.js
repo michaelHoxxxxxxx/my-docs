@@ -8,35 +8,43 @@ window.addEventListener('load', function() {
   var startButton = document.getElementById('start-reading-btn');
   
   if (startButton) {
-    // 添加多种事件监听器以支持移动端
-    function handleStartReading(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      
+    // 处理开始阅读功能
+    function handleStartReading() {
+      console.log('开始阅读按钮被点击');
       var customCover = document.getElementById('custom-cover');
       
-      // 添加平滑过渡效果
-      customCover.style.transition = 'opacity 0.8s ease-in-out';
-      customCover.style.opacity = '0';
-      
-      // 延迟后完全隐藏封面
-      setTimeout(function() {
-        customCover.style.display = 'none';
-      }, 800);
+      if (customCover) {
+        // 添加平滑过渡效果
+        customCover.style.transition = 'opacity 0.8s ease-in-out';
+        customCover.style.opacity = '0';
+        
+        // 延迟后完全隐藏封面
+        setTimeout(function() {
+          customCover.style.display = 'none';
+          console.log('封面已隐藏');
+        }, 800);
+      }
     }
     
-    // 添加多种事件支持移动端
-    startButton.addEventListener('click', handleStartReading);
-    startButton.addEventListener('touchstart', handleStartReading);
-    startButton.addEventListener('touchend', function(e) {
-      e.preventDefault();
-    });
+    // 使用 onclick 方式处理，这是最兼容的方式
+    startButton.onclick = function(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      handleStartReading();
+      return false;
+    };
     
-    // 添加移动端样式
-    startButton.style.webkitTapHighlightColor = 'transparent';
-    startButton.style.webkitTouchCallout = 'none';
-    startButton.style.webkitUserSelect = 'none';
-    startButton.style.userSelect = 'none';
+    // 同时添加事件监听器作为备用
+    startButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      handleStartReading();
+    }, false);
+    
+    // 确保按钮可点击
+    startButton.style.cursor = 'pointer';
+    startButton.style.pointerEvents = 'auto';
   }
   
   // 自定义返回顶部按钮功能
