@@ -64,9 +64,23 @@
 - **📖 mem0学习文档**
   - [MEM0 使用指南](docs/MEM0_使用指南.md)
 
-- **📖 e2b学习指南**
-  - [e2b 学习概述](docs/e2b_study/README.md)
-  - [E2B SDK 概述](docs/e2b_study/01_e2b_sdk_overview.md)
+- **📖 E2B 学习指南**
+  - [E2B 学习概述](docs/README.md)
+  - [E2B SDK 概述](docs/01_e2b_sdk_overview.md)
+  - [E2B 零基础入门指南](docs/e2b_beginner_guide.md)
+  - [E2B 完整使用指南](docs/e2b_comprehensive_guide.md)
+  - [E2B 应用场景与最佳实践](docs/02_e2b_applications.md)
+  - [E2B 与 Firecracker 集成分析](docs/03_e2b_firecracker_integration.md)
+  - [E2B 核心架构与技术实现](docs/05_e2b_core_architecture.md)
+  - [E2B 沙箱生命周期管理](docs/06_e2b_sandbox_lifecycle.md)
+  - [E2B 安全模型与认证机制](docs/07_e2b_security_authentication.md)
+  - [E2B 性能优化与资源管理](docs/08_e2b_performance_optimization.md)
+  - [E2B vs 其他代码执行方案对比](docs/09_e2b_vs_alternatives.md)
+  - [E2B SDK 代码示例分析](docs/04_code_examples.md)
+  - [E2B LLM 集成示例大全](docs/10_e2b_llm_integrations.md)
+  - [E2B AI 框架集成指南](docs/11_e2b_ai_frameworks.md)
+  - [E2B 自托管部署指南](docs/12_e2b_self_hosting.md)
+  - [E2B 实际应用案例详解](docs/13_e2b_real_world_applications.md)
 
 - **📖 Claude Code 学习文档**
   - [Claude Code 简介](docs/claude-code_intro.md)
