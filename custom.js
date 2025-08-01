@@ -22,6 +22,17 @@ window.addEventListener('load', function() {
         setTimeout(function() {
           customCover.style.display = 'none';
           console.log('封面已隐藏');
+          
+          // 确保侧边栏切换按钮在移动端可见
+          if (window.innerWidth <= 768) {
+            var sidebarToggle = document.querySelector('.sidebar-toggle');
+            if (sidebarToggle) {
+              sidebarToggle.style.display = 'block';
+              sidebarToggle.style.visibility = 'visible';
+              sidebarToggle.style.opacity = '1';
+              console.log('侧边栏切换按钮已显示');
+            }
+          }
         }, 800);
       }
     }
