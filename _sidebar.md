@@ -67,3 +67,9 @@
 - **📖 e2b学习指南**
   - [e2b 学习概述](docs/e2b_study/README.md)
   - [E2B SDK 概述](docs/e2b_study/01_e2b_sdk_overview.md)
+
+- **📖 Claude Code 学习文档**
+  - [Claude Code 简介](docs/claude-code_intro.md)
+  - [Claude Code 安装与配置](docs/claude-code_install.md)
+  - [MCP 配置与使用](docs/claude-code_mcp.md)
+  - [Agent 创建与管理](docs/claude-code_agents.md)
