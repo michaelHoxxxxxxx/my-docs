@@ -215,4 +215,4 @@ python -m owl.ui.app
 
 ## 下一步
 
-成功安装和配置OWL后，您可以继续阅读[OWL基础概念](owl_basic-concepts.md)文档，了解如何使用OWL构建强大的多智能体应用。
+成功安装和配置OWL后，您可以继续阅读[OWL基础概念](docs/owl_basic-concepts.md)文档，了解如何使用OWL构建强大的多智能体应用。
