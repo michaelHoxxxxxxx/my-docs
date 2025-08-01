@@ -672,6 +672,6 @@ claude workflow optimize \
 ## 下一步
 
 优化了个人工作流后，你可以：
-- [配置团队协作环境](claude-code_team.md)
-- [深入了解高级功能](claude-code_advanced.md)
-- [集成到 CI/CD 流程](claude-code_cicd.md)
+- [配置团队协作环境](docs/claude-code_team.md)
+- [深入了解高级功能](docs/claude-code_advanced.md)
+- [集成到 CI/CD 流程](docs/claude-code_cicd.md)

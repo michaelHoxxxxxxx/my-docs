@@ -484,6 +484,6 @@ claude perf analyze performance.profile
 ## 下一步
 
 掌握了这些高级功能后，你可以：
-- [将 Claude Code 集成到 CI/CD 流程](claude-code_cicd.md)
-- [优化开发工作流](claude-code_workflow.md)
-- [配置团队协作环境](claude-code_team.md)
+- [将 Claude Code 集成到 CI/CD 流程](docs/claude-code_cicd.md)
+- [优化开发工作流](docs/claude-code_workflow.md)
+- [配置团队协作环境](docs/claude-code_team.md)

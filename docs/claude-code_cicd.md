@@ -696,6 +696,6 @@ exit 1
 ## 下一步
 
 掌握了 CI/CD 集成后，你可以：
-- [优化开发工作流](claude-code_workflow.md)
-- [配置团队协作环境](claude-code_team.md)
-- [深入了解高级功能](claude-code_advanced.md)
+- [优化开发工作流](docs/claude-code_workflow.md)
+- [配置团队协作环境](docs/claude-code_team.md)
+- [深入了解高级功能](docs/claude-code_advanced.md)
