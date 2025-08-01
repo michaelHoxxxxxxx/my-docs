@@ -103,29 +103,29 @@
 ## 🎯 学习路径建议
 
 ### 👶 初学者路径 (适合编程零基础)
-1. [E2B 零基础入门指南](./docs/e2b_study/e2b_beginner_guide.md) - 从基本概念开始
-2. [E2B SDK 概述](./docs/e2b_study/01_e2b_sdk_overview.md) - 了解核心功能
-3. [E2B 完整使用指南](./docs/e2b_study/e2b_comprehensive_guide.md) - 动手实践
+1. [E2B 零基础入门指南](e2b_beginner_guide.md) - 从基本概念开始
+2. [E2B SDK 概述](01_e2b_sdk_overview.md) - 了解核心功能
+3. [E2B 完整使用指南](e2b_comprehensive_guide.md) - 动手实践
 
 ### 🧑‍💻 开发者路径 (有编程经验)
-1. [E2B 完整使用指南](./docs/e2b_study/e2b_comprehensive_guide.md) - 快速上手
-2. [E2B 核心架构与技术实现](./docs/e2b_study/05_e2b_core_architecture.md) - 理解原理
-3. [E2B LLM 集成示例大全](./docs/e2b_study/10_e2b_llm_integrations.md) - 模型集成
-4. [E2B AI 框架集成指南](./docs/e2b_study/11_e2b_ai_frameworks.md) - 框架应用
-5. [E2B 代码示例分析](./docs/e2b_study/04_code_examples.md) - 实战演练
+1. [E2B 完整使用指南](e2b_comprehensive_guide.md) - 快速上手
+2. [E2B 核心架构与技术实现](05_e2b_core_architecture.md) - 理解原理
+3. [E2B LLM 集成示例大全](10_e2b_llm_integrations.md) - 模型集成
+4. [E2B AI 框架集成指南](11_e2b_ai_frameworks.md) - 框架应用
+5. [E2B 代码示例分析](04_code_examples.md) - 实战演练
 
 ### 🏗️ 架构师路径 (系统设计)
-1. [E2B 核心架构与技术实现](./docs/e2b_study/05_e2b_core_architecture.md) - 架构设计
-2. [E2B 安全模型与认证机制](./docs/e2b_study/07_e2b_security_authentication.md) - 安全设计
-3. [E2B 性能优化与资源管理](./docs/e2b_study/08_e2b_performance_optimization.md) - 性能设计
-4. [E2B 自托管部署指南](./docs/e2b_study/12_e2b_self_hosting.md) - 部署运维
-5. [E2B 沙箱生命周期管理](./docs/e2b_study/06_e2b_sandbox_lifecycle.md) - 运维设计
+1. [E2B 核心架构与技术实现](05_e2b_core_architecture.md) - 架构设计
+2. [E2B 安全模型与认证机制](07_e2b_security_authentication.md) - 安全设计
+3. [E2B 性能优化与资源管理](08_e2b_performance_optimization.md) - 性能设计
+4. [E2B 自托管部署指南](12_e2b_self_hosting.md) - 部署运维
+5. [E2B 沙箱生命周期管理](06_e2b_sandbox_lifecycle.md) - 运维设计
 
 ### 🎓 深度研究路径 (技术专家)
-1. [E2B 与 Firecracker 集成分析](./docs/e2b_study/03_e2b_firecracker_integration.md) - 底层技术
-2. [E2B vs 其他方案对比](./docs/e2b_study/09_e2b_vs_alternatives.md) - 技术对比
-3. [E2B 性能优化与资源管理](./docs/e2b_study/08_e2b_performance_optimization.md) - 性能调优
-4. [E2B 实际应用案例详解](./docs/e2b_study/13_e2b_real_world_applications.md) - 实战案例
+1. [E2B 与 Firecracker 集成分析](03_e2b_firecracker_integration.md) - 底层技术
+2. [E2B vs 其他方案对比](09_e2b_vs_alternatives.md) - 技术对比
+3. [E2B 性能优化与资源管理](08_e2b_performance_optimization.md) - 性能调优
+4. [E2B 实际应用案例详解](13_e2b_real_world_applications.md) - 实战案例
 5. 源码研究和贡献
 
 ## 🛠️ 快速开始
