@@ -57,6 +57,6 @@ Claude Code 是一个交互式 CLI 工具，让开发者能够：
 ## 下一步
 
 继续阅读本系列文档，了解如何：
-- [安装与配置 Claude Code](claude-code_install)
-- [MCP 配置和使用](claude-code_mcp)
-- [Agent 创建和管理](claude-code_agents)
+- [安装与配置 Claude Code](docs/claude-code_install.md)
+- [MCP 配置和使用](docs/claude-code_mcp.md)
+- [Agent 创建和管理](docs/claude-code_agents.md)
