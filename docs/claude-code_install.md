@@ -183,3 +183,4 @@ claude test-permissions
 配置完成后，你可以：
 - [配置 MCP 连接外部服务](claude-code_mcp.md)
 - [创建和使用 Agent](claude-code_agents.md)
+- [探索高级功能](claude-code_advanced.md)

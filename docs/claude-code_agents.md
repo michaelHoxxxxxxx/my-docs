@@ -443,6 +443,6 @@ claude config set agents.timeout 120000
 ## 下一步
 
 Agent 配置完成后，你可以：
-- 创建更多专业化的 Agent
-- 将 Agent 集成到你的开发工作流中
-- 探索 Agent 与 MCP 的结合使用
+- [探索高级工作流](claude-code_advanced.md)
+- [集成到开发流程](claude-code_workflow.md)
+- [团队协作配置](claude-code_team.md)

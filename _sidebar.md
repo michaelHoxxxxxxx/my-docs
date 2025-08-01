@@ -73,3 +73,7 @@
   - [Claude Code 安装与配置](docs/claude-code_install.md)
   - [MCP 配置与使用](docs/claude-code_mcp.md)
   - [Agent 创建与管理](docs/claude-code_agents.md)
+  - [高级功能指南](docs/claude-code_advanced.md)
+  - [CI/CD 集成](docs/claude-code_cicd.md)
+  - [开发工作流集成](docs/claude-code_workflow.md)
+  - [团队协作配置](docs/claude-code_team.md)
