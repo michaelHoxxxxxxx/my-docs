@@ -47,23 +47,23 @@
 
 
 - **📖 HawkinsDB学习文档**
-  - [点击展开](docs/hawkinsdb_intro.md)
+  - [HawkinsDB 简介](docs/hawkinsdb_intro.md)
   
 - **📖 Agno学习文档**
   - [介绍](docs/agno_intro.md)
   - [对话流程实现](docs/agno_true.md)  
 - **📖 VoltAgent学习文档**
-  - [点击展开](docs/voltagent_intro.md)
+  - [VoltAgent 简介](docs/voltagent_intro.md)
 
 - **📖 NodeRAG学习文档**
-  - [点击展开](docs/nodrag_intro.md)
+  - [NodeRAG 简介](docs/nodrag_intro.md)
 
 - **📖 Suna学习文档**
-  - [点击展开](docs/suna_intro.md)
+  - [Suna 简介](docs/suna_intro.md)
 
 - **📖 mem0学习文档**
-  - [点击展开](docs/MEM0_使用指南.md)
+  - [MEM0 使用指南](docs/MEM0_使用指南.md)
 
 - **📖 e2b学习指南**
-  - [点击展开](docs/e2b_study/README.md.md)
-  - [](docs/e2b_study/01_e2b_sdk_overview.md)
+  - [e2b 学习概述](docs/e2b_study/README.md)
+  - [E2B SDK 概述](docs/e2b_study/01_e2b_sdk_overview.md)

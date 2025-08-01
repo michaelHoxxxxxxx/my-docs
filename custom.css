@@ -1,0 +1,453 @@
+/* 自定义样式 */
+
+/* 主要背景颜色 */
+body:not(.dark) {
+  background: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%, hsl(181, 100%, 85%) 100%);
+  background-attachment: fixed;
+}
+
+/* 暗色模式主要背景颜色 */
+body.dark {
+  background: #091a28;
+  background-attachment: fixed;
+}
+
+.content {
+  background: transparent !important;
+}
+
+/* 亮色模式文档区域 */
+body:not(.dark) .markdown-section,
+body.light .markdown-section {
+  background-color: #ffffff;
+  color: #34495e;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 2rem;
+  margin: 1rem;
+}
+
+/* 暗色模式文档区域 */
+body.dark .markdown-section {
+  background-color: #091a28;
+  color: #b4b4b4;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  margin: 1rem;
+}
+
+/* 移动端优化 */
+@media screen and (max-width: 768px) {
+  .sidebar {
+    left: -300px;
+    transition: transform .25s ease-out;
+  }
+  
+  .sidebar-toggle {
+    background-color: rgba(255,255,255,.8);
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .content {
+    padding-top: 20px;
+    left: 0;
+    max-width: 100%;
+    position: static;
+    padding: 16px;
+  }
+  
+  body.close .sidebar {
+    transform: translateX(300px);
+  }
+  
+  .markdown-section {
+    padding: 1rem 0.8rem;
+    margin: 0.5rem;
+  }
+  
+  .sidebar {
+    width: 250px;
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 代码块样式 */
+.markdown-section pre {
+  border-radius: 5px;
+}
+
+.markdown-section code {
+  border-radius: 3px;
+  font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+  -webkit-font-smoothing: auto;
+}
+
+/* 暗色模式代码块样式 */
+body.dark .markdown-section pre {
+  background-color: #0e2233;
+}
+
+body.dark .markdown-section code {
+  background-color: #0e2233;
+  color: #ffffff;
+}
+
+body.dark .token.comment,
+body.dark .token.prolog,
+body.dark .token.doctype,
+body.dark .token.cdata {
+  color: #8ba8c1;
+}
+
+body.dark .token.punctuation {
+  color: #f8f8f2;
+}
+
+body.dark .token.property,
+body.dark .token.tag,
+body.dark .token.constant,
+body.dark .token.symbol {
+  color: #f92672;
+}
+
+body.dark .token.boolean,
+body.dark .token.number {
+  color: #ae81ff;
+}
+
+body.dark .token.selector,
+body.dark .token.attr-name,
+body.dark .token.string,
+body.dark .token.char,
+body.dark .token.builtin {
+  color: #a6e22e;
+}
+
+body.dark .token.operator,
+body.dark .token.entity,
+body.dark .token.url,
+body.dark .language-css .token.string,
+body.dark .style .token.string,
+body.dark .token.variable {
+  color: #f8f8f2;
+}
+
+body.dark .token.atrule,
+body.dark .token.attr-value {
+  color: #e6db74;
+}
+
+body.dark .token.keyword {
+  color: #66d9ef;
+}
+
+body.dark .token.regex,
+body.dark .token.important {
+  color: #fd971f;
+}
+
+/* 链接样式 */
+.markdown-section a {
+  text-decoration: none;
+  border-bottom: 1px solid #42b983;
+  transition: all 0.3s ease;
+}
+
+.markdown-section a:hover {
+  border-bottom: 1px solid #3eaf7c;
+  color: #3eaf7c;
+}
+
+/* 暗色模式链接样式 */
+body.dark .markdown-section a {
+  color: #42b983;
+  border-bottom: 1px solid #42b983;
+}
+
+body.dark .markdown-section a:hover {
+  color: #3eaf7c;
+  border-bottom: 1px solid #3eaf7c;
+}
+
+/* 表格样式 */
+.markdown-section table {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.markdown-section tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-section th {
+  background-color: #f2f2f2;
+  font-weight: 600;
+}
+
+/* 暗色模式表格样式 */
+body.dark .markdown-section table {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .markdown-section tr {
+  background-color: #0d2538;
+  border-top: 1px solid #0d2538;
+}
+
+body.dark .markdown-section tr:nth-child(2n) {
+  background-color: #091a28;
+}
+
+body.dark .markdown-section th {
+  background-color: #0e2233;
+  color: #ffffff;
+}
+
+body.dark .markdown-section td {
+  border-color: #0d2538;
+}
+
+/* 引用块样式 */
+.markdown-section blockquote {
+  border-left: 4px solid #42b983;
+  background-color: #f8f8f8;
+  padding: 10px 15px;
+  border-radius: 0 5px 5px 0;
+}
+
+/* 暗色模式引用块样式 */
+body.dark .markdown-section blockquote {
+  border-left: 4px solid #42b983;
+  color: #858585;
+  background-color: #0e2233;
+}
+
+/* 暗色模式分割线 */
+body.dark .markdown-section hr {
+  border-bottom: 1px solid #0d2538;
+}
+
+/* 暗色模式标题 */
+body.dark .markdown-section h1,
+body.dark .markdown-section h2,
+body.dark .markdown-section h3,
+body.dark .markdown-section h4,
+body.dark .markdown-section h5,
+body.dark .markdown-section h6 {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+body.dark .markdown-section h1 {
+  border-bottom: 1px solid #0d2538;
+}
+
+body.dark .markdown-section h2 {
+  border-bottom: 1px solid #0d2538;
+}
+
+/* 图片样式 */
+.markdown-section img {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+}
+
+/* 标题样式 */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* 侧边栏样式 */
+.sidebar ul li.active>a {
+  border-right: 2px solid #42b983;
+}
+
+.sidebar-toggle {
+  background-color: transparent;
+}
+
+/* 自定义返回顶部按钮样式 */
+#custom-back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+/* 自定义明暗模式切换按钮 */
+#theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 70px; /* 向左移动，避免遮挡 GitHub 图标 */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100; /* 降低 z-index，确保不会遮挡其他元素 */
+  transition: all 0.3s ease;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+/* 明暗模式图标样式 */
+#theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  color: #42b983;
+}
+
+.dark #theme-toggle {
+  background-color: #091a28;
+}
+
+.dark #theme-toggle svg {
+  color: #ffffff;
+}
+
+/* 隐藏原生主题切换按钮 */
+.darkmode-toggle {
+  z-index: -1 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  display: none !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* 隐藏原生返回顶部按钮 */
+.to-top {
+  z-index: -1 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  display: none !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* 侧边栏链接手型指针样式 */
+.sidebar-nav a,
+.sidebar-nav a:hover,
+.sidebar li,
+.sidebar-nav li.active > a {
+  cursor: pointer !important;
+}
+
+/* 亮色模式侧边栏样式 */
+body:not(.dark) .sidebar,
+body.light .sidebar {
+  background-color: #ffffff !important;
+  color: #34495e !important;
+}
+
+body:not(.dark) .sidebar-nav a,
+body.light .sidebar-nav a {
+  color: #34495e !important;
+}
+
+body:not(.dark) .sidebar-nav a:hover,
+body.light .sidebar-nav a:hover {
+  color: #42b983 !important;
+}
+
+body:not(.dark) .sidebar-toggle,
+body.light .sidebar-toggle {
+  background-color: rgba(255,255,255,0.8) !important;
+}
+
+body:not(.dark) .sidebar-toggle span,
+body.light .sidebar-toggle span {
+  background-color: #42b983 !important;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+#theme-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* 暗黑模式下的按钮样式 */
+body.darkmode #theme-toggle {
+  background-color: #091a28;
+}
+
+body.darkmode #theme-toggle svg path {
+  fill: #ffffff;
+}
+
+.markdown-section h2 {
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3em;
+}
+
+/* 侧边栏样式优化 */
+.sidebar ul li.active > a {
+  border-right: 2px solid;
+}
+
+.sidebar ul li a {
+  transition: all 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: none;
+  transform: translateX(3px);
+}
+
+/* 封面页样式 */
+section.cover .cover-main {
+  margin: 0 16px;
+  z-index: 1;
+}
+
+section.cover h1 {
+  margin: 0.625rem 0 1rem;
+}
+
+section.cover blockquote {
+  font-size: 1.5rem;
+}
+
+section.cover a {
+  margin-right: 16px;
+}

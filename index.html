@@ -7,17 +7,68 @@
   <title>kiki's docs</title>
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
+  <meta name="description" content="个人技术学习文档，包含n8n、Supabase、OWL、OpenManus、llm-chain、SurrealDB等多种技术栈的学习笔记">
+  <meta name="keywords" content="技术文档,n8n,Supabase,OWL,OpenManus,llm-chain,SurrealDB,学习笔记">
+  <meta name="author" content="kiki">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="kiki's docs">
+  <meta property="og:description" content="个人技术学习文档，包含多种技术栈的学习笔记">
+  <meta property="og:type" content="website">
   <!-- vue主题样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <!-- 暗黑主题插件样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css"
     title="docsify-darklight-theme" type="text/css" />
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="./custom.css">
+  <!-- 自定义脚本，必须在 Docsify 初始化之前加载 -->
+  <script src="./custom.js"></script>
 </head>
 
 <body>
+  <!-- 自定义封面 -->
+  <div id="custom-cover" style="position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <img src="https://docsify.js.org/_media/icon.svg" alt="logo" style="width: 100px; height: 100px; margin-bottom: 20px;">
+    <h1>学习文档 <small>0.0.1</small></h1>
+    <p>个人技术学习笔记收集</p>
+    <ul style="list-style: none; padding: 0;">
+      <li>多种技术栈文档收集</li>
+      <li>简洁清晰的学习笔记</li>
+      <li>持续更新中</li>
+    </ul>
+    <div style="margin-top: 20px;">
+      <a href="https://github.com/michaelHoxxxxxxx/my-docs" target="_blank" style="margin-right: 20px; color: #42b983; text-decoration: none;">GitHub</a>
+      <button id="start-reading-btn" style="background-color: #42b983; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px;">开始阅读</button>
+    </div>
+  </div>
+  
   <div id="app">loading...</div>
+  
+  <!-- 自定义返回顶部按钮 -->
+  <div id="custom-back-to-top" style="position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background-color: #42b983; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </div>
+  
+  <!-- 自定义明暗模式切换按钮 -->
+  <div id="theme-toggle" class="theme-toggle-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="light-icon">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark-icon" style="display: none;">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </div>
   <!-- 在github上编辑插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
   <script>
@@ -29,15 +80,33 @@
       loadSidebar: true, // 加载侧边栏
       subMaxLevel: 2, 
       sidebarCollapse: {
-    collapse: true,   // 默认折叠
-    autoOpen: false,  // 不自动展开
-  },
+        collapse: true,   // 默认折叠
+        autoOpen: false,  // 不自动展开
+      },
       externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
       cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
       routerMode: 'hash', // 路由方式 默认hash
-      coverpage: true, // 展示封面
+      coverpage: false, // 禁用内置封面页，使用自定义封面
       notFoundPage: true, // 在找不到指定页面时加载_404.md
       auto2top: true, // 切换页面后是否自动跳转到页面顶部
+      timeUpdater: {
+        text: '<div align="right">上次更新时间：{docsify-updated}</div>',
+        formatUpdated: '{YYYY}-{MM}-{DD} {HH}:{mm}',
+      }, // 文档更新时间
+      scrollToTop: {
+        auto: true,
+        text: '顶部',
+        right: 15,
+        bottom: 15,
+        offset: 500
+      }, // 返回顶部按钮
+      tabs: {
+        persist: true,
+        sync: true,
+        theme: 'classic',
+        tabComments: true,
+        tabHeadings: true
+      }, // 选项卡配置
       search: { // 搜索插件配置
         paths: 'auto',
         placeholder: '🔍 搜索',
@@ -70,12 +139,12 @@
       themeColor: "#42b983", // 暗黑模式主题色
       darklightTheme: {
         siteFont: "PT Sans",
-        defaultTheme: 'dark',
+        defaultTheme: 'light',
         codeFontFamily: 'Roboto Mono, Monaco, courier, monospace',
         bodyFontSize: '17px',
         dark: {
           accent: '#42b983',
-          toogleBackground: '#ffffff',
+          toggleBackground: '#ffffff',
           background: '#091a28',
           textColor: '#b4b4b4',
           codeTextColor: '#ffffff',
@@ -86,11 +155,11 @@
           sidebarSublink: '#b4b4b4',
           codeTypeColor: '#ffffff',
           coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
-          toogleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
+          toggleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
         },
         light: {
           accent: '#42b983',
-          toogleBackground: '#091a28',
+          toggleBackground: '#091a28',
           background: '#ffffff',
           textColor: '#34495e',
           codeTextColor: '#525252',
@@ -101,26 +170,43 @@
           sidebarSublink: '#b4b4b4',
           codeTypeColor: '#091a28',
           coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
-          toogleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
+          toggleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
         }
       }
     }
   </script>
+  
+  <!-- Docsify 核心和插件 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!--全局搜索插件-->
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!--字数统计插件-->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <!--代码段复制插件-->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!--图片缩放插件-->
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <!-- 阅读进度条插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
+  <!-- 暗黑主题切换插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+  <!-- 选项卡插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
+  <!-- 阅读进度条插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+  <!-- 外部脚本插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-updated/src/time-updater.min.js"></script>
+  <!-- 文档更新时间插件 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
+  <!-- 返回顶部按钮 -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <!-- 代码高亮支持更多语言 -->
 </body>
-<script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
-
-<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-<!--全局搜索插件-->
-<script src="//unpkg.com/docsify-count/dist/countable.js"></script>
-<!--字数统计插件-->
-<script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-<!--代码段复制插件-->
-<script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-<!--图片缩放插件-->
-<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
-<!-- 阅读进度条插件 -->
-<script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
-<!-- 暗黑主题切换插件 -->
 
 </html>
