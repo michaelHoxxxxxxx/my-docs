@@ -95,3 +95,4 @@
 - **🦀 SoulBox (Rust 版本)**
   - [SoulBox 架构设计](docs/soulbox_architecture_design.md)
   - [SoulBox 快速开始](docs/soulbox_quickstart.md)
+  - [SoulBox 高级功能](docs/soulbox_advanced_features.md)
