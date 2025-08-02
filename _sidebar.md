@@ -91,3 +91,7 @@
   - [CI/CD 集成](docs/claude-code_cicd.md)
   - [开发工作流集成](docs/claude-code_workflow.md)
   - [团队协作配置](docs/claude-code_team.md)
+
+- **🦀 SoulBox (Rust 版本)**
+  - [SoulBox 架构设计](docs/soulbox_architecture_design.md)
+  - [SoulBox 快速开始](docs/soulbox_quickstart.md)
