@@ -31,3 +31,7 @@
 
 - **📱 实际应用**
   - [E2B 实际应用案例详解](docs/13_e2b_real_world_applications.md)
+
+- **🦀 SoulBox (Rust 版本)**
+  - [SoulBox 架构设计](docs/soulbox_architecture_design.md)
+  - [SoulBox 快速开始](docs/soulbox_quickstart.md)
