@@ -33,7 +33,8 @@
   - [E2B 实际应用案例详解](docs/13_e2b_real_world_applications.md)
 
 - **🦀 SoulBox (Rust 版本)**
-  - [SoulBox 架构设计](docs/soulbox_architecture_design.md)
-  - [SoulBox 快速开始](docs/soulbox_quickstart.md)
-  - [SoulBox 高级功能](docs/soulbox_advanced_features.md)
-  - [SoulBox 遗漏功能补充](docs/soulbox_missing_features.md)
+  - [SoulBox 完整指南 (五步显化法)](soulbox_complete_guide.md)
+  - [SoulBox 架构设计](soulbox_architecture_design.md)
+  - [SoulBox 快速开始](soulbox_quickstart.md)
+  - [SoulBox 高级功能](soulbox_advanced_features.md)
+  - [SoulBox 遗漏功能补充](soulbox_missing_features.md)

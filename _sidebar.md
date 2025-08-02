@@ -93,6 +93,7 @@
   - [团队协作配置](docs/claude-code_team.md)
 
 - **🦀 SoulBox (Rust 版本)**
+  - [SoulBox 完整指南 (五步显化法)](docs/soulbox_complete_guide.md)
   - [SoulBox 架构设计](docs/soulbox_architecture_design.md)
   - [SoulBox 快速开始](docs/soulbox_quickstart.md)
   - [SoulBox 高级功能](docs/soulbox_advanced_features.md)
