@@ -108,3 +108,6 @@
   - [sandbox/index.ts - 核心 Sandbox 类](docs/e2b_sandbox_index.md)
   - [filesystem/index.ts - 文件系统操作](docs/e2b_filesystem_index.md)
   - [commands/index.ts - 命令执行模块](docs/e2b_commands_index.md)
+  - [commandHandle.ts - 命令句柄管理](docs/e2b_command_handle.md)
+  - [envd/api.ts - envd 服务通信](docs/e2b_envd_api.md)
+  - [python/__init__.py - Python SDK 入口](docs/e2b_python_init.md)

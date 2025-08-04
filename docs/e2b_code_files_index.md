@@ -37,21 +37,21 @@
 
 ### 进程管理模块
 - [sandbox/commands/index.ts - 命令执行模块](docs/e2b_commands_index.md) ✅
-- [sandbox/commands/commandHandle.ts - 命令句柄管理](docs/e2b_command_handle.md) 🚧
-- [envd/process/process_connect.ts - 进程管理 gRPC 客户端](docs/e2b_process_connect.md)
+- [sandbox/commands/commandHandle.ts - 命令句柄管理](docs/e2b_command_handle.md) ✅
+- [envd/process/process_connect.ts - 进程管理 gRPC 客户端](docs/e2b_process_connect.md) 🚧
 
 ### API 通信模块
-- [envd/api.ts - envd 服务通信](docs/e2b_envd_api.md)
-- [sandbox/sandboxApi.ts - 沙箱 API 基础类](docs/e2b_sandbox_api.md)
-- [sandbox/signature.ts - 访问签名管理](docs/e2b_signature.md)
+- [envd/api.ts - envd 服务通信](docs/e2b_envd_api.md) ✅
+- [sandbox/sandboxApi.ts - 沙箱 API 基础类](docs/e2b_sandbox_api.md) 🚧
+- [sandbox/signature.ts - 访问签名管理](docs/e2b_signature.md) 🚧
 
 ---
 
 ## 🐍 Python SDK 文档
 
 ### SDK 核心模块
-- [__init__.py - Python SDK 入口](docs/e2b_python_init.md)
-- [connection_config.py - 连接配置](docs/e2b_python_connection_config.md)
+- [__init__.py - Python SDK 入口](docs/e2b_python_init.md) ✅
+- [connection_config.py - 连接配置](docs/e2b_python_connection_config.md) 🚧
 
 ### 沙箱实现
 - [sandbox_sync/main.py - 同步 Sandbox 实现](docs/e2b_sandbox_sync.md)
