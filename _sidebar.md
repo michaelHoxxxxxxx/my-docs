@@ -98,3 +98,9 @@
   - [SoulBox 快速开始](docs/soulbox_quickstart.md)
   - [SoulBox 高级功能](docs/soulbox_advanced_features.md)
   - [SoulBox 遗漏功能补充](docs/soulbox_missing_features.md)
+
+- **📚 E2B 源码深度解析 (五步显化法)**
+  - [E2B 代码文件索引](docs/e2b_code_files_index.md)
+  - [filesystem.proto - 文件系统接口](docs/e2b_filesystem_proto.md)
+  - [process.proto - 进程管理接口](docs/e2b_process_proto.md)
+  - [sandbox/index.ts - 核心 Sandbox 类](docs/e2b_sandbox_index.md)
