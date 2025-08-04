@@ -102,6 +102,7 @@
 - **📚 E2B 源码深度解析 (五步显化法)**
   - [E2B 代码文件索引](docs/e2b_code_files_index.md)
   - [E2B 整体架构与运作流程](docs/e2b_architecture_flow.md)
+  - [E2B 完整部署教程](docs/e2b_deployment_guide.md)
   - [openapi.yml - REST API 规范](docs/e2b_openapi_yml.md)
   - [filesystem.proto - 文件系统接口](docs/e2b_filesystem_proto.md)
   - [process.proto - 进程管理接口](docs/e2b_process_proto.md)
