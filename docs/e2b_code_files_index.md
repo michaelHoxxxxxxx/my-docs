@@ -2,6 +2,15 @@
 
 > 基于五步显化法的 E2B 源码深度解析
 
+## 🏗️ 系统架构总览
+
+- [E2B 整体架构与运作流程解析](docs/e2b_architecture_flow.md) - **必读** 🔥
+  - 系统分层架构和组件关系
+  - 完整的运作流程（创建、执行、文件操作）
+  - Python SDK vs TypeScript SDK 实现差异
+  - Firecracker 集成原理和调用时机
+  - 性能特征和最佳实践
+
 本索引包含了 E2B 项目核心代码文件的详细开发文档，每个文档都采用五步显化法进行系统化分析。
 
 ## 📋 文档结构说明
@@ -54,13 +63,13 @@
 - [connection_config.py - 连接配置](docs/e2b_python_connection_config.md) 🚧
 
 ### 沙箱实现
-- [sandbox_sync/main.py - 同步 Sandbox 实现](docs/e2b_sandbox_sync.md)
-- [sandbox_async/main.py - 异步 Sandbox 实现](docs/e2b_sandbox_async.md)
+- [sandbox_sync/main.py - 同步 Sandbox 实现](docs/e2b_sandbox_sync.md) ✅
+- [sandbox_async/main.py - 异步 Sandbox 实现](docs/e2b_sandbox_async.md) ✅
 - [sandbox/sandbox_api.py - 沙箱 API 基类](docs/e2b_python_sandbox_api.md)
 
 ### 功能模块
-- [sandbox/filesystem/filesystem.py - 文件系统操作](docs/e2b_python_filesystem.md)
-- [sandbox/commands/main.py - 命令执行](docs/e2b_python_commands.md)
+- [sandbox/filesystem/filesystem.py - 文件系统操作](docs/e2b_python_filesystem.md) ✅
+- [sandbox/commands/main.py - 命令执行](docs/e2b_python_commands.md) ✅
 
 ### gRPC 客户端
 - [envd/filesystem/filesystem_connect.py - 文件系统客户端](docs/e2b_python_filesystem_connect.md)
@@ -71,10 +80,10 @@
 ## 🛠️ CLI 工具文档
 
 ### 沙箱管理命令
-- [sandbox/spawn.ts - 创建沙箱命令](docs/e2b_cli_spawn.md)
-- [sandbox/connect.ts - 连接沙箱命令](docs/e2b_cli_connect.md)
-- [sandbox/list.ts - 列出沙箱命令](docs/e2b_cli_list.md)
-- [sandbox/kill.ts - 终止沙箱命令](docs/e2b_cli_kill.md)
+- [sandbox/spawn.ts - 创建沙箱命令](docs/e2b_cli_spawn.md) ✅
+- [sandbox/connect.ts - 连接沙箱命令](docs/e2b_cli_connect.md) ✅
+- [sandbox/list.ts - 列出沙箱命令](docs/e2b_cli_list.md) ✅
+- [sandbox/kill.ts - 终止沙箱命令](docs/e2b_cli_kill.md) ✅
 
 ---
 

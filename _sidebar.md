@@ -101,6 +101,7 @@
 
 - **📚 E2B 源码深度解析 (五步显化法)**
   - [E2B 代码文件索引](docs/e2b_code_files_index.md)
+  - [E2B 整体架构与运作流程](docs/e2b_architecture_flow.md)
   - [openapi.yml - REST API 规范](docs/e2b_openapi_yml.md)
   - [filesystem.proto - 文件系统接口](docs/e2b_filesystem_proto.md)
   - [process.proto - 进程管理接口](docs/e2b_process_proto.md)
@@ -111,3 +112,11 @@
   - [commandHandle.ts - 命令句柄管理](docs/e2b_command_handle.md)
   - [envd/api.ts - envd 服务通信](docs/e2b_envd_api.md)
   - [python/__init__.py - Python SDK 入口](docs/e2b_python_init.md)
+  - [sandbox_sync/main.py - 同步沙箱实现](docs/e2b_sandbox_sync.md)
+  - [sandbox_async/main.py - 异步沙箱实现](docs/e2b_sandbox_async.md)
+  - [filesystem.py - 文件系统数据结构](docs/e2b_python_filesystem.md)
+  - [commands/main.py - 命令执行数据结构](docs/e2b_python_commands.md)
+  - [CLI spawn.ts - 沙箱创建命令](docs/e2b_cli_spawn.md)
+  - [CLI connect.ts - 沙箱连接命令](docs/e2b_cli_connect.md)
+  - [CLI list.ts - 沙箱列表命令](docs/e2b_cli_list.md)
+  - [CLI kill.ts - 沙箱终止命令](docs/e2b_cli_kill.md)
