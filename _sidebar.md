@@ -106,3 +106,5 @@
   - [process.proto - 进程管理接口](docs/e2b_process_proto.md)
   - [js-sdk/index.ts - SDK 主入口](docs/e2b_js_sdk_index.md)
   - [sandbox/index.ts - 核心 Sandbox 类](docs/e2b_sandbox_index.md)
+  - [filesystem/index.ts - 文件系统操作](docs/e2b_filesystem_index.md)
+  - [commands/index.ts - 命令执行模块](docs/e2b_commands_index.md)

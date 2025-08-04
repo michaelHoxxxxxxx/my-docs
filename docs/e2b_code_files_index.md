@@ -32,12 +32,12 @@
 - [connectionConfig.ts - 连接配置管理](docs/e2b_connection_config.md) 🚧
 
 ### 文件系统模块
-- [sandbox/filesystem/index.ts - 文件系统操作](docs/e2b_filesystem_index.md)
-- [envd/filesystem/filesystem_connect.ts - 文件系统 gRPC 客户端](docs/e2b_filesystem_connect.md)
+- [sandbox/filesystem/index.ts - 文件系统操作](docs/e2b_filesystem_index.md) ✅
+- [envd/filesystem/filesystem_connect.ts - 文件系统 gRPC 客户端](docs/e2b_filesystem_connect.md) 🚧
 
 ### 进程管理模块
-- [sandbox/commands/index.ts - 命令执行模块](docs/e2b_commands_index.md)
-- [sandbox/commands/commandHandle.ts - 命令句柄管理](docs/e2b_command_handle.md)
+- [sandbox/commands/index.ts - 命令执行模块](docs/e2b_commands_index.md) ✅
+- [sandbox/commands/commandHandle.ts - 命令句柄管理](docs/e2b_command_handle.md) 🚧
 - [envd/process/process_connect.ts - 进程管理 gRPC 客户端](docs/e2b_process_connect.md)
 
 ### API 通信模块
