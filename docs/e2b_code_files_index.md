@@ -18,18 +18,18 @@
 ## 🗂️ Protocol Buffer 定义文档
 
 ### 核心接口定义
-- [filesystem.proto - 文件系统接口定义](docs/e2b_filesystem_proto.md)
-- [process.proto - 进程管理接口定义](docs/e2b_process_proto.md)
-- [openapi.yml - REST API 规范](docs/e2b_openapi_yml.md)
+- [filesystem.proto - 文件系统接口定义](docs/e2b_filesystem_proto.md) ✅
+- [process.proto - 进程管理接口定义](docs/e2b_process_proto.md) ✅
+- [openapi.yml - REST API 规范](docs/e2b_openapi_yml.md) ✅
 
 ---
 
 ## 📦 JavaScript/TypeScript SDK 文档
 
 ### SDK 核心模块
-- [index.ts - SDK 主入口](docs/e2b_js_sdk_index.md)
-- [sandbox/index.ts - Sandbox 类实现](docs/e2b_sandbox_index.md)
-- [connectionConfig.ts - 连接配置管理](docs/e2b_connection_config.md)
+- [index.ts - SDK 主入口](docs/e2b_js_sdk_index.md) ✅
+- [sandbox/index.ts - Sandbox 类实现](docs/e2b_sandbox_index.md) ✅
+- [connectionConfig.ts - 连接配置管理](docs/e2b_connection_config.md) 🚧
 
 ### 文件系统模块
 - [sandbox/filesystem/index.ts - 文件系统操作](docs/e2b_filesystem_index.md)
