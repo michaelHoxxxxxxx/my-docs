@@ -98,6 +98,8 @@
   - [3. SoulBox 快速开始](docs/soulbox_quickstart.md)
   - [4. SoulBox 高级功能](docs/soulbox_advanced_features.md)
   - [5. SoulBox 遗漏功能补充](docs/soulbox_missing_features.md)
+  - [6. SoulBox 查缺补漏综合分析报告](docs/soulbox_gap_analysis_report.md)
+  - [7. SoulBox 完整缺失功能清单 (22个功能)](docs/soulbox_complete_missing_features.md)
 
 - **📚 E2B 源码深度解析 (五步显化法)**
   - **1. 总览与部署**
