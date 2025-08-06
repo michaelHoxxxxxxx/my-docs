@@ -99,7 +99,8 @@
     - [1.3 功能覆盖度报告（85%）](docs/soulbox_coverage_complete_report.md)
     - [1.4 完整覆盖度分析（87%）](docs/soulbox_complete_coverage_analysis.md)
     - [1.5 缺失13%功能补充](docs/soulbox_missing_13_percent.md)
-    - [1.6 最终10%功能补充（100%覆盖）](docs/soulbox_final_10_percent.md)
+    - [1.6 最终10%功能补充](docs/soulbox_final_10_percent.md)
+    - [1.7 最终3%功能补充（真正100%覆盖）](docs/soulbox_final_3_percent.md)
   
   - **🏗️ 2. 架构与设计**
     - [2.1 完整架构指南（五步显化法）](docs/soulbox_complete_guide.md)
