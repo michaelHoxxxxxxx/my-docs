@@ -93,51 +93,55 @@
   - [8. 团队协作配置](docs/claude-code_team.md)
 
 - **🦀 SoulBox 项目文档**
-  - **📋 1. 项目总览**
-    - [1.1 文档导航与阅读指南](docs/soulbox_documentation_overview.md)
-    - [1.2 项目完成度分析报告（40%）](docs/soulbox_completion_analysis.md)
-    - [1.3 功能覆盖度报告（85%）](docs/soulbox_coverage_complete_report.md)
-    - [1.4 完整覆盖度分析（87%）](docs/soulbox_complete_coverage_analysis.md)
-    - [1.5 缺失13%功能补充](docs/soulbox_missing_13_percent.md)
-    - [1.6 最终10%功能补充](docs/soulbox_final_10_percent.md)
-    - [1.7 最终3%功能补充（真正100%覆盖）](docs/soulbox_final_3_percent.md)
+  - **⭐ 开发优先级快速指南**
+    - [📌 SoulBox开发优先级总览（必看）](docs/soulbox_priority_guide.md)
   
-  - **🏗️ 2. 架构与设计**
-    - [2.1 完整架构指南（五步显化法）](docs/soulbox_complete_guide.md)
-    - [2.2 技术架构详细设计](docs/soulbox_architecture_design.md)
+  - **🎯 1. 开发必读（按优先级排序）**
+    - **📕 P0 - 立即开始**
+      - [1.1 快速入门指南](docs/soulbox_quickstart.md)
+      - [1.2 完整架构指南（五步显化法）](docs/soulbox_complete_guide.md)
+      - [1.3 模块化开发路线（28周计划）](docs/soulbox_development_roadmap.md)
+    
+    - **📘 P1 - 核心功能实现**
+      - [1.4 配置系统规范（soulbox.toml）](docs/soulbox_missing_13_percent.md#配置文件格式定义)
+      - [1.5 协议层与通信（gRPC/WebSocket）](docs/soulbox_final_missing_features.md#协议层功能)
+      - [1.6 沙箱管理核心](docs/soulbox_ultimate_development_guide.md#核心沙箱管理)
+      - [1.7 安全与认证系统](docs/soulbox_ultimate_development_guide.md#安全与认证)
+    
+    - **📗 P2 - 增强功能**
+      - [1.8 多运行时支持（Node/Python/Bun/Deno）](docs/soulbox_missing_13_percent.md#多运行时适配详细实现)
+      - [1.9 LLM集成（OpenAI/Claude/Mistral）](docs/soulbox_final_10_percent.md#llm-提供商完整实现)
+      - [1.10 监控与可观测性](docs/soulbox_final_missing_features.md#监控和指标)
+      - [1.11 CLI工具开发](docs/soulbox_ultimate_development_guide.md#开发者工具)
+    
+    - **📙 P3 - 高级功能**
+      - [1.12 企业级功能（多租户/合规）](docs/soulbox_final_missing_features.md#企业级功能)
+      - [1.13 性能优化（缓存/连接池）](docs/soulbox_missing_13_percent.md#性能优化具体实现)
+      - [1.14 容器与K8s支持](docs/soulbox_final_10_percent.md#kubernetes-部署完整配置)
+      - [1.15 边缘功能（Desktop SDK/迁移工具）](docs/soulbox_final_3_percent.md)
   
-  - **🚀 3. 使用手册**
-    - [3.1 快速入门指南](docs/soulbox_quickstart.md)
-    - [3.2 高级功能使用](docs/soulbox_advanced_features.md)
+  - **📊 2. 项目分析报告**
+    - [2.1 文档导航总览](docs/soulbox_documentation_overview.md)
+    - [2.2 功能覆盖进展（85%→87%→97%→100%）](docs/soulbox_coverage_complete_report.md)
+    - [2.3 项目完成度分析（40%）](docs/soulbox_completion_analysis.md)
+    - [2.4 终极开发指南（52个功能）](docs/soulbox_ultimate_development_guide.md)
   
-  - **⚡ 4. 开发实施**
-    - [📋 模块化开发路线指南](docs/soulbox_development_roadmap.md)
-    
-    - **4.1 核心基础模块（P0优先级）**
-      - [4.1.1 协议层与通信（gRPC/WebSocket）](docs/soulbox_final_missing_features.md#协议层功能)
-      - [4.1.2 沙箱管理核心（模板/会话/池化）](docs/soulbox_ultimate_development_guide.md#核心沙箱管理)
-      - [4.1.3 安全与认证（RBAC/审计/加密）](docs/soulbox_ultimate_development_guide.md#安全与认证)
-      - [4.1.4 监控与指标（实时采集/日志）](docs/soulbox_final_missing_features.md#监控和指标)
-    
-    - **4.2 用户体验模块（P1重要）**
-      - [4.2.1 开发者工具（CLI/调试/热重载）](docs/soulbox_ultimate_development_guide.md#开发者工具)
-      - [4.2.2 网络功能（端口/域名/代理）](docs/soulbox_ultimate_development_guide.md#网络功能)
-      - [4.2.3 多运行时支持（Bun/Deno/Edge）](docs/soulbox_final_missing_features.md#多运行时支持)
-      - [4.2.4 数据科学生态（Jupyter/GPU）](docs/soulbox_ultimate_development_guide.md#数据科学)
-    
-    - **4.3 企业级模块（P2高级）**
-      - [4.3.1 存储系统（云存储/FUSE/缓存）](docs/soulbox_final_missing_features.md#云存储集成)
-      - [4.3.2 企业功能（多租户/合规/SLA）](docs/soulbox_final_missing_features.md#企业级功能)
-      - [4.3.3 AI集成（LangChain/OpenAI）](docs/soulbox_ultimate_development_guide.md#AI集成)
-      - [4.3.4 性能优化（缓存/GPU调度）](docs/soulbox_final_missing_features.md#性能优化)
-    
-    - **4.4 扩展功能（P3未来）**
-      - [4.4.1 容器支持（Docker/K8s）](docs/soulbox_ultimate_development_guide.md#容器支持)
-      - [4.4.2 边缘计算（WebAssembly/CDN）](docs/soulbox_ultimate_development_guide.md#边缘计算)
+  - **🏗️ 3. 技术架构**
+    - [3.1 技术架构详细设计](docs/soulbox_architecture_design.md)
+    - [3.2 高级功能使用指南](docs/soulbox_advanced_features.md)
   
-  - **📚 5. 参考资料**
-    - [5.1 历史分析报告](docs/soulbox_gap_analysis_report.md)
-    - [5.2 早期功能补充](docs/soulbox_missing_features.md)
+  - **🔧 4. 部署与运维**
+    - [4.1 Docker Compose开发环境](docs/soulbox_final_10_percent.md#docker-compose-开发环境)
+    - [4.2 Kubernetes生产部署](docs/soulbox_final_10_percent.md#kubernetes-部署完整配置)
+    - [4.3 Terraform基础设施](docs/soulbox_final_10_percent.md#terraform-基础设施代码)
+    - [4.4 多云部署（AWS/GCP/Azure）](docs/soulbox_final_3_percent.md#多云部署azure支持)
+  
+  - **📚 5. 补充文档**
+    - [5.1 完整覆盖度分析（87%）](docs/soulbox_complete_coverage_analysis.md)
+    - [5.2 缺失13%功能补充](docs/soulbox_missing_13_percent.md)
+    - [5.3 最终10%功能补充](docs/soulbox_final_10_percent.md)
+    - [5.4 最终3%功能补充（100%覆盖）](docs/soulbox_final_3_percent.md)
+    - [5.5 历史分析报告](docs/soulbox_gap_analysis_report.md)
 
 - **📚 E2B 源码深度解析 (五步显化法)**
   - **1. 总览与部署**
