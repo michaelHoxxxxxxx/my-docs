@@ -93,32 +93,96 @@
   - [8. 团队协作配置](docs/claude-code_team.md)
 
 - **🦀 SoulBox 项目文档**
-  - **⭐ 开发优先级快速指南**
-    - [📌 SoulBox开发优先级总览（必看）](docs/soulbox_priority_guide.md)
+  - **⭐ 开发指南**
+    - [📌 开发优先级总览（必看）](docs/soulbox_priority_guide.md)
+    - [🔄 模块依赖关系图](docs/soulbox_module_dependencies.md)
+    - [📅 28周开发计划](docs/soulbox_development_roadmap.md)
   
-  - **🎯 1. 开发必读（按优先级排序）**
-    - **📕 P0 - 立即开始**
-      - [1.1 快速入门指南](docs/soulbox_quickstart.md)
-      - [1.2 完整架构指南（五步显化法）](docs/soulbox_complete_guide.md)
-      - [1.3 模块化开发路线（28周计划）](docs/soulbox_development_roadmap.md)
+  - **🎯 模块化开发顺序**
+    - **📦 模块1: 基础架构（第1-2周）**
+      - [1.1 项目初始化与架构](docs/soulbox_complete_guide.md)
+      - [1.2 配置系统（soulbox.toml）](docs/soulbox_missing_13_percent.md#配置文件格式定义)
+      - [1.3 错误处理体系](docs/soulbox_missing_13_percent.md#错误处理增强)
     
-    - **📘 P1 - 核心功能实现**
-      - [1.4 配置系统规范（soulbox.toml）](docs/soulbox_missing_13_percent.md#配置文件格式定义)
-      - [1.5 协议层与通信（gRPC/WebSocket）](docs/soulbox_final_missing_features.md#协议层功能)
-      - [1.6 沙箱管理核心](docs/soulbox_ultimate_development_guide.md#核心沙箱管理)
-      - [1.7 安全与认证系统](docs/soulbox_ultimate_development_guide.md#安全与认证)
+    - **📦 模块2: 通信协议（第3周）**
+      - [2.1 gRPC协议层](docs/soulbox_final_missing_features.md#协议层功能)
+      - [2.2 WebSocket实时通信](docs/soulbox_final_missing_features.md#websocket-实时通信)
+      - [2.3 API网关设计](docs/soulbox_architecture_design.md)
     
-    - **📗 P2 - 增强功能**
-      - [1.8 多运行时支持（Node/Python/Bun/Deno）](docs/soulbox_missing_13_percent.md#多运行时适配详细实现)
-      - [1.9 LLM集成（OpenAI/Claude/Mistral）](docs/soulbox_final_10_percent.md#llm-提供商完整实现)
-      - [1.10 监控与可观测性](docs/soulbox_final_missing_features.md#监控和指标)
-      - [1.11 CLI工具开发](docs/soulbox_ultimate_development_guide.md#开发者工具)
+    - **📦 模块3: 沙箱核心（第4-5周）**
+      - [3.1 沙箱生命周期管理](docs/soulbox_ultimate_development_guide.md#核心沙箱管理)
+      - [3.2 模板系统实现](docs/soulbox_ultimate_development_guide.md#模板系统)
+      - [3.3 资源隔离与限制](docs/soulbox_ultimate_development_guide.md#资源管理)
     
-    - **📙 P3 - 高级功能**
-      - [1.12 企业级功能（多租户/合规）](docs/soulbox_final_missing_features.md#企业级功能)
-      - [1.13 性能优化（缓存/连接池）](docs/soulbox_missing_13_percent.md#性能优化具体实现)
-      - [1.14 容器与K8s支持](docs/soulbox_final_10_percent.md#kubernetes-部署完整配置)
-      - [1.15 边缘功能（Desktop SDK/迁移工具）](docs/soulbox_final_3_percent.md)
+    - **📦 模块4: 安全认证（第6-7周）**
+      - [4.1 认证系统（JWT/API Key）](docs/soulbox_ultimate_development_guide.md#安全与认证)
+      - [4.2 RBAC权限管理](docs/soulbox_final_missing_features.md#认证和授权)
+      - [4.3 审计日志系统](docs/soulbox_final_missing_features.md#审计系统)
+    
+    - **📦 模块5: 文件系统（第8周）**
+      - [5.1 文件操作API](docs/soulbox_ultimate_development_guide.md#文件系统)
+      - [5.2 文件监控（inotify）](docs/soulbox_ultimate_development_guide.md#文件监控)
+      - [5.3 文件传输与签名URL](docs/soulbox_ultimate_development_guide.md#文件传输)
+    
+    - **📦 模块6: 进程管理（第9周）**
+      - [6.1 进程执行引擎](docs/soulbox_ultimate_development_guide.md#进程执行)
+      - [6.2 PTY终端支持](docs/soulbox_ultimate_development_guide.md#pty-支持)
+      - [6.3 信号处理机制](docs/soulbox_ultimate_development_guide.md#信号处理)
+    
+    - **📦 模块7: CLI工具（第10周）**
+      - [7.1 CLI命令框架](docs/soulbox_ultimate_development_guide.md#开发者工具)
+      - [7.2 交互式界面](docs/soulbox_ultimate_development_guide.md#cli-交互)
+      - [7.3 调试器集成](docs/soulbox_ultimate_development_guide.md#调试功能)
+    
+    - **📦 模块8: 运行时支持（第11-12周）**
+      - [8.1 运行时检测器](docs/soulbox_missing_13_percent.md#运行时检测器)
+      - [8.2 Node.js/Python支持](docs/soulbox_missing_13_percent.md#多版本运行时管理器)
+      - [8.3 Bun/Deno适配器](docs/soulbox_missing_13_percent.md#bun-适配器)
+    
+    - **📦 模块9: 网络功能（第13周）**
+      - [9.1 端口映射系统](docs/soulbox_ultimate_development_guide.md#网络功能)
+      - [9.2 自定义域名](docs/soulbox_ultimate_development_guide.md#域名管理)
+      - [9.3 代理配置](docs/soulbox_ultimate_development_guide.md#代理支持)
+    
+    - **📦 模块10: 监控系统（第14周）**
+      - [10.1 指标收集（Prometheus）](docs/soulbox_final_missing_features.md#监控和指标)
+      - [10.2 日志聚合系统](docs/soulbox_final_missing_features.md#日志系统)
+      - [10.3 健康检查](docs/soulbox_final_missing_features.md#健康检查)
+    
+    - **📦 模块11: 数据科学（第15周）**
+      - [11.1 Jupyter内核集成](docs/soulbox_ultimate_development_guide.md#数据科学)
+      - [11.2 数据分析库支持](docs/soulbox_ultimate_development_guide.md#jupyter-支持)
+      - [11.3 GPU调度（可选）](docs/soulbox_ultimate_development_guide.md#gpu-支持)
+    
+    - **📦 模块12: AI集成（第16-17周）**
+      - [12.1 LLM提供商接口](docs/soulbox_final_10_percent.md#llm-提供商完整实现)
+      - [12.2 OpenAI适配器](docs/soulbox_ultimate_development_guide.md#ai集成)
+      - [12.3 Claude/Mistral集成](docs/soulbox_final_10_percent.md#anthropic-claude-完整适配)
+    
+    - **📦 模块13: 企业功能（第18-19周）**
+      - [13.1 多租户架构](docs/soulbox_final_missing_features.md#企业级功能)
+      - [13.2 资源配额管理](docs/soulbox_final_missing_features.md#资源管理)
+      - [13.3 计费系统](docs/soulbox_ultimate_development_guide.md#计费功能)
+    
+    - **📦 模块14: 性能优化（第20-21周）**
+      - [14.1 连接池管理](docs/soulbox_missing_13_percent.md#连接池管理)
+      - [14.2 缓存系统](docs/soulbox_missing_13_percent.md#性能优化具体实现)
+      - [14.3 熔断器模式](docs/soulbox_final_10_percent.md#熔断器模式实现)
+    
+    - **📦 模块15: 容器化（第22-24周）**
+      - [15.1 Docker集成](docs/soulbox_ultimate_development_guide.md#容器支持)
+      - [15.2 K8s部署](docs/soulbox_final_10_percent.md#kubernetes-部署完整配置)
+      - [15.3 Helm Charts](docs/soulbox_ultimate_development_guide.md#helm-支持)
+    
+    - **📦 模块16: 云部署（第25-26周）**
+      - [16.1 Terraform基础设施](docs/soulbox_final_10_percent.md#terraform-基础设施代码)
+      - [16.2 多云支持（AWS/GCP/Azure）](docs/soulbox_final_3_percent.md#多云部署azure支持)
+      - [16.3 自动扩缩容](docs/soulbox_ultimate_development_guide.md#自动扩缩容)
+    
+    - **📦 模块17: 迁移兼容（第27-28周）**
+      - [17.1 E2B API兼容层](docs/soulbox_final_3_percent.md#api-兼容性映射)
+      - [17.2 迁移工具](docs/soulbox_final_3_percent.md#e2b-迁移指南)
+      - [17.3 Desktop SDK（可选）](docs/soulbox_final_3_percent.md#desktop-sdk-支持)
   
   - **📊 2. 项目分析报告**
     - [2.1 文档导航总览](docs/soulbox_documentation_overview.md)
