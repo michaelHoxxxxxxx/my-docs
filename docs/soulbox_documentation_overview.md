@@ -47,17 +47,22 @@
 
 ### 四、功能实现文档（开发指南）
 
-8. **[SoulBox 终极开发指南 (52个功能)](soulbox_ultimate_development_guide.md)**
+8. **[SoulBox 最终缺失功能补充](soulbox_final_missing_features.md)** ✨NEW
+   - 最新识别的15%未覆盖功能的完整实现
+   - 包含协议层、安全、持久化、监控等高级特性
+   - **推荐指数**：⭐⭐⭐⭐⭐（最新必读）
+
+9. **[SoulBox 终极开发指南 (52个功能)](soulbox_ultimate_development_guide.md)**
    - 整合所有缺失功能的开发指南
    - 按优先级（P0-P3）分类
    - **推荐指数**：⭐⭐⭐⭐⭐（开发必读）
 
-9. **[SoulBox 完整缺失功能清单 (22个功能)](soulbox_complete_missing_features.md)**
-   - 22个核心缺失功能的Rust实现代码
-   - 详细的代码示例
-   - **推荐指数**：⭐⭐⭐⭐
+10. **[SoulBox 完整缺失功能清单 (22个功能)](soulbox_complete_missing_features.md)**
+    - 22个核心缺失功能的Rust实现代码
+    - 详细的代码示例
+    - **推荐指数**：⭐⭐⭐⭐
 
-10. **[SoulBox 遗漏功能补充](soulbox_missing_features.md)**
+11. **[SoulBox 遗漏功能补充](soulbox_missing_features.md)**
     - 初期识别的10个遗漏功能
     - 基础实现建议
     - **推荐指数**：⭐⭐⭐
