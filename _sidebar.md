@@ -107,9 +107,29 @@
     - [3.2 高级功能使用](docs/soulbox_advanced_features.md)
   
   - **⚡ 4. 开发实施**
-    - [4.1 最终缺失功能实现（优先）](docs/soulbox_final_missing_features.md)
-    - [4.2 开发路线图（52个功能）](docs/soulbox_ultimate_development_guide.md)
-    - [4.3 核心功能实现（22个功能）](docs/soulbox_complete_missing_features.md)
+    - [📋 模块化开发路线指南](docs/soulbox_development_roadmap.md)
+    
+    - **4.1 核心基础模块（P0优先级）**
+      - [4.1.1 协议层与通信（gRPC/WebSocket）](docs/soulbox_final_missing_features.md#协议层功能)
+      - [4.1.2 沙箱管理核心（模板/会话/池化）](docs/soulbox_ultimate_development_guide.md#核心沙箱管理)
+      - [4.1.3 安全与认证（RBAC/审计/加密）](docs/soulbox_ultimate_development_guide.md#安全与认证)
+      - [4.1.4 监控与指标（实时采集/日志）](docs/soulbox_final_missing_features.md#监控和指标)
+    
+    - **4.2 用户体验模块（P1重要）**
+      - [4.2.1 开发者工具（CLI/调试/热重载）](docs/soulbox_ultimate_development_guide.md#开发者工具)
+      - [4.2.2 网络功能（端口/域名/代理）](docs/soulbox_ultimate_development_guide.md#网络功能)
+      - [4.2.3 多运行时支持（Bun/Deno/Edge）](docs/soulbox_final_missing_features.md#多运行时支持)
+      - [4.2.4 数据科学生态（Jupyter/GPU）](docs/soulbox_ultimate_development_guide.md#数据科学)
+    
+    - **4.3 企业级模块（P2高级）**
+      - [4.3.1 存储系统（云存储/FUSE/缓存）](docs/soulbox_final_missing_features.md#云存储集成)
+      - [4.3.2 企业功能（多租户/合规/SLA）](docs/soulbox_final_missing_features.md#企业级功能)
+      - [4.3.3 AI集成（LangChain/OpenAI）](docs/soulbox_ultimate_development_guide.md#AI集成)
+      - [4.3.4 性能优化（缓存/GPU调度）](docs/soulbox_final_missing_features.md#性能优化)
+    
+    - **4.4 扩展功能（P3未来）**
+      - [4.4.1 容器支持（Docker/K8s）](docs/soulbox_ultimate_development_guide.md#容器支持)
+      - [4.4.2 边缘计算（WebAssembly/CDN）](docs/soulbox_ultimate_development_guide.md#边缘计算)
   
   - **📚 5. 参考资料**
     - [5.1 历史分析报告](docs/soulbox_gap_analysis_report.md)
