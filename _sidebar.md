@@ -95,8 +95,10 @@
 - **🦀 SoulBox 项目文档**
   - **📋 1. 项目总览**
     - [1.1 文档导航与阅读指南](docs/soulbox_documentation_overview.md)
-    - [1.2 项目完成度分析报告](docs/soulbox_completion_analysis.md)
-    - [1.3 功能覆盖度完整报告](docs/soulbox_coverage_complete_report.md)
+    - [1.2 项目完成度分析报告（40%）](docs/soulbox_completion_analysis.md)
+    - [1.3 功能覆盖度报告（85%）](docs/soulbox_coverage_complete_report.md)
+    - [1.4 完整覆盖度分析（87%）](docs/soulbox_complete_coverage_analysis.md)
+    - [1.5 缺失13%功能补充](docs/soulbox_missing_13_percent.md)
   
   - **🏗️ 2. 架构与设计**
     - [2.1 完整架构指南（五步显化法）](docs/soulbox_complete_guide.md)
