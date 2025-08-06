@@ -92,25 +92,28 @@
   - [7. 开发工作流集成](docs/claude-code_workflow.md)
   - [8. 团队协作配置](docs/claude-code_team.md)
 
-- **🦀 SoulBox (Rust 版本)**
-  - **📖 文档总览**
-    - [SoulBox 文档体系总览](docs/soulbox_documentation_overview.md)
-  - **🏗️ 架构设计**
-    - [1. SoulBox 完整指南 (五步显化法)](docs/soulbox_complete_guide.md)
-    - [2. SoulBox 架构设计](docs/soulbox_architecture_design.md)
-  - **🚀 使用指南**
-    - [3. SoulBox 快速开始](docs/soulbox_quickstart.md)
-    - [4. SoulBox 高级功能](docs/soulbox_advanced_features.md)
-  - **📊 分析报告**
-    - [5. SoulBox 功能覆盖度完整报告 (85%)](docs/soulbox_coverage_complete_report.md)
-    - [6. SoulBox 项目完成度分析 (40%)](docs/soulbox_completion_analysis.md)
-  - **🔧 开发指南**
-    - [7. SoulBox 最终缺失功能补充 (15%细节)](docs/soulbox_final_missing_features.md)
-    - [8. SoulBox 终极开发指南 (52个功能)](docs/soulbox_ultimate_development_guide.md)
-    - [9. SoulBox 完整缺失功能清单 (22个功能)](docs/soulbox_complete_missing_features.md)
-  - **📝 历史文档**
-    - [10. SoulBox 查缺补漏综合分析报告](docs/soulbox_gap_analysis_report.md)
-    - [11. SoulBox 遗漏功能补充](docs/soulbox_missing_features.md)
+- **🦀 SoulBox 项目文档**
+  - **📋 1. 项目总览**
+    - [1.1 文档导航与阅读指南](docs/soulbox_documentation_overview.md)
+    - [1.2 项目完成度分析报告](docs/soulbox_completion_analysis.md)
+    - [1.3 功能覆盖度完整报告](docs/soulbox_coverage_complete_report.md)
+  
+  - **🏗️ 2. 架构与设计**
+    - [2.1 完整架构指南（五步显化法）](docs/soulbox_complete_guide.md)
+    - [2.2 技术架构详细设计](docs/soulbox_architecture_design.md)
+  
+  - **🚀 3. 使用手册**
+    - [3.1 快速入门指南](docs/soulbox_quickstart.md)
+    - [3.2 高级功能使用](docs/soulbox_advanced_features.md)
+  
+  - **⚡ 4. 开发实施**
+    - [4.1 最终缺失功能实现（优先）](docs/soulbox_final_missing_features.md)
+    - [4.2 开发路线图（52个功能）](docs/soulbox_ultimate_development_guide.md)
+    - [4.3 核心功能实现（22个功能）](docs/soulbox_complete_missing_features.md)
+  
+  - **📚 5. 参考资料**
+    - [5.1 历史分析报告](docs/soulbox_gap_analysis_report.md)
+    - [5.2 早期功能补充](docs/soulbox_missing_features.md)
 
 - **📚 E2B 源码深度解析 (五步显化法)**
   - **1. 总览与部署**
