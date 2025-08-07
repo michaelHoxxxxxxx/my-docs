@@ -544,33 +544,33 @@ section.cover a {
   margin-right: 16px;
 }
 
-/* 文章目录样式 */
+/* 文章目录样式 - Apple风格设计 */
 .page_toc {
   position: fixed;
-  top: 80px;
-  right: 20px;
-  width: 220px;
-  max-height: calc(100vh - 120px);
+  top: 100px;
+  right: 30px;
+  width: 200px;
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(224, 224, 224, 0.5);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  z-index: 999;
+  overflow-x: hidden;
+  z-index: 50;
+  /* 移除所有背景和边框，完全融入页面 */
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
-/* 文章目录标题 */
+/* 文章目录标题 - 极简风格 */
 .page_toc p {
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 600;
-  color: #34495e;
-  margin: 0 0 12px 0;
-  padding-bottom: 8px;
-  border-bottom: 2px solid #42b983;
+  color: #8e8e93;
+  margin: 0 0 16px 0;
+  padding: 0;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  border: none;
 }
 
 /* 目录列表样式 */
@@ -582,118 +582,189 @@ section.cover a {
 
 .page_toc li {
   margin: 0;
-  line-height: 1.8;
+  line-height: 1.5;
 }
 
 .page_toc a {
-  color: #5a5a5a;
+  color: #8e8e93;
   text-decoration: none;
   font-size: 13px;
+  font-weight: 400;
   display: block;
-  padding: 4px 8px;
+  padding: 6px 0;
   transition: all 0.2s ease;
-  border-left: 3px solid transparent;
-  border-radius: 0 6px 6px 0;
+  border-left: 2px solid transparent;
+  padding-left: 0;
   position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .page_toc a:hover {
-  color: #42b983;
-  border-left-color: #42b983;
-  background-color: rgba(66, 185, 131, 0.08);
-  padding-left: 12px;
+  color: #1d1d1f;
+  padding-left: 8px;
 }
 
-/* 当前激活的目录项 */
+/* 当前激活的目录项 - 使用左边线条指示 */
 .page_toc .active a {
-  color: #42b983;
+  color: #007aff;
   font-weight: 500;
-  border-left-color: #42b983;
-  background-color: rgba(66, 185, 131, 0.12);
-  padding-left: 12px;
+  border-left-color: #007aff;
+  padding-left: 8px;
 }
 
 /* 多级目录缩进 */
 .page_toc ul ul {
-  padding-left: 16px;
+  padding-left: 12px;
 }
 
 .page_toc ul ul a {
   font-size: 12px;
-  color: #7a7a7a;
+  color: #aeaeb2;
 }
 
 /* 暗黑模式下的文章目录 */
-body.dark .page_toc {
-  background: rgba(13, 37, 56, 0.95);
-  border-color: rgba(30, 60, 90, 0.5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
 body.dark .page_toc p {
-  color: #e0e0e0;
-  border-bottom-color: #42b983;
+  color: #98989d;
 }
 
 body.dark .page_toc a {
-  color: #a0a0a0;
+  color: #98989d;
 }
 
 body.dark .page_toc a:hover {
-  color: #42b983;
-  background-color: rgba(66, 185, 131, 0.15);
+  color: #f5f5f7;
 }
 
 body.dark .page_toc .active a {
-  color: #42b983;
-  background-color: rgba(66, 185, 131, 0.2);
+  color: #0a84ff;
+  border-left-color: #0a84ff;
 }
 
 body.dark .page_toc ul ul a {
-  color: #888888;
+  color: #636366;
 }
 
-/* TOC导航容器（如果插件生成的是这个类名） */
+/* TOC导航容器 - 同样采用Apple风格 */
 .toc-nav {
   position: fixed;
-  top: 80px;
-  right: 20px;
-  width: 220px;
-  max-height: calc(100vh - 120px);
+  top: 100px;
+  right: 30px;
+  width: 200px;
+  max-height: calc(100vh - 140px);
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(224, 224, 224, 0.5);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  z-index: 999;
+  overflow-x: hidden;
+  z-index: 50;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
 }
 
-/* 暗黑模式下的toc-nav */
-body.dark .toc-nav {
-  background: rgba(13, 37, 56, 0.95);
-  border-color: rgba(30, 60, 90, 0.5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+/* 标题样式 */
+.toc-nav .toc-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8e8e93;
+  margin: 0 0 16px 0;
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: none;
 }
 
+/* 链接样式 */
+.toc-nav a {
+  color: #8e8e93;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  display: block;
+  padding: 6px 0;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+  padding-left: 0;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.toc-nav a:hover {
+  color: #1d1d1f;
+  padding-left: 8px;
+}
+
+.toc-nav a.active {
+  color: #007aff;
+  font-weight: 500;
+  border-left-color: #007aff;
+  padding-left: 8px;
+}
+
+/* 暗黑模式 */
 body.dark .toc-nav .toc-title {
-  color: #e0e0e0;
-  border-bottom-color: #42b983;
+  color: #98989d;
 }
 
 body.dark .toc-nav a {
-  color: #a0a0a0;
+  color: #98989d;
 }
 
 body.dark .toc-nav a:hover {
-  color: #42b983;
-  background-color: rgba(66, 185, 131, 0.15);
+  color: #f5f5f7;
 }
 
 body.dark .toc-nav a.active {
-  color: #42b983;
-  background-color: rgba(66, 185, 131, 0.2);
+  color: #0a84ff;
+  border-left-color: #0a84ff;
+}
+
+/* 为目录添加一个微妙的渐变遮罩效果 - 需要匹配实际背景 */
+.page_toc::before,
+.toc-nav::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  right: -20px;
+  height: 30px;
+  background: linear-gradient(to bottom, 
+    hsl(150, 100%, 85%) 0%, 
+    hsla(150, 100%, 85%, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page_toc::after,
+.toc-nav::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: -20px;
+  right: -20px;
+  height: 30px;
+  background: linear-gradient(to top, 
+    hsl(180, 100%, 85%) 0%, 
+    hsla(180, 100%, 85%, 0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 暗黑模式渐变 */
+body.dark .page_toc::before,
+body.dark .toc-nav::before {
+  background: linear-gradient(to bottom, 
+    #091a28 0%, 
+    rgba(9, 26, 40, 0) 100%);
+}
+
+body.dark .page_toc::after,
+body.dark .toc-nav::after {
+  background: linear-gradient(to top, 
+    #091a28 0%, 
+    rgba(9, 26, 40, 0) 100%);
 }
 
 /* 响应式隐藏文章目录 */
@@ -704,49 +775,49 @@ body.dark .toc-nav a.active {
   }
 }
 
-/* 滚动条样式 */
+/* 滚动条样式 - 极简化处理 */
 .toc-nav::-webkit-scrollbar,
 .page_toc::-webkit-scrollbar {
+  width: 0px; /* 隐藏滚动条，但保持滚动功能 */
+}
+
+/* 如果需要显示滚动条，使用极简样式 */
+.toc-nav:hover::-webkit-scrollbar,
+.page_toc:hover::-webkit-scrollbar {
   width: 4px;
 }
 
 .toc-nav::-webkit-scrollbar-track,
 .page_toc::-webkit-scrollbar-track {
-  background: rgba(241, 241, 241, 0.5);
-  border-radius: 4px;
+  background: transparent;
 }
 
 .toc-nav::-webkit-scrollbar-thumb,
 .page_toc::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0.5);
+  background: rgba(142, 142, 147, 0.3);
   border-radius: 4px;
 }
 
 .toc-nav::-webkit-scrollbar-thumb:hover,
 .page_toc::-webkit-scrollbar-thumb:hover {
-  background: rgba(85, 85, 85, 0.7);
+  background: rgba(142, 142, 147, 0.5);
 }
 
 /* 暗黑模式滚动条 */
-body.dark .toc-nav::-webkit-scrollbar-track,
-body.dark .page_toc::-webkit-scrollbar-track {
-  background: rgba(14, 34, 51, 0.5);
-}
-
 body.dark .toc-nav::-webkit-scrollbar-thumb,
 body.dark .page_toc::-webkit-scrollbar-thumb {
-  background: rgba(66, 185, 131, 0.4);
+  background: rgba(152, 152, 157, 0.3);
 }
 
 body.dark .toc-nav::-webkit-scrollbar-thumb:hover,
 body.dark .page_toc::-webkit-scrollbar-thumb:hover {
-  background: rgba(66, 185, 131, 0.6);
+  background: rgba(152, 152, 157, 0.5);
 }
 
 /* 调整主内容区域，避免被目录遮挡 */
 @media screen and (min-width: 1301px) {
   .markdown-section {
-    margin-right: 260px;
+    margin-right: 240px;
   }
 }
 
