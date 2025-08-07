@@ -83,6 +83,12 @@
         collapse: true,   // 默认折叠
         autoOpen: false,  // 不自动展开
       },
+      toc: {
+        tocMaxLevel: 5,
+        target: 'h2, h3, h4, h5, h6',
+        ignoreHeaders: [],
+        title: '文章目录'
+      },
       externalLinkTarget: '_blank', // 外部链接的打开方式，默认_blank
       cornerExternalLinkTarget: '_blank', // 右上角链接的打开方式。默认为 _blank
       routerMode: 'hash', // 路由方式 默认hash
@@ -202,6 +208,9 @@
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
   <!-- 返回顶部按钮 -->
+  <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
+  <!-- 文章目录插件 -->
+  <link rel="stylesheet" href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css">
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js"></script>

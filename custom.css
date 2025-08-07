@@ -543,3 +543,139 @@ section.cover blockquote {
 section.cover a {
   margin-right: 16px;
 }
+
+/* 文章目录样式 */
+.toc-nav {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 250px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+/* 文章目录标题 */
+.toc-nav .toc-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #42b983;
+}
+
+/* 目录列表样式 */
+.toc-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.toc-nav li {
+  margin: 5px 0;
+  line-height: 1.6;
+}
+
+.toc-nav a {
+  color: #34495e;
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+  padding: 3px 0;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+  padding-left: 10px;
+}
+
+.toc-nav a:hover {
+  color: #42b983;
+  border-left-color: #42b983;
+  background-color: #f8f8f8;
+}
+
+/* 当前激活的目录项 */
+.toc-nav a.active {
+  color: #42b983;
+  font-weight: 600;
+  border-left-color: #42b983;
+  background-color: #f0f0f0;
+}
+
+/* 多级目录缩进 */
+.toc-nav ul ul {
+  padding-left: 15px;
+}
+
+/* 暗黑模式下的文章目录 */
+body.dark .toc-nav {
+  background: #091a28;
+  border-color: #0d2538;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .toc-nav .toc-title {
+  color: #ffffff;
+  border-bottom-color: #42b983;
+}
+
+body.dark .toc-nav a {
+  color: #b4b4b4;
+}
+
+body.dark .toc-nav a:hover {
+  color: #42b983;
+  background-color: #0e2233;
+}
+
+body.dark .toc-nav a.active {
+  color: #42b983;
+  background-color: #0d2538;
+}
+
+/* 响应式隐藏文章目录 */
+@media screen and (max-width: 1300px) {
+  .toc-nav {
+    display: none;
+  }
+}
+
+/* 滚动条样式 */
+.toc-nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+.toc-nav::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.toc-nav::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 暗黑模式滚动条 */
+body.dark .toc-nav::-webkit-scrollbar-track {
+  background: #0e2233;
+}
+
+body.dark .toc-nav::-webkit-scrollbar-thumb {
+  background: #42b983;
+}
+
+/* 调整主内容区域，避免被目录遮挡 */
+@media screen and (min-width: 1301px) {
+  .markdown-section {
+    margin-right: 280px;
+  }
+}
