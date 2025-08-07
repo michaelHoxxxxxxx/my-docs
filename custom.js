@@ -576,11 +576,23 @@ if (typeof MutationObserver !== 'undefined') {
     }
   });
   
-  // 开始观察
-  tocObserver.observe(document.body, {
-    childList: true,
-    subtree: true
-  });
+  // 开始观察 - 确保 document.body 存在
+  if (document.body) {
+    tocObserver.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  } else {
+    // 如果 body 还没加载，等待 DOM 完成
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document.body) {
+        tocObserver.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+    });
+  }
 }
 
 // Docsify 插件钩子
