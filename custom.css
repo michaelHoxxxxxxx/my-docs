@@ -590,7 +590,7 @@ section.cover a {
 /* 给目录列表添加滚动 */
 .page_toc > ul {
   max-height: calc(100vh - 180px);
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
   padding-right: 0;
   word-wrap: break-word;
@@ -598,6 +598,8 @@ section.cover a {
   /* 强制隐藏所有滚动条 */
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+  /* 确保滚动功能可用 */
+  scroll-behavior: smooth;
 }
 
 /* 强制隐藏所有子元素的滚动条 */
@@ -741,7 +743,7 @@ body.dark .page_toc ul ul a {
 /* 给toc-nav的列表添加滚动 */
 .toc-nav > ul {
   max-height: calc(100vh - 180px);
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
   padding-right: 0;
   word-wrap: break-word;
@@ -749,6 +751,8 @@ body.dark .page_toc ul ul a {
   /* 强制隐藏所有滚动条 */
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+  /* 确保滚动功能可用 */
+  scroll-behavior: smooth;
 }
 
 /* 强制隐藏所有子元素的滚动条 */

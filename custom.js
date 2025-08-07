@@ -323,16 +323,12 @@ function initTOCScrollFollow() {
   
   // 更新目录高亮和滚动位置
   function updateTOC() {
-    console.log('=== 开始更新目录 ===');
-    console.log('当前滚动位置:', window.pageYOffset);
-    
     var currentHeading = getCurrentHeading();
     if (!currentHeading) {
-      console.log('没有找到当前标题');
       return;
     }
     
-    console.log('当前标题:', currentHeading.id, '内容:', currentHeading.element.textContent.trim());
+    console.log('当前标题:', currentHeading.id);
     
     // 移除所有激活状态
     tocLinks.forEach(function(link) {
@@ -363,34 +359,35 @@ function initTOCScrollFollow() {
     // 自动滚动目录，使当前项始终在中间
     if (activeLink && tocContainer) {
       try {
-        // 获取激活链接在目录容器中的偏移量
-        var linkOffsetTop = 0;
-        var element = activeLink;
-        while (element && element !== tocContainer) {
-          linkOffsetTop += element.offsetTop;
-          element = element.offsetParent;
-        }
+        // 更简单直接的计算方式
+        var containerHeight = tocContainer.clientHeight || tocContainer.offsetHeight;
+        var containerScrollHeight = tocContainer.scrollHeight;
         
-        var containerHeight = tocContainer.clientHeight;
+        // 获取激活链接相对于容器的位置
+        var linkOffsetTop = activeLink.offsetTop;
+        var linkHeight = activeLink.offsetHeight || activeLink.clientHeight;
         
         // 计算目标滚动位置（将激活项放在容器中间）
-        var targetScrollTop = linkOffsetTop - (containerHeight / 2) + (activeLink.offsetHeight / 2);
+        var targetScrollTop = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
         
         // 确保滚动位置在合理范围内
-        var maxScrollTop = tocContainer.scrollHeight - containerHeight;
+        var maxScrollTop = Math.max(0, containerScrollHeight - containerHeight);
         targetScrollTop = Math.max(0, Math.min(targetScrollTop, maxScrollTop));
         
+        // 获取当前滚动位置
+        var currentScrollTop = tocContainer.scrollTop || 0;
+        
         // 只有当差距超过阈值时才滚动，避免频繁滚动
-        var currentScrollTop = tocContainer.scrollTop;
-        if (Math.abs(currentScrollTop - targetScrollTop) > 30) {
-          tocContainer.scrollTo({
-            top: targetScrollTop,
-            behavior: 'smooth'
-          });
-          console.log('滚动目录到中间位置:', targetScrollTop, '当前激活:', activeLink.textContent.trim());
+        if (Math.abs(currentScrollTop - targetScrollTop) > 20) {
+          // 直接设置scrollTop，确保兼容性
+          tocContainer.scrollTop = targetScrollTop;
+          
+          console.log('滚动目录到中间位置:', targetScrollTop, '容器高度:', containerHeight, '当前激活:', activeLink.textContent.trim());
         }
       } catch (error) {
         console.error('目录滚动出错:', error);
+        console.log('容器信息:', tocContainer);
+        console.log('激活链接信息:', activeLink);
       }
     }
   }
@@ -428,19 +425,13 @@ function initTOCScrollFollow() {
   
   // 添加滚动事件监听器
   console.log('添加滚动事件监听器...');
-  window.addEventListener('scroll', function() {
-    console.log('滚动事件触发，当前位置:', window.pageYOffset);
-    throttledUpdate();
-  }, { passive: true });
+  window.addEventListener('scroll', throttledUpdate, { passive: true });
   
   // 也监听主内容区域的滚动
   var mainContent = document.querySelector('.content') || document.body;
   if (mainContent) {
     console.log('也监听主内容区域滚动...');
-    mainContent.addEventListener('scroll', function() {
-      console.log('主内容滚动事件触发');
-      throttledUpdate();
-    }, { passive: true });
+    mainContent.addEventListener('scroll', throttledUpdate, { passive: true });
   }
   
   // 初始更新
