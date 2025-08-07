@@ -163,7 +163,8 @@
     - **📦 模块13: 企业功能（第18-19周）**
       - [13.1 多租户架构](docs/soulbox_final_missing_features.md#企业级功能)
       - [13.2 资源配额管理](docs/soulbox_final_missing_features.md#资源管理)
-      - [13.3 计费系统](docs/soulbox_ultimate_development_guide.md#计费功能)
+      - [13.3 计费系统概述](docs/soulbox_ultimate_development_guide.md#计费功能)
+      - [13.4 **计费系统详细设计（新）**](docs/soulbox_billing_system_design.md)
     
     - **📦 模块14: 性能优化（第20-21周）**
       - [14.1 连接池管理](docs/soulbox_missing_13_percent.md#连接池管理)
