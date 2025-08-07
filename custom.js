@@ -201,3 +201,145 @@ window.addEventListener('load', function() {
     });
   }, 3000); // 增加等待时间到 3 秒
 });
+
+// 文章目录自动滚动跟随功能
+window.addEventListener('DOMContentLoaded', function() {
+  // 延迟执行，确保TOC已经生成
+  setTimeout(function() {
+    // 监听滚动事件，实现目录高亮和自动滚动
+    var tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a');
+    var tocContainer = document.querySelector('.toc-nav > ul, .page_toc > ul');
+    
+    if (!tocLinks.length || !tocContainer) {
+      console.log('未找到目录元素，延迟重试');
+      // 如果没找到，延迟重试
+      setTimeout(arguments.callee, 1000);
+      return;
+    }
+    
+    console.log('找到目录元素，开始初始化滚动跟随');
+    
+    // 获取所有标题元素
+    function getAllHeadings() {
+      var headings = [];
+      var selectors = 'h2, h3, h4, h5, h6';
+      var elements = document.querySelectorAll('.markdown-section ' + selectors);
+      
+      elements.forEach(function(el) {
+        if (el.id) {
+          headings.push({
+            id: el.id,
+            element: el,
+            offsetTop: el.offsetTop
+          });
+        }
+      });
+      
+      return headings;
+    }
+    
+    // 查找当前可见的标题
+    function getCurrentHeading() {
+      var headings = getAllHeadings();
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      var current = null;
+      
+      // 添加一个偏移量，让高亮更准确
+      var offset = 100;
+      
+      for (var i = headings.length - 1; i >= 0; i--) {
+        if (headings[i].offsetTop - offset <= scrollTop) {
+          current = headings[i];
+          break;
+        }
+      }
+      
+      return current;
+    }
+    
+    // 更新目录高亮和滚动位置
+    function updateTOC() {
+      var currentHeading = getCurrentHeading();
+      if (!currentHeading) return;
+      
+      // 移除所有激活状态
+      tocLinks.forEach(function(link) {
+        link.classList.remove('active');
+        if (link.parentElement) {
+          link.parentElement.classList.remove('active');
+        }
+      });
+      
+      // 找到对应的目录链接
+      var activeLink = null;
+      tocLinks.forEach(function(link) {
+        var href = link.getAttribute('href');
+        if (href && (href === '#' + currentHeading.id || href.endsWith('#' + currentHeading.id))) {
+          link.classList.add('active');
+          if (link.parentElement) {
+            link.parentElement.classList.add('active');
+          }
+          activeLink = link;
+        }
+      });
+      
+      // 自动滚动目录，使当前项可见
+      if (activeLink && tocContainer) {
+        var linkRect = activeLink.getBoundingClientRect();
+        var containerRect = tocContainer.getBoundingClientRect();
+        
+        // 计算链接在容器中的相对位置
+        var linkTop = activeLink.offsetTop;
+        var containerHeight = containerRect.height;
+        var scrollTop = tocContainer.scrollTop;
+        
+        // 如果链接不在可见区域，滚动到中间位置
+        if (linkTop < scrollTop || linkTop > scrollTop + containerHeight - 50) {
+          tocContainer.scrollTo({
+            top: linkTop - containerHeight / 2,
+            behavior: 'smooth'
+          });
+        }
+      }
+    }
+    
+    // 节流函数
+    function throttle(func, wait) {
+      var timeout = null;
+      var previous = 0;
+      
+      return function() {
+        var now = Date.now();
+        var remaining = wait - (now - previous);
+        
+        if (remaining <= 0) {
+          if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+          }
+          previous = now;
+          func.apply(this, arguments);
+        } else if (!timeout) {
+          timeout = setTimeout(function() {
+            previous = Date.now();
+            timeout = null;
+            func.apply(this, arguments);
+          }, remaining);
+        }
+      };
+    }
+    
+    // 监听滚动事件
+    var throttledUpdate = throttle(updateTOC, 100);
+    window.addEventListener('scroll', throttledUpdate);
+    
+    // 初始更新
+    updateTOC();
+    
+    // 监听路由变化
+    window.addEventListener('hashchange', function() {
+      setTimeout(updateTOC, 300);
+    });
+    
+  }, 1000);
+});
