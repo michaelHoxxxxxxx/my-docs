@@ -700,11 +700,16 @@ body.dark .page_toc > ul::-webkit-scrollbar-thumb:hover {
 }
 
 /* 当前激活的目录项 - 使用左边线条指示 */
-.page_toc .active a {
-  color: #007aff;
-  font-weight: 500;
-  border-left-color: #007aff;
-  padding-left: 8px;
+.page_toc .active a,
+.page_toc a.active {
+  color: #007aff !important;
+  font-weight: 600 !important;
+  border-left: 3px solid #007aff !important;
+  padding-left: 12px !important;
+  background-color: rgba(0, 122, 255, 0.1) !important;
+  border-radius: 4px !important;
+  margin-left: -4px !important;
+  transition: all 0.2s ease !important;
 }
 
 /* 多级目录缩进 */
@@ -730,9 +735,15 @@ body.dark .page_toc a:hover {
   color: #f5f5f7;
 }
 
-body.dark .page_toc .active a {
-  color: #0a84ff;
-  border-left-color: #0a84ff;
+body.dark .page_toc .active a,
+body.dark .page_toc a.active {
+  color: #0a84ff !important;
+  font-weight: 600 !important;
+  border-left: 3px solid #0a84ff !important;
+  padding-left: 12px !important;
+  background-color: rgba(10, 132, 255, 0.15) !important;
+  border-radius: 4px !important;
+  margin-left: -4px !important;
 }
 
 body.dark .page_toc ul ul a {
@@ -889,11 +900,16 @@ body.dark .toc-nav > ul::-webkit-scrollbar-thumb:hover {
   padding-left: 8px;
 }
 
-.toc-nav a.active {
-  color: #007aff;
-  font-weight: 500;
-  border-left-color: #007aff;
-  padding-left: 8px;
+.toc-nav a.active,
+.toc-nav .active a {
+  color: #007aff !important;
+  font-weight: 600 !important;
+  border-left: 3px solid #007aff !important;
+  padding-left: 12px !important;
+  background-color: rgba(0, 122, 255, 0.1) !important;
+  border-radius: 4px !important;
+  margin-left: -4px !important;
+  transition: all 0.2s ease !important;
 }
 
 /* 暗黑模式 */
@@ -909,9 +925,15 @@ body.dark .toc-nav a:hover {
   color: #f5f5f7;
 }
 
-body.dark .toc-nav a.active {
-  color: #0a84ff;
-  border-left-color: #0a84ff;
+body.dark .toc-nav a.active,
+body.dark .toc-nav .active a {
+  color: #0a84ff !important;
+  font-weight: 600 !important;
+  border-left: 3px solid #0a84ff !important;
+  padding-left: 12px !important;
+  background-color: rgba(10, 132, 255, 0.15) !important;
+  border-radius: 4px !important;
+  margin-left: -4px !important;
 }
 
 /* 移除渐变遮罩效果，保持完全透明 */

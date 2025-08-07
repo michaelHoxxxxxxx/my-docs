@@ -202,10 +202,14 @@ window.addEventListener('load', function() {
   }, 3000); // 增加等待时间到 3 秒
 });
 
+// 调试开关 - 在控制台输入 window.tocDebug = true 来开启调试
+// 或者 window.tocDebug = false 来关闭调试
+if (typeof window.tocDebug === 'undefined') {
+  window.tocDebug = false;
+}
+
 // 文章目录自动滚动跟随功能
 function initTOCScrollFollow() {
-  console.log('开始初始化目录跟随功能');
-  
   // 更全面地查找目录元素，包括插件生成的所有可能选择器
   var tocSelectors = [
     '.page_toc a',           // docsify-plugin-toc 主要选择器
@@ -232,7 +236,9 @@ function initTOCScrollFollow() {
     var links = document.querySelectorAll(tocSelectors[i]);
     if (links.length > 0) {
       tocLinks = links;
-      console.log('✓ 使用选择器找到目录链接:', tocSelectors[i], '数量:', links.length);
+      if (window.tocDebug) {
+        console.log('✓ 找到目录链接:', tocSelectors[i], '数量:', links.length);
+      }
       break;
     }
   }
@@ -241,13 +247,12 @@ function initTOCScrollFollow() {
     var container = document.querySelector(containerSelectors[j]);
     if (container) {
       tocContainer = container;
-      console.log('✓ 使用选择器找到目录容器:', containerSelectors[j]);
+      if (window.tocDebug) {
+        console.log('✓ 找到目录容器:', containerSelectors[j]);
+      }
       break;
     }
   }
-  
-  console.log('最终找到的目录链接数量：', tocLinks.length);
-  console.log('最终找到的目录容器：', tocContainer);
   
   // 检查是否在小屏幕上被隐藏
   if (window.innerWidth <= 360) {
@@ -352,16 +357,10 @@ function initTOCScrollFollow() {
   
   // 更新目录高亮和滚动位置
   function updateTOC() {
-    console.log('=== 开始更新目录 ===');
-    console.log('当前滚动位置:', window.pageYOffset);
-    
     var currentHeading = getCurrentHeading();
     if (!currentHeading) {
-      console.log('没有找到当前标题');
       return;
     }
-    
-    console.log('当前标题:', currentHeading.id, '内容:', currentHeading.element.textContent.trim());
     
     // 移除所有激活状态
     tocLinks.forEach(function(link) {
@@ -371,41 +370,68 @@ function initTOCScrollFollow() {
       }
     });
     
-    // 找到对应的目录链接
+    // 找到对应的目录链接 - 增强匹配逻辑
     var activeLink = null;
-    console.log('寻找匹配的目录项，目标ID:', currentHeading.id);
+    var targetId = currentHeading.id;
+    var targetText = currentHeading.element.textContent.trim();
     
-    tocLinks.forEach(function(link, index) {
+    tocLinks.forEach(function(link) {
       var href = link.getAttribute('href');
+      var linkText = link.textContent.trim();
       
       if (href) {
-        // 处理不同的href格式
-        var linkId = href.replace(/^.*#/, ''); // 移除#前面的所有内容
+        // 提取链接ID，处理多种格式
+        var linkId = href.replace(/^.*#/, '').replace(/^\?id=/, '');
         
-        console.log('检查目录项', index, '- href:', href, '- 提取ID:', linkId, '- 文本:', link.textContent.trim());
+        // 多种匹配策略
+        var isMatch = false;
         
-        if (linkId === currentHeading.id) {
+        // 1. ID完全匹配
+        if (linkId === targetId) {
+          isMatch = true;
+        }
+        
+        // 2. 文本内容匹配（去除特殊字符）
+        if (!isMatch && linkText && targetText) {
+          var normalizedLinkText = linkText.replace(/[^\w\s\u4e00-\u9fa5]/g, '').trim();
+          var normalizedTargetText = targetText.replace(/[^\w\s\u4e00-\u9fa5]/g, '').trim();
+          
+          if (normalizedLinkText === normalizedTargetText) {
+            isMatch = true;
+          }
+        }
+        
+        // 3. URL解码后的ID匹配
+        if (!isMatch) {
+          try {
+            var decodedLinkId = decodeURIComponent(linkId);
+            if (decodedLinkId === targetId) {
+              isMatch = true;
+            }
+          } catch (e) {
+            // 忽略解码错误
+          }
+        }
+        
+        if (isMatch) {
           link.classList.add('active');
           if (link.parentElement) {
             link.parentElement.classList.add('active');
           }
           activeLink = link;
-          console.log('✓ 匹配成功！激活目录项:', linkId);
+          
+          // 调试信息（可在控制台查看）
+          if (window.tocDebug) {
+            console.log('✅ TOC匹配成功:', {
+              标题ID: targetId,
+              标题文本: targetText,
+              目录链接: linkText,
+              链接ID: linkId
+            });
+          }
         }
       }
     });
-    
-    if (!activeLink) {
-      console.log('❌ 没有找到匹配的目录项');
-      console.log('可用的目录项ID列表:');
-      tocLinks.forEach(function(link, index) {
-        var href = link.getAttribute('href');
-        if (href) {
-          var linkId = href.replace(/^.*#/, '');
-          console.log('  ', index, ':', linkId, '(', link.textContent.trim(), ')');
-        }
-      });
-    }
     
     // 智能滚动目录，使当前项保持在合适位置
     if (activeLink && tocContainer) {
