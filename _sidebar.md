@@ -104,10 +104,11 @@
       - [1.2 配置系统（soulbox.toml）](docs/soulbox_missing_13_percent.md#配置文件格式定义)
       - [1.3 错误处理体系](docs/soulbox_missing_13_percent.md#错误处理增强)
     
-    - **📦 模块2: 通信协议（第3周）**
+    - **📦 模块2: 通信协议（第3周）✅**
       - [2.1 gRPC协议层](docs/soulbox_final_missing_features.md#协议层功能)
       - [2.2 WebSocket实时通信](docs/soulbox_final_missing_features.md#websocket-实时通信)
       - [2.3 API网关设计](docs/soulbox_architecture_design.md)
+      - [2.4 **TDD实施报告（24个测试100%通过）**](docs/soulbox_module2_tdd_implementation_report.md)
     
     - **📦 模块3: 沙箱核心（第4-5周）**
       - [3.1 沙箱生命周期管理](docs/soulbox_ultimate_development_guide.md#核心沙箱管理)
@@ -212,6 +213,7 @@
     - [1.1 E2B 代码文件索引](docs/e2b_code_files_index.md)
     - [1.2 E2B 整体架构与运作流程](docs/e2b_architecture_flow.md)
     - [1.3 E2B 完整部署教程](docs/e2b_deployment_guide.md)
+    - [1.4 E2B 计费系统分析报告](docs/e2b_billing_system_analysis.md)
   - **2. 协议定义层**
     - [2.1 openapi.yml - REST API 规范](docs/e2b_openapi_yml.md)
     - [2.2 filesystem.proto - 文件系统接口](docs/e2b_filesystem_proto.md)
