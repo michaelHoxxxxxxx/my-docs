@@ -551,14 +551,21 @@ section.cover a {
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible; /* 改为visible，让内容自然显示 */
   z-index: 50;
   /* 移除所有背景和边框，完全融入页面 */
   background: transparent;
   border: none;
   box-shadow: none;
   padding: 0;
+}
+
+/* 给目录列表添加滚动 */
+.page_toc > ul {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px; /* 给滚动条留空间 */
 }
 
 /* 文章目录标题 - 极简风格 */
@@ -653,13 +660,20 @@ body.dark .page_toc ul ul a {
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: visible;
   z-index: 50;
   background: transparent;
   border: none;
   box-shadow: none;
   padding: 0;
+}
+
+/* 给toc-nav的列表添加滚动 */
+.toc-nav > ul {
+  max-height: calc(100vh - 180px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
 }
 
 /* 标题样式 */
@@ -775,42 +789,42 @@ body.dark .toc-nav::after {
   }
 }
 
-/* 滚动条样式 - 极简化处理 */
-.toc-nav::-webkit-scrollbar,
-.page_toc::-webkit-scrollbar {
+/* 滚动条样式 - 只应用到ul元素 */
+.toc-nav > ul::-webkit-scrollbar,
+.page_toc > ul::-webkit-scrollbar {
   width: 0px; /* 隐藏滚动条，但保持滚动功能 */
 }
 
 /* 如果需要显示滚动条，使用极简样式 */
-.toc-nav:hover::-webkit-scrollbar,
-.page_toc:hover::-webkit-scrollbar {
+.toc-nav > ul:hover::-webkit-scrollbar,
+.page_toc > ul:hover::-webkit-scrollbar {
   width: 4px;
 }
 
-.toc-nav::-webkit-scrollbar-track,
-.page_toc::-webkit-scrollbar-track {
+.toc-nav > ul::-webkit-scrollbar-track,
+.page_toc > ul::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.toc-nav::-webkit-scrollbar-thumb,
-.page_toc::-webkit-scrollbar-thumb {
+.toc-nav > ul::-webkit-scrollbar-thumb,
+.page_toc > ul::-webkit-scrollbar-thumb {
   background: rgba(142, 142, 147, 0.3);
   border-radius: 4px;
 }
 
-.toc-nav::-webkit-scrollbar-thumb:hover,
-.page_toc::-webkit-scrollbar-thumb:hover {
+.toc-nav > ul::-webkit-scrollbar-thumb:hover,
+.page_toc > ul::-webkit-scrollbar-thumb:hover {
   background: rgba(142, 142, 147, 0.5);
 }
 
 /* 暗黑模式滚动条 */
-body.dark .toc-nav::-webkit-scrollbar-thumb,
-body.dark .page_toc::-webkit-scrollbar-thumb {
+body.dark .toc-nav > ul::-webkit-scrollbar-thumb,
+body.dark .page_toc > ul::-webkit-scrollbar-thumb {
   background: rgba(152, 152, 157, 0.3);
 }
 
-body.dark .toc-nav::-webkit-scrollbar-thumb:hover,
-body.dark .page_toc::-webkit-scrollbar-thumb:hover {
+body.dark .toc-nav > ul::-webkit-scrollbar-thumb:hover,
+body.dark .page_toc > ul::-webkit-scrollbar-thumb:hover {
   background: rgba(152, 152, 157, 0.5);
 }
 
