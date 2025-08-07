@@ -592,25 +592,42 @@ section.cover a {
   max-height: calc(100vh - 180px);
   overflow-y: auto !important;
   overflow-x: hidden !important;
-  padding-right: 0;
+  padding-right: 8px; /* 增加右边距，为滚动条留空间 */
   word-wrap: break-word;
   word-break: break-word;
-  /* 强制隐藏所有滚动条 */
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
-  /* 确保滚动功能可用 */
+  /* 滚动条样式 - 显示但美化 */
   scroll-behavior: smooth;
 }
 
-/* 强制隐藏所有子元素的滚动条 */
-.page_toc ul::-webkit-scrollbar,
-.page_toc ul *::-webkit-scrollbar,
-.page_toc *::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+/* 美化目录滚动条 */
+.page_toc > ul::-webkit-scrollbar {
+  width: 4px !important;
+  display: block !important;
+}
+
+.page_toc > ul::-webkit-scrollbar-track {
   background: transparent !important;
 }
+
+.page_toc > ul::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 2px !important;
+}
+
+.page_toc > ul::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 暗色模式下的滚动条 */
+body.dark .page_toc > ul::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.dark .page_toc > ul::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 移除了强制隐藏滚动条的规则，让目录可以正常滚动 */
 
 /* 文章目录标题 - 极简风格 */
 .page_toc p {
@@ -745,25 +762,42 @@ body.dark .page_toc ul ul a {
   max-height: calc(100vh - 180px);
   overflow-y: auto !important;
   overflow-x: hidden !important;
-  padding-right: 0;
+  padding-right: 8px; /* 增加右边距，为滚动条留空间 */
   word-wrap: break-word;
   word-break: break-word;
-  /* 强制隐藏所有滚动条 */
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
-  /* 确保滚动功能可用 */
+  /* 滚动条样式 - 显示但美化 */
   scroll-behavior: smooth;
 }
 
-/* 强制隐藏所有子元素的滚动条 */
-.toc-nav ul::-webkit-scrollbar,
-.toc-nav ul *::-webkit-scrollbar,
-.toc-nav *::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+/* 美化toc-nav滚动条 */
+.toc-nav > ul::-webkit-scrollbar {
+  width: 4px !important;
+  display: block !important;
+}
+
+.toc-nav > ul::-webkit-scrollbar-track {
   background: transparent !important;
 }
+
+.toc-nav > ul::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 2px !important;
+}
+
+.toc-nav > ul::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 暗色模式下的toc-nav滚动条 */
+body.dark .toc-nav > ul::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.dark .toc-nav > ul::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* 移除了强制隐藏滚动条的规则，让toc-nav可以正常滚动 */
 
 /* 标题样式 */
 .toc-nav .toc-title {
