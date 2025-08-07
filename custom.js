@@ -1,8 +1,5 @@
 // 页面加载完成后的初始化
 window.addEventListener('load', function() {
-  console.log('自定义脚本已加载');
-  console.log('用户代理:', navigator.userAgent);
-  console.log('是否为移动设备:', /Mobi|Android/i.test(navigator.userAgent));
   
   // 获取开始阅读按钮
   var startButton = document.getElementById('start-reading-btn');
@@ -10,7 +7,6 @@ window.addEventListener('load', function() {
   if (startButton) {
     // 处理开始阅读功能
     function handleStartReading() {
-      console.log('开始阅读按钮被点击');
       var customCover = document.getElementById('custom-cover');
       
       if (customCover) {
@@ -21,7 +17,6 @@ window.addEventListener('load', function() {
         // 延迟后完全隐藏封面
         setTimeout(function() {
           customCover.style.display = 'none';
-          console.log('封面已隐藏');
           
           // 确保侧边栏切换按钮在移动端可见
           if (window.innerWidth <= 768) {
@@ -30,7 +25,6 @@ window.addEventListener('load', function() {
               sidebarToggle.style.display = 'block';
               sidebarToggle.style.visibility = 'visible';
               sidebarToggle.style.opacity = '1';
-              console.log('侧边栏切换按钮已显示');
             }
           }
         }, 800);
@@ -83,8 +77,6 @@ window.addEventListener('load', function() {
 
 // 自定义明暗模式切换功能
 window.addEventListener('load', function() {
-  console.log('自定义明暗模式切换功能已加载');
-  
   // 等待更长时间确保 Docsify 完全加载
   setTimeout(function() {
     // 获取元素
@@ -92,33 +84,21 @@ window.addEventListener('load', function() {
     var lightIcon = document.querySelector('.light-icon');
     var darkIcon = document.querySelector('.dark-icon');
     
-    if (!themeToggle) {
-      console.error('找不到主题切换按钮');
-      return;
+    if (!themeToggle || !lightIcon || !darkIcon) {
+      return; // 静默退出，避免错误日志
     }
-    
-    if (!lightIcon || !darkIcon) {
-      console.error('找不到主题图标');
-      return;
-    }
-    
-    console.log('主题切换按钮和图标已找到');
     
     // 初始更新图标状态
     updateThemeIcons();
     
     // 添加点击事件
     themeToggle.addEventListener('click', function() {
-      console.log('点击了主题切换按钮');
-      
       // 尝试找到并点击 Docsify 的原生主题切换按钮
       var darkmodeToggle = document.querySelector('.darkmode-toggle');
       if (darkmodeToggle) {
         darkmodeToggle.click();
-        console.log('点击原生切换按钮成功');
       } else {
         // 如果找不到原生按钮，就手动切换
-        console.log('找不到原生切换按钮，手动切换');
         manualToggleTheme();
       }
       
@@ -139,11 +119,9 @@ window.addEventListener('load', function() {
       if (newTheme === 'dark') {
         document.body.classList.add('dark');
         document.body.classList.remove('light');
-        console.log('已切换到暗色模式');
       } else {
         document.body.classList.add('light');
         document.body.classList.remove('dark');
-        console.log('已切换到亮色模式');
       }
       
       // 应用主题样式
@@ -183,7 +161,6 @@ window.addEventListener('load', function() {
     // 更新图标状态
     function updateThemeIcons() {
       var isDark = document.body.classList.contains('dark');
-      console.log('当前主题是暗色模式：', isDark);
       
       if (isDark) {
         lightIcon.style.display = 'none';
@@ -256,7 +233,6 @@ function initTOCScrollFollow() {
   
   // 检查是否在小屏幕上被隐藏
   if (window.innerWidth <= 360) {
-    console.log('屏幕太小，目录被隐藏');
     return;
   }
   
@@ -267,23 +243,18 @@ function initTOCScrollFollow() {
   window.tocInitRetries++;
   
   if (!tocLinks.length && window.tocInitRetries < 20) {
-    console.log('未找到目录链接，延迟重试...第', window.tocInitRetries, '次');
     setTimeout(initTOCScrollFollow, 500);
     return;
   }
   
   if (!tocContainer && window.tocInitRetries < 20) {
-    console.log('未找到目录容器，延迟重试...第', window.tocInitRetries, '次');
     setTimeout(initTOCScrollFollow, 500);
     return;
   }
   
   if (window.tocInitRetries >= 20) {
-    console.log('重试次数已达上限，停止初始化');
     return;
   }
-  
-  console.log('找到目录元素：', tocLinks.length, '个链接');
   
   // 获取所有标题元素
   function getAllHeadings() {
@@ -452,7 +423,6 @@ function initTOCScrollFollow() {
               block: 'center',
               inline: 'nearest'
             });
-            console.log('✓ 使用 scrollIntoView 滚动目录:', activeLink.textContent.trim());
           }
         } else {
           // 降级到手动滚动逻辑
@@ -483,7 +453,6 @@ function initTOCScrollFollow() {
               } else {
                 tocContainer.scrollTop = targetScrollTop;
               }
-              console.log('✓ 使用手动滚动目录:', activeLink.textContent.trim());
             }
           }
         }
@@ -526,25 +495,21 @@ function initTOCScrollFollow() {
   var throttledUpdate = throttle(updateTOC, 150);
   
   // 添加滚动事件监听器
-  console.log('✓ 添加滚动事件监听器');
   window.addEventListener('scroll', throttledUpdate, { passive: true });
   
   // 监听窗口大小变化，重新初始化
   window.addEventListener('resize', throttle(function() {
-    console.log('窗口大小变化，重新初始化目录跟随');
     setTimeout(initTOCScrollFollow, 200);
   }, 500));
   
   // 初始更新
   setTimeout(function() {
     updateTOC();
-    console.log('✓ 目录跟随功能初始化完成');
   }, 300);
   
   // 监听路由变化和页面切换
   var handlePageChange = function() {
     setTimeout(function() {
-      console.log('页面变化，重新初始化目录跟随');
       initTOCScrollFollow();
     }, 600);
   };
@@ -561,7 +526,6 @@ function initTOCScrollFollow() {
 function smartInitTOC() {
   // 防止重复初始化
   if (window.tocFollowInitialized) {
-    console.log('目录跟随已初始化，跳过');
     return;
   }
   
@@ -573,10 +537,7 @@ function smartInitTOC() {
   var hasContent = document.querySelector('.markdown-section');
   
   if (hasTOC && hasContent) {
-    console.log('检测到目录和内容，开始初始化');
     initTOCScrollFollow();
-  } else {
-    console.log('等待目录或内容加载...');
   }
 }
 
@@ -611,7 +572,6 @@ if (typeof MutationObserver !== 'undefined') {
     });
     
     if (shouldInit && !window.tocFollowInitialized) {
-      console.log('检测到目录元素变化，触发初始化');
       setTimeout(smartInitTOC, 300);
     }
   });
