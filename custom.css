@@ -582,7 +582,9 @@ section.cover a {
   max-height: calc(100vh - 180px);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 10px; /* 给滚动条留空间 */
+  padding-right: 5px; /* 减小右边距 */
+  word-wrap: break-word; /* 长文本自动换行 */
+  word-break: break-word;
 }
 
 /* 文章目录标题 - 极简风格 */
@@ -620,9 +622,10 @@ section.cover a {
   border-left: 2px solid transparent;
   padding-left: 0;
   position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal; /* 允许换行 */
+  line-height: 1.4;
 }
 
 .page_toc a:hover {
@@ -707,7 +710,9 @@ body.dark .page_toc ul ul a {
   max-height: calc(100vh - 180px);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-right: 10px;
+  padding-right: 5px;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 /* 标题样式 */
@@ -734,9 +739,10 @@ body.dark .page_toc ul ul a {
   border-left: 2px solid transparent;
   padding-left: 0;
   position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  line-height: 1.4;
 }
 
 .toc-nav a:hover {
@@ -769,50 +775,12 @@ body.dark .toc-nav a.active {
   border-left-color: #0a84ff;
 }
 
-/* 为目录添加一个微妙的渐变遮罩效果 - 需要匹配实际背景 */
+/* 移除渐变遮罩效果，保持完全透明 */
 .page_toc::before,
-.toc-nav::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -20px;
-  right: -20px;
-  height: 30px;
-  background: linear-gradient(to bottom, 
-    hsl(150, 100%, 85%) 0%, 
-    hsla(150, 100%, 85%, 0) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
+.toc-nav::before,
 .page_toc::after,
 .toc-nav::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: -20px;
-  right: -20px;
-  height: 30px;
-  background: linear-gradient(to top, 
-    hsl(180, 100%, 85%) 0%, 
-    hsla(180, 100%, 85%, 0) 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 暗黑模式渐变 */
-body.dark .page_toc::before,
-body.dark .toc-nav::before {
-  background: linear-gradient(to bottom, 
-    #091a28 0%, 
-    rgba(9, 26, 40, 0) 100%);
-}
-
-body.dark .page_toc::after,
-body.dark .toc-nav::after {
-  background: linear-gradient(to top, 
-    #091a28 0%, 
-    rgba(9, 26, 40, 0) 100%);
+  display: none !important;
 }
 
 /* 响应式隐藏文章目录 */
@@ -823,43 +791,43 @@ body.dark .toc-nav::after {
   }
 }
 
-/* 滚动条样式 - 只应用到ul元素 */
+/* 滚动条样式 - 苹果风格超细滚动条 */
 .toc-nav > ul::-webkit-scrollbar,
 .page_toc > ul::-webkit-scrollbar {
-  width: 0px; /* 隐藏滚动条，但保持滚动功能 */
-}
-
-/* 如果需要显示滚动条，使用极简样式 */
-.toc-nav > ul:hover::-webkit-scrollbar,
-.page_toc > ul:hover::-webkit-scrollbar {
-  width: 4px;
+  width: 6px; /* 始终显示，但很细 */
 }
 
 .toc-nav > ul::-webkit-scrollbar-track,
 .page_toc > ul::-webkit-scrollbar-track {
   background: transparent;
+  margin: 5px 0; /* 上下留白 */
 }
 
 .toc-nav > ul::-webkit-scrollbar-thumb,
 .page_toc > ul::-webkit-scrollbar-thumb {
-  background: rgba(142, 142, 147, 0.3);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 
 .toc-nav > ul::-webkit-scrollbar-thumb:hover,
 .page_toc > ul::-webkit-scrollbar-thumb:hover {
-  background: rgba(142, 142, 147, 0.5);
+  background: rgba(0, 0, 0, 0.25);
+  background-clip: padding-box;
 }
 
 /* 暗黑模式滚动条 */
 body.dark .toc-nav > ul::-webkit-scrollbar-thumb,
 body.dark .page_toc > ul::-webkit-scrollbar-thumb {
-  background: rgba(152, 152, 157, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  background-clip: padding-box;
 }
 
 body.dark .toc-nav > ul::-webkit-scrollbar-thumb:hover,
 body.dark .page_toc > ul::-webkit-scrollbar-thumb:hover {
-  background: rgba(152, 152, 157, 0.5);
+  background: rgba(255, 255, 255, 0.3);
+  background-clip: padding-box;
 }
 
 /* 调整主内容区域，避免被目录遮挡 */
