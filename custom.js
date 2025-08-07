@@ -205,32 +205,49 @@ window.addEventListener('load', function() {
 // 文章目录自动滚动跟随功能
 function initTOCScrollFollow() {
   console.log('开始初始化目录跟随功能');
-  console.log('当前屏幕宽度:', window.innerWidth);
-  console.log('当前屏幕高度:', window.innerHeight);
   
-  // 查找目录元素
-  var tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a, aside.toc-nav a');
-  var tocContainer = document.querySelector('aside.toc-nav') || document.querySelector('.toc-nav') || document.querySelector('.page_toc');
+  // 更全面地查找目录元素，包括插件生成的所有可能选择器
+  var tocSelectors = [
+    '.page_toc a',           // docsify-plugin-toc 主要选择器
+    '.toc-nav a',            // 备用选择器
+    'aside.toc-nav a',       // aside 标签
+    '.page_toc li a',        // 嵌套列表项
+    '.toc-container a',      // 容器内链接
+    '.toc-wrapper a'         // 包装器内链接
+  ];
   
-  console.log('查找到的目录链接数量：', tocLinks.length);
-  console.log('查找到的目录容器：', tocContainer);
-  console.log('所有可能的目录元素：');
-  console.log('- .toc-nav:', document.querySelectorAll('.toc-nav'));
-  console.log('- .page_toc:', document.querySelectorAll('.page_toc'));
-  console.log('- 所有目录相关元素:', document.querySelectorAll('[class*="toc"]'));
+  var containerSelectors = [
+    '.page_toc',
+    'aside.toc-nav', 
+    '.toc-nav',
+    '.toc-container',
+    '.toc-wrapper'
+  ];
   
-  // 检查实际的HTML结构
-  var tocElement = document.querySelector('.toc-nav') || document.querySelector('.page_toc');
-  if (tocElement) {
-    console.log('实际目录HTML结构:');
-    console.log(tocElement.outerHTML);
-    console.log('目录样式计算结果:');
-    console.log('overflow-y:', getComputedStyle(tocElement).overflowY);
-    console.log('max-height:', getComputedStyle(tocElement).maxHeight);
-    console.log('height:', getComputedStyle(tocElement).height);
-    console.log('scrollHeight:', tocElement.scrollHeight);
-    console.log('clientHeight:', tocElement.clientHeight);
+  var tocLinks = [];
+  var tocContainer = null;
+  
+  // 逐个尝试选择器
+  for (var i = 0; i < tocSelectors.length; i++) {
+    var links = document.querySelectorAll(tocSelectors[i]);
+    if (links.length > 0) {
+      tocLinks = links;
+      console.log('✓ 使用选择器找到目录链接:', tocSelectors[i], '数量:', links.length);
+      break;
+    }
   }
+  
+  for (var j = 0; j < containerSelectors.length; j++) {
+    var container = document.querySelector(containerSelectors[j]);
+    if (container) {
+      tocContainer = container;
+      console.log('✓ 使用选择器找到目录容器:', containerSelectors[j]);
+      break;
+    }
+  }
+  
+  console.log('最终找到的目录链接数量：', tocLinks.length);
+  console.log('最终找到的目录容器：', tocContainer);
   
   // 检查是否在小屏幕上被隐藏
   if (window.innerWidth <= 360) {
@@ -291,39 +308,45 @@ function initTOCScrollFollow() {
     return headings;
   }
   
-  // 查找当前可见的标题
+  // 查找当前可见的标题 - 优化版本
   function getCurrentHeading() {
     var headings = getAllHeadings();
     if (!headings.length) {
-      console.log('没有找到任何标题');
       return null;
     }
     
-    console.log('找到', headings.length, '个标题');
-    
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var offsetThreshold = 150; // 增加偏移阈值，让切换更灵敏
+    var viewportHeight = window.innerHeight;
+    var offsetThreshold = Math.min(viewportHeight * 0.3, 200); // 动态阈值，最大200px
     
     var currentHeading = null;
+    var bestMatch = null;
+    var minDistance = Infinity;
     
-    // 从后往前找，找到第一个在当前滚动位置上方的标题
-    for (var i = headings.length - 1; i >= 0; i--) {
+    // 寻找最佳匹配的标题
+    for (var i = 0; i < headings.length; i++) {
       var heading = headings[i];
-      // 重新计算位置，确保准确
-      var headingTop = heading.element.getBoundingClientRect().top + scrollTop;
+      var rect = heading.element.getBoundingClientRect();
+      var headingTop = rect.top + scrollTop;
+      var headingBottom = headingTop + rect.height;
       
-      console.log('检查标题:', heading.id, '位置:', headingTop, '滚动:', scrollTop + offsetThreshold);
+      // 检查标题是否在视口上部可见区域
+      if (rect.top <= offsetThreshold && rect.bottom >= 0) {
+        var distance = Math.abs(rect.top);
+        if (distance < minDistance) {
+          minDistance = distance;
+          bestMatch = heading;
+        }
+      }
       
+      // 备用逻辑：找到滚动位置上方最近的标题
       if (headingTop <= scrollTop + offsetThreshold) {
         currentHeading = heading;
-        console.log('选中标题:', heading.id);
-        break;
       }
     }
     
-    // 如果没找到，使用第一个标题
-    var result = currentHeading || headings[0];
-    console.log('最终选择的标题:', result ? result.id : 'null');
+    // 优先使用视口内的最佳匹配，否则使用备用逻辑
+    var result = bestMatch || currentHeading || headings[0];
     return result;
   }
   
@@ -384,48 +407,64 @@ function initTOCScrollFollow() {
       });
     }
     
-    // 自动滚动目录，使当前项始终在中间
+    // 智能滚动目录，使当前项保持在合适位置
     if (activeLink && tocContainer) {
       try {
-        // 获取容器信息
-        var containerHeight = tocContainer.clientHeight || tocContainer.offsetHeight;
-        var containerScrollHeight = tocContainer.scrollHeight;
-        
-        // 计算激活链接在容器中的位置
-        var linkRect = activeLink.getBoundingClientRect();
-        var containerRect = tocContainer.getBoundingClientRect();
-        
-        // 激活链接相对于容器顶部的位置
-        var linkRelativeTop = linkRect.top - containerRect.top + tocContainer.scrollTop;
-        var linkHeight = activeLink.offsetHeight || activeLink.clientHeight;
-        
-        // 计算目标滚动位置（将激活项放在容器中间）
-        var targetScrollTop = linkRelativeTop - (containerHeight / 2) + (linkHeight / 2);
-        
-        // 确保滚动位置在合理范围内
-        var maxScrollTop = Math.max(0, containerScrollHeight - containerHeight);
-        targetScrollTop = Math.max(0, Math.min(targetScrollTop, maxScrollTop));
-        
-        // 获取当前滚动位置
-        var currentScrollTop = tocContainer.scrollTop || 0;
-        
-        // 只有当差距超过阈值时才滚动，避免频繁滚动
-        if (Math.abs(currentScrollTop - targetScrollTop) > 20) {
-          // 使用平滑滚动
-          tocContainer.scrollTo({
-            top: targetScrollTop,
-            behavior: 'smooth'
-          });
-          console.log('滚动目录到中间位置:', activeLink.textContent.trim());
+        // 首先尝试使用 scrollIntoView (现代浏览器支持)
+        if (activeLink.scrollIntoView && typeof activeLink.scrollIntoView === 'function') {
+          // 检查是否需要滚动
+          var linkRect = activeLink.getBoundingClientRect();
+          var containerRect = tocContainer.getBoundingClientRect();
+          var linkInContainer = (
+            linkRect.top >= containerRect.top && 
+            linkRect.bottom <= containerRect.bottom
+          );
+          
+          if (!linkInContainer) {
+            activeLink.scrollIntoView({
+              behavior: 'smooth',
+              block: 'center',
+              inline: 'nearest'
+            });
+            console.log('✓ 使用 scrollIntoView 滚动目录:', activeLink.textContent.trim());
+          }
+        } else {
+          // 降级到手动滚动逻辑
+          var containerHeight = tocContainer.clientHeight || tocContainer.offsetHeight;
+          var containerScrollHeight = tocContainer.scrollHeight;
+          
+          if (containerScrollHeight > containerHeight) {
+            var linkRect = activeLink.getBoundingClientRect();
+            var containerRect = tocContainer.getBoundingClientRect();
+            
+            var linkRelativeTop = linkRect.top - containerRect.top + tocContainer.scrollTop;
+            var linkHeight = activeLink.offsetHeight || activeLink.clientHeight;
+            
+            // 将激活项放在容器上方 1/3 处，这样更自然
+            var targetScrollTop = linkRelativeTop - (containerHeight / 3);
+            
+            var maxScrollTop = Math.max(0, containerScrollHeight - containerHeight);
+            targetScrollTop = Math.max(0, Math.min(targetScrollTop, maxScrollTop));
+            
+            var currentScrollTop = tocContainer.scrollTop || 0;
+            
+            if (Math.abs(currentScrollTop - targetScrollTop) > 30) {
+              if (tocContainer.scrollTo) {
+                tocContainer.scrollTo({
+                  top: targetScrollTop,
+                  behavior: 'smooth'
+                });
+              } else {
+                tocContainer.scrollTop = targetScrollTop;
+              }
+              console.log('✓ 使用手动滚动目录:', activeLink.textContent.trim());
+            }
+          }
         }
       } catch (error) {
-        console.error('目录滚动出错:', error);
-        console.log('容器信息:', tocContainer);
-        console.log('激活链接信息:', activeLink);
+        console.warn('目录滚动出错:', error);
+        // 静默处理错误，不影响其他功能
       }
-    } else {
-      if (!activeLink) console.log('没有激活链接');
-      if (!tocContainer) console.log('没有目录容器');
     }
   }
   
@@ -457,55 +496,119 @@ function initTOCScrollFollow() {
     };
   }
   
-  // 监听滚动事件 - 使用更高的频率让跟随更流畅
-  var throttledUpdate = throttle(updateTOC, 100);
+  // 使用适中的频率让跟随更流畅但不会造成性能问题
+  var throttledUpdate = throttle(updateTOC, 150);
   
   // 添加滚动事件监听器
-  console.log('添加滚动事件监听器...');
+  console.log('✓ 添加滚动事件监听器');
   window.addEventListener('scroll', throttledUpdate, { passive: true });
   
-  // 也监听主内容区域的滚动
-  var mainContent = document.querySelector('.content') || document.body;
-  if (mainContent) {
-    console.log('也监听主内容区域滚动...');
-    mainContent.addEventListener('scroll', throttledUpdate, { passive: true });
-  }
+  // 监听窗口大小变化，重新初始化
+  window.addEventListener('resize', throttle(function() {
+    console.log('窗口大小变化，重新初始化目录跟随');
+    setTimeout(initTOCScrollFollow, 200);
+  }, 500));
   
   // 初始更新
-  console.log('执行初始更新...');
   setTimeout(function() {
-    console.log('延迟初始更新执行');
     updateTOC();
+    console.log('✓ 目录跟随功能初始化完成');
   }, 300);
   
-  // 监听路由变化
-  window.addEventListener('hashchange', function() {
+  // 监听路由变化和页面切换
+  var handlePageChange = function() {
     setTimeout(function() {
-      // 重新获取目录元素
-      tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a');
-      tocContainer = document.querySelector('.toc-nav > ul') || document.querySelector('.page_toc > ul');
-      updateTOC();
-    }, 500);
-  });
+      console.log('页面变化，重新初始化目录跟随');
+      initTOCScrollFollow();
+    }, 600);
+  };
   
-  console.log('目录跟随功能初始化完成');
+  window.addEventListener('hashchange', handlePageChange);
+  window.addEventListener('popstate', handlePageChange);
+  
+  // 成功初始化的标记
+  window.tocFollowInitialized = true;
+  return true;
 }
 
-// 在多个时机尝试初始化
+// 智能初始化策略 - 避免重复初始化
+function smartInitTOC() {
+  // 防止重复初始化
+  if (window.tocFollowInitialized) {
+    console.log('目录跟随已初始化，跳过');
+    return;
+  }
+  
+  // 检查必要元素是否存在
+  var hasTOC = document.querySelector('.page_toc') || 
+               document.querySelector('.toc-nav') || 
+               document.querySelector('[class*="toc"]');
+               
+  var hasContent = document.querySelector('.markdown-section');
+  
+  if (hasTOC && hasContent) {
+    console.log('检测到目录和内容，开始初始化');
+    initTOCScrollFollow();
+  } else {
+    console.log('等待目录或内容加载...');
+  }
+}
+
+// 在多个关键时机尝试初始化
 window.addEventListener('DOMContentLoaded', function() {
-  setTimeout(initTOCScrollFollow, 800);
+  setTimeout(smartInitTOC, 500);
 });
 
 window.addEventListener('load', function() {
-  setTimeout(initTOCScrollFollow, 1000);
+  setTimeout(smartInitTOC, 800);
 });
 
-// 监听Docsify的路由变化事件
+// 使用 MutationObserver 监听DOM变化
+if (typeof MutationObserver !== 'undefined') {
+  var tocObserver = new MutationObserver(function(mutations) {
+    var shouldInit = false;
+    
+    mutations.forEach(function(mutation) {
+      // 检查是否有新增的目录相关元素
+      if (mutation.addedNodes) {
+        for (var i = 0; i < mutation.addedNodes.length; i++) {
+          var node = mutation.addedNodes[i];
+          if (node.nodeType === 1 && // Element node
+              (node.className && 
+               (node.className.includes('toc') || 
+                node.className.includes('page_toc')))) {
+            shouldInit = true;
+            break;
+          }
+        }
+      }
+    });
+    
+    if (shouldInit && !window.tocFollowInitialized) {
+      console.log('检测到目录元素变化，触发初始化');
+      setTimeout(smartInitTOC, 300);
+    }
+  });
+  
+  // 开始观察
+  tocObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+}
+
+// Docsify 插件钩子
 if (typeof window.$docsify !== 'undefined') {
   window.$docsify.plugins = window.$docsify.plugins || [];
   window.$docsify.plugins.push(function(hook) {
     hook.doneEach(function() {
-      setTimeout(initTOCScrollFollow, 500);
+      // 重置初始化标记，允许重新初始化
+      window.tocFollowInitialized = false;
+      setTimeout(smartInitTOC, 400);
+    });
+    
+    hook.ready(function() {
+      setTimeout(smartInitTOC, 600);
     });
   });
 }

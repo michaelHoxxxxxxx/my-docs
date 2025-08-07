@@ -544,30 +544,54 @@ section.cover a {
   margin-right: 16px;
 }
 
-/* 文章目录样式 - Apple风格设计 */
+/* 文章目录样式 - 优化版本 */
 .page_toc {
   position: fixed;
   top: 100px;
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow: visible !important; /* 改为visible，让内部ul处理滚动 */
+  overflow-y: auto !important; /* 允许垂直滚动 */
+  overflow-x: hidden !important; /* 隐藏水平滚动 */
   z-index: 50;
-  /* 移除所有背景和边框，完全融入页面 */
+  /* 保持透明背景 */
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0;
-  /* 强制隐藏所有滚动条 */
-  -ms-overflow-style: none !important;
-  scrollbar-width: none !important;
+  /* 平滑滚动 */
+  scroll-behavior: smooth !important;
+  /* 自定义滚动条样式 */
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent !important;
 }
 
-/* 强制隐藏page_toc的所有滚动条 */
+/* 优化page_toc滚动条样式 */
 .page_toc::-webkit-scrollbar {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
+  width: 4px !important;
+  display: block !important;
+}
+
+.page_toc::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.page_toc::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 2px !important;
+}
+
+.page_toc::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 暗色模式下的page_toc滚动条 */
+body.dark .page_toc::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+body.dark .page_toc::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* 覆盖插件的默认样式 */
@@ -715,7 +739,7 @@ body.dark .page_toc ul ul a {
   color: #636366;
 }
 
-/* TOC导航容器 - 同样采用Apple风格 */
+/* TOC导航容器 - 优化版本 */
 aside.toc-nav,
 .toc-nav {
   position: fixed !important;
@@ -723,14 +747,18 @@ aside.toc-nav,
   right: 30px !important;
   width: 200px !important;
   max-height: calc(100vh - 140px) !important;
-  overflow-y: auto !important; /* 直接在容器上启用滚动 */
+  overflow-y: auto !important;
   overflow-x: hidden !important;
   z-index: 50 !important;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0 !important;
-  padding-right: 8px !important; /* 为滚动条留空间 */
+  /* 平滑滚动 */
+  scroll-behavior: smooth !important;
+  /* 自定义滚动条样式 */
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent !important;
 }
 
 /* 美化toc-nav容器的滚动条 */
