@@ -209,8 +209,8 @@ function initTOCScrollFollow() {
   console.log('当前屏幕高度:', window.innerHeight);
   
   // 查找目录元素
-  var tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a');
-  var tocContainer = document.querySelector('.toc-nav > ul') || document.querySelector('.page_toc > ul');
+  var tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a, aside.toc-nav a');
+  var tocContainer = document.querySelector('aside.toc-nav') || document.querySelector('.toc-nav') || document.querySelector('.page_toc');
   
   console.log('查找到的目录链接数量：', tocLinks.length);
   console.log('查找到的目录容器：', tocContainer);
@@ -218,6 +218,19 @@ function initTOCScrollFollow() {
   console.log('- .toc-nav:', document.querySelectorAll('.toc-nav'));
   console.log('- .page_toc:', document.querySelectorAll('.page_toc'));
   console.log('- 所有目录相关元素:', document.querySelectorAll('[class*="toc"]'));
+  
+  // 检查实际的HTML结构
+  var tocElement = document.querySelector('.toc-nav') || document.querySelector('.page_toc');
+  if (tocElement) {
+    console.log('实际目录HTML结构:');
+    console.log(tocElement.outerHTML);
+    console.log('目录样式计算结果:');
+    console.log('overflow-y:', getComputedStyle(tocElement).overflowY);
+    console.log('max-height:', getComputedStyle(tocElement).maxHeight);
+    console.log('height:', getComputedStyle(tocElement).height);
+    console.log('scrollHeight:', tocElement.scrollHeight);
+    console.log('clientHeight:', tocElement.clientHeight);
+  }
   
   // 检查是否在小屏幕上被隐藏
   if (window.innerWidth <= 360) {
