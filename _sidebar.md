@@ -164,7 +164,11 @@
       - [13.1 多租户架构](docs/soulbox_final_missing_features.md#企业级功能)
       - [13.2 资源配额管理](docs/soulbox_final_missing_features.md#资源管理)
       - [13.3 计费系统概述](docs/soulbox_ultimate_development_guide.md#计费功能)
-      - [13.4 **计费系统详细设计（新）**](docs/soulbox_billing_system_design.md)
+      - [13.4 **计费系统详细设计**](docs/soulbox_billing_system_design.md)
+      - [13.5 **计费系统实施指南**](docs/soulbox_billing_implementation_guide.md)
+      - [13.6 **计费系统FAQ**](docs/soulbox_billing_faq.md)
+      - [13.7 **计费系统架构图**](docs/soulbox_billing_architecture_diagram.md)
+      - [13.8 **计费监控仪表板**](docs/soulbox_billing_monitoring_dashboard.md)
     
     - **📦 模块14: 性能优化（第20-21周）**
       - [14.1 连接池管理](docs/soulbox_missing_13_percent.md#连接池管理)
