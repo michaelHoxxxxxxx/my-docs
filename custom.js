@@ -355,16 +355,28 @@ function initTOCScrollFollow() {
     // 自动滚动目录，使当前项始终在中间
     if (activeLink && tocContainer) {
       try {
-        // 更简单直接的计算方式
+        console.log('开始滚动目录...');
+        console.log('目录容器:', tocContainer);
+        console.log('激活链接:', activeLink);
+        
+        // 获取容器信息
         var containerHeight = tocContainer.clientHeight || tocContainer.offsetHeight;
         var containerScrollHeight = tocContainer.scrollHeight;
         
-        // 获取激活链接相对于容器的位置
-        var linkOffsetTop = activeLink.offsetTop;
+        console.log('容器高度:', containerHeight, '滚动高度:', containerScrollHeight);
+        
+        // 计算激活链接在容器中的位置
+        var linkRect = activeLink.getBoundingClientRect();
+        var containerRect = tocContainer.getBoundingClientRect();
+        
+        // 激活链接相对于容器顶部的位置
+        var linkRelativeTop = linkRect.top - containerRect.top + tocContainer.scrollTop;
         var linkHeight = activeLink.offsetHeight || activeLink.clientHeight;
         
+        console.log('链接相对位置:', linkRelativeTop, '链接高度:', linkHeight);
+        
         // 计算目标滚动位置（将激活项放在容器中间）
-        var targetScrollTop = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+        var targetScrollTop = linkRelativeTop - (containerHeight / 2) + (linkHeight / 2);
         
         // 确保滚动位置在合理范围内
         var maxScrollTop = Math.max(0, containerScrollHeight - containerHeight);
@@ -373,18 +385,47 @@ function initTOCScrollFollow() {
         // 获取当前滚动位置
         var currentScrollTop = tocContainer.scrollTop || 0;
         
+        console.log('当前滚动:', currentScrollTop, '目标滚动:', targetScrollTop);
+        
         // 只有当差距超过阈值时才滚动，避免频繁滚动
-        if (Math.abs(currentScrollTop - targetScrollTop) > 20) {
-          // 直接设置scrollTop，确保兼容性
+        if (Math.abs(currentScrollTop - targetScrollTop) > 10) {
+          // 测试多种滚动方式
+          console.log('执行滚动...');
+          
+          // 方法1: 直接设置scrollTop
           tocContainer.scrollTop = targetScrollTop;
           
-          console.log('滚动目录到中间位置:', targetScrollTop, '容器高度:', containerHeight, '当前激活:', activeLink.textContent.trim());
+          // 方法2: 如果方法1不工作，尝试scrollTo
+          if (tocContainer.scrollTop !== targetScrollTop) {
+            console.log('scrollTop不工作，尝试scrollTo...');
+            tocContainer.scrollTo({
+              top: targetScrollTop,
+              behavior: 'smooth'
+            });
+          }
+          
+          // 方法3: 如果前两个都不工作，尝试滚动父元素
+          if (tocContainer.scrollTop === currentScrollTop) {
+            console.log('目录容器无法滚动，尝试滚动父元素...');
+            var parent = tocContainer.parentElement;
+            if (parent) {
+              console.log('滚动父元素:', parent);
+              parent.scrollTop = targetScrollTop;
+            }
+          }
+          
+          console.log('滚动完成，新位置:', tocContainer.scrollTop);
+        } else {
+          console.log('滚动差距太小，跳过滚动');
         }
       } catch (error) {
         console.error('目录滚动出错:', error);
         console.log('容器信息:', tocContainer);
         console.log('激活链接信息:', activeLink);
       }
+    } else {
+      if (!activeLink) console.log('没有激活链接');
+      if (!tocContainer) console.log('没有目录容器');
     }
   }
   

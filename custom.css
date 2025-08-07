@@ -551,7 +551,7 @@ section.cover a {
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow: hidden !important; /* 完全隐藏溢出内容 */
+  overflow: visible !important; /* 改为visible，让内部ul处理滚动 */
   z-index: 50;
   /* 移除所有背景和边框，完全融入页面 */
   background: transparent !important;
@@ -705,7 +705,7 @@ body.dark .page_toc ul ul a {
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow: hidden !important;
+  overflow: visible !important; /* 改为visible，让内部ul处理滚动 */
   z-index: 50;
   background: transparent !important;
   border: none !important;
