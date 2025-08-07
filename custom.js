@@ -268,14 +268,10 @@ function initTOCScrollFollow() {
     var headings = [];
     var selectors = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']; // 包含h1
     
-    console.log('开始扫描标题元素...');
-    
     selectors.forEach(function(selector) {
       var elements = document.querySelectorAll('.markdown-section ' + selector);
-      console.log('找到', selector, '标题', elements.length, '个');
       
       elements.forEach(function(el) {
-        console.log('检查标题:', el.textContent.trim(), 'ID:', el.id);
         if (el.id) {
           var offsetTop = el.getBoundingClientRect().top + window.pageYOffset;
           headings.push({
@@ -283,9 +279,6 @@ function initTOCScrollFollow() {
             element: el,
             offsetTop: offsetTop
           });
-          console.log('✓ 添加标题:', el.id, '位置:', offsetTop, '内容:', el.textContent.trim());
-        } else {
-          console.log('✗ 跳过无ID标题:', el.textContent.trim());
         }
       });
     });
@@ -295,43 +288,57 @@ function initTOCScrollFollow() {
       return a.offsetTop - b.offsetTop;
     });
     
-    console.log('总共找到', headings.length, '个有ID的标题');
     return headings;
   }
   
   // 查找当前可见的标题
   function getCurrentHeading() {
     var headings = getAllHeadings();
-    if (!headings.length) return null;
+    if (!headings.length) {
+      console.log('没有找到任何标题');
+      return null;
+    }
+    
+    console.log('找到', headings.length, '个标题');
     
     var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var offsetThreshold = 100; // 偏移阈值
+    var offsetThreshold = 150; // 增加偏移阈值，让切换更灵敏
     
     var currentHeading = null;
     
     // 从后往前找，找到第一个在当前滚动位置上方的标题
     for (var i = headings.length - 1; i >= 0; i--) {
       var heading = headings[i];
+      // 重新计算位置，确保准确
       var headingTop = heading.element.getBoundingClientRect().top + scrollTop;
+      
+      console.log('检查标题:', heading.id, '位置:', headingTop, '滚动:', scrollTop + offsetThreshold);
       
       if (headingTop <= scrollTop + offsetThreshold) {
         currentHeading = heading;
+        console.log('选中标题:', heading.id);
         break;
       }
     }
     
     // 如果没找到，使用第一个标题
-    return currentHeading || headings[0];
+    var result = currentHeading || headings[0];
+    console.log('最终选择的标题:', result ? result.id : 'null');
+    return result;
   }
   
   // 更新目录高亮和滚动位置
   function updateTOC() {
+    console.log('=== 开始更新目录 ===');
+    console.log('当前滚动位置:', window.pageYOffset);
+    
     var currentHeading = getCurrentHeading();
     if (!currentHeading) {
+      console.log('没有找到当前标题');
       return;
     }
     
-    console.log('当前标题:', currentHeading.id);
+    console.log('当前标题:', currentHeading.id, '内容:', currentHeading.element.textContent.trim());
     
     // 移除所有激活状态
     tocLinks.forEach(function(link) {
@@ -347,12 +354,12 @@ function initTOCScrollFollow() {
     
     tocLinks.forEach(function(link, index) {
       var href = link.getAttribute('href');
-      console.log('检查目录项', index, ':', href, '链接文本:', link.textContent.trim());
       
       if (href) {
         // 处理不同的href格式
         var linkId = href.replace(/^.*#/, ''); // 移除#前面的所有内容
-        console.log('提取的ID:', linkId, '比较目标:', currentHeading.id);
+        
+        console.log('检查目录项', index, '- href:', href, '- 提取ID:', linkId, '- 文本:', link.textContent.trim());
         
         if (linkId === currentHeading.id) {
           link.classList.add('active');
@@ -360,10 +367,22 @@ function initTOCScrollFollow() {
             link.parentElement.classList.add('active');
           }
           activeLink = link;
-          console.log('✓ 激活目录项:', linkId, '链接文本:', link.textContent.trim());
+          console.log('✓ 匹配成功！激活目录项:', linkId);
         }
       }
     });
+    
+    if (!activeLink) {
+      console.log('❌ 没有找到匹配的目录项');
+      console.log('可用的目录项ID列表:');
+      tocLinks.forEach(function(link, index) {
+        var href = link.getAttribute('href');
+        if (href) {
+          var linkId = href.replace(/^.*#/, '');
+          console.log('  ', index, ':', linkId, '(', link.textContent.trim(), ')');
+        }
+      });
+    }
     
     // 自动滚动目录，使当前项始终在中间
     if (activeLink && tocContainer) {
