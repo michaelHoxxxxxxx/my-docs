@@ -203,143 +203,195 @@ window.addEventListener('load', function() {
 });
 
 // 文章目录自动滚动跟随功能
-window.addEventListener('DOMContentLoaded', function() {
-  // 延迟执行，确保TOC已经生成
-  setTimeout(function() {
-    // 监听滚动事件，实现目录高亮和自动滚动
-    var tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a');
-    var tocContainer = document.querySelector('.toc-nav > ul, .page_toc > ul');
+function initTOCScrollFollow() {
+  console.log('开始初始化目录跟随功能');
+  
+  // 查找目录元素
+  var tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a');
+  var tocContainer = document.querySelector('.toc-nav > ul') || document.querySelector('.page_toc > ul');
+  
+  if (!tocLinks.length) {
+    console.log('未找到目录链接，延迟重试...');
+    setTimeout(initTOCScrollFollow, 500);
+    return;
+  }
+  
+  if (!tocContainer) {
+    console.log('未找到目录容器，延迟重试...');
+    setTimeout(initTOCScrollFollow, 500);
+    return;
+  }
+  
+  console.log('找到目录元素：', tocLinks.length, '个链接');
+  
+  // 获取所有标题元素
+  function getAllHeadings() {
+    var headings = [];
+    var selectors = ['h2', 'h3', 'h4', 'h5', 'h6'];
     
-    if (!tocLinks.length || !tocContainer) {
-      console.log('未找到目录元素，延迟重试');
-      // 如果没找到，延迟重试
-      setTimeout(arguments.callee, 1000);
-      return;
-    }
-    
-    console.log('找到目录元素，开始初始化滚动跟随');
-    
-    // 获取所有标题元素
-    function getAllHeadings() {
-      var headings = [];
-      var selectors = 'h2, h3, h4, h5, h6';
-      var elements = document.querySelectorAll('.markdown-section ' + selectors);
-      
+    selectors.forEach(function(selector) {
+      var elements = document.querySelectorAll('.markdown-section ' + selector);
       elements.forEach(function(el) {
         if (el.id) {
           headings.push({
             id: el.id,
             element: el,
-            offsetTop: el.offsetTop
+            offsetTop: el.getBoundingClientRect().top + window.pageYOffset
           });
         }
       });
-      
-      return headings;
-    }
+    });
     
-    // 查找当前可见的标题
-    function getCurrentHeading() {
-      var headings = getAllHeadings();
-      var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      var current = null;
-      
-      // 添加一个偏移量，让高亮更准确
-      var offset = 100;
-      
-      for (var i = headings.length - 1; i >= 0; i--) {
-        if (headings[i].offsetTop - offset <= scrollTop) {
-          current = headings[i];
-          break;
-        }
+    // 按位置排序
+    headings.sort(function(a, b) {
+      return a.offsetTop - b.offsetTop;
+    });
+    
+    return headings;
+  }
+  
+  // 查找当前可见的标题
+  function getCurrentHeading() {
+    var headings = getAllHeadings();
+    if (!headings.length) return null;
+    
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    var current = null;
+    
+    // 添加一个偏移量，让高亮更准确
+    var offset = 150;
+    
+    for (var i = headings.length - 1; i >= 0; i--) {
+      if (headings[i].offsetTop - offset <= scrollTop) {
+        current = headings[i];
+        break;
       }
-      
-      return current;
     }
     
-    // 更新目录高亮和滚动位置
-    function updateTOC() {
-      var currentHeading = getCurrentHeading();
-      if (!currentHeading) return;
-      
-      // 移除所有激活状态
-      tocLinks.forEach(function(link) {
-        link.classList.remove('active');
-        if (link.parentElement) {
-          link.parentElement.classList.remove('active');
-        }
-      });
-      
-      // 找到对应的目录链接
-      var activeLink = null;
-      tocLinks.forEach(function(link) {
-        var href = link.getAttribute('href');
-        if (href && (href === '#' + currentHeading.id || href.endsWith('#' + currentHeading.id))) {
+    return current || headings[0];
+  }
+  
+  // 更新目录高亮和滚动位置
+  function updateTOC() {
+    var currentHeading = getCurrentHeading();
+    if (!currentHeading) {
+      console.log('没有找到当前标题');
+      return;
+    }
+    
+    console.log('当前标题:', currentHeading.id);
+    
+    // 移除所有激活状态
+    tocLinks.forEach(function(link) {
+      link.classList.remove('active');
+      if (link.parentElement) {
+        link.parentElement.classList.remove('active');
+      }
+    });
+    
+    // 找到对应的目录链接
+    var activeLink = null;
+    tocLinks.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (href) {
+        // 处理不同的href格式
+        var linkId = href.replace(/^.*#/, ''); // 移除#前面的所有内容
+        if (linkId === currentHeading.id) {
           link.classList.add('active');
           if (link.parentElement) {
             link.parentElement.classList.add('active');
           }
           activeLink = link;
-        }
-      });
-      
-      // 自动滚动目录，使当前项可见
-      if (activeLink && tocContainer) {
-        var linkRect = activeLink.getBoundingClientRect();
-        var containerRect = tocContainer.getBoundingClientRect();
-        
-        // 计算链接在容器中的相对位置
-        var linkTop = activeLink.offsetTop;
-        var containerHeight = containerRect.height;
-        var scrollTop = tocContainer.scrollTop;
-        
-        // 如果链接不在可见区域，滚动到中间位置
-        if (linkTop < scrollTop || linkTop > scrollTop + containerHeight - 50) {
-          tocContainer.scrollTo({
-            top: linkTop - containerHeight / 2,
-            behavior: 'smooth'
-          });
+          console.log('激活目录项:', linkId);
         }
       }
-    }
-    
-    // 节流函数
-    function throttle(func, wait) {
-      var timeout = null;
-      var previous = 0;
-      
-      return function() {
-        var now = Date.now();
-        var remaining = wait - (now - previous);
-        
-        if (remaining <= 0) {
-          if (timeout) {
-            clearTimeout(timeout);
-            timeout = null;
-          }
-          previous = now;
-          func.apply(this, arguments);
-        } else if (!timeout) {
-          timeout = setTimeout(function() {
-            previous = Date.now();
-            timeout = null;
-            func.apply(this, arguments);
-          }, remaining);
-        }
-      };
-    }
-    
-    // 监听滚动事件
-    var throttledUpdate = throttle(updateTOC, 100);
-    window.addEventListener('scroll', throttledUpdate);
-    
-    // 初始更新
-    updateTOC();
-    
-    // 监听路由变化
-    window.addEventListener('hashchange', function() {
-      setTimeout(updateTOC, 300);
     });
     
-  }, 1000);
+    // 自动滚动目录，使当前项可见
+    if (activeLink && tocContainer) {
+      var containerRect = tocContainer.getBoundingClientRect();
+      var linkRect = activeLink.getBoundingClientRect();
+      
+      // 计算相对位置
+      var linkRelativeTop = linkRect.top - containerRect.top + tocContainer.scrollTop;
+      var containerHeight = containerRect.height;
+      
+      // 如果链接不在可见区域中间，滚动到中间位置
+      var targetScrollTop = linkRelativeTop - containerHeight / 2;
+      
+      if (Math.abs(tocContainer.scrollTop - targetScrollTop) > 20) {
+        tocContainer.scrollTo({
+          top: targetScrollTop,
+          behavior: 'smooth'
+        });
+        console.log('滚动目录到位置:', targetScrollTop);
+      }
+    }
+  }
+  
+  // 节流函数
+  function throttle(func, wait) {
+    var timeout;
+    var previous = 0;
+    
+    return function() {
+      var now = Date.now();
+      var remaining = wait - (now - previous);
+      var context = this;
+      var args = arguments;
+      
+      if (remaining <= 0 || remaining > wait) {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        previous = now;
+        func.apply(context, args);
+      } else if (!timeout) {
+        timeout = setTimeout(function() {
+          previous = Date.now();
+          timeout = null;
+          func.apply(context, args);
+        }, remaining);
+      }
+    };
+  }
+  
+  // 监听滚动事件
+  var throttledUpdate = throttle(updateTOC, 150);
+  window.addEventListener('scroll', throttledUpdate);
+  
+  // 初始更新
+  setTimeout(updateTOC, 300);
+  
+  // 监听路由变化
+  window.addEventListener('hashchange', function() {
+    setTimeout(function() {
+      // 重新获取目录元素
+      tocLinks = document.querySelectorAll('.toc-nav a, .page_toc a');
+      tocContainer = document.querySelector('.toc-nav > ul') || document.querySelector('.page_toc > ul');
+      updateTOC();
+    }, 500);
+  });
+  
+  console.log('目录跟随功能初始化完成');
+}
+
+// 在多个时机尝试初始化
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(initTOCScrollFollow, 800);
 });
+
+window.addEventListener('load', function() {
+  setTimeout(initTOCScrollFollow, 1000);
+});
+
+// 监听Docsify的路由变化事件
+if (typeof window.$docsify !== 'undefined') {
+  window.$docsify.plugins = window.$docsify.plugins || [];
+  window.$docsify.plugins.push(function(hook) {
+    hook.doneEach(function() {
+      setTimeout(initTOCScrollFollow, 500);
+    });
+  });
+}

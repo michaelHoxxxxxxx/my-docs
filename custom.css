@@ -551,13 +551,23 @@ section.cover a {
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow: visible; /* 改为visible，让内容自然显示 */
+  overflow: hidden !important; /* 完全隐藏溢出内容 */
   z-index: 50;
   /* 移除所有背景和边框，完全融入页面 */
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0;
+  /* 强制隐藏所有滚动条 */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* 强制隐藏page_toc的所有滚动条 */
+.page_toc::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* 覆盖插件的默认样式 */
@@ -580,21 +590,24 @@ section.cover a {
 /* 给目录列表添加滚动 */
 .page_toc > ul {
   max-height: calc(100vh - 180px);
-  overflow-y: scroll; /* 改为scroll确保滚动功能 */
-  overflow-x: hidden;
-  padding-right: 0; /* 不需要为滚动条留空间了 */
-  word-wrap: break-word; /* 长文本自动换行 */
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding-right: 0;
+  word-wrap: break-word;
   word-break: break-word;
-  /* 隐藏滚动条 */
-  -ms-overflow-style: none;  /* IE和Edge */
-  scrollbar-width: none;  /* Firefox */
+  /* 强制隐藏所有滚动条 */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
-/* 隐藏滚动条 - Webkit */
-.page_toc > ul::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+/* 强制隐藏所有子元素的滚动条 */
+.page_toc ul::-webkit-scrollbar,
+.page_toc ul *::-webkit-scrollbar,
+.page_toc *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 /* 文章目录标题 - 极简风格 */
@@ -690,12 +703,22 @@ body.dark .page_toc ul ul a {
   right: 30px;
   width: 200px;
   max-height: calc(100vh - 140px);
-  overflow: visible;
+  overflow: hidden !important;
   z-index: 50;
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
   padding: 0;
+  /* 强制隐藏所有滚动条 */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* 强制隐藏toc-nav的所有滚动条 */
+.toc-nav::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }
 
 /* 覆盖toc-nav插件的默认样式 */
@@ -718,21 +741,24 @@ body.dark .page_toc ul ul a {
 /* 给toc-nav的列表添加滚动 */
 .toc-nav > ul {
   max-height: calc(100vh - 180px);
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
   padding-right: 0;
   word-wrap: break-word;
   word-break: break-word;
-  /* 隐藏滚动条 */
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  /* 强制隐藏所有滚动条 */
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
-/* 隐藏滚动条 - Webkit */
-.toc-nav > ul::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+/* 强制隐藏所有子元素的滚动条 */
+.toc-nav ul::-webkit-scrollbar,
+.toc-nav ul *::-webkit-scrollbar,
+.toc-nav *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
 }
 
 /* 标题样式 */
