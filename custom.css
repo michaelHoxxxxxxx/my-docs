@@ -250,9 +250,15 @@ body {
 
 
 
-/* 隐藏原生返回顶部按钮 */
-.to-top {
-  z-index: -1 !important;
+/* 隐藏原生返回顶部按钮 - 增强规则 */
+.to-top,
+.scroll-to-top,
+#scroll-to-top,
+[class*="scroll-to-top"],
+[id*="scroll-to-top"],
+/* docsify-scroll-to-top 插件的按钮 */
+body > div[style*="position: fixed"][style*="bottom"][style*="right"]:not(#custom-back-to-top) {
+  z-index: -9999 !important;
   opacity: 0 !important;
   visibility: hidden !important;
   display: none !important;
@@ -260,6 +266,27 @@ body {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 确保我们的自定义返回顶部按钮样式 */
+#custom-back-to-top {
+  /* 覆盖任何可能的白色背景 */
+  background: #42b983 !important;
+  border: none !important;
+  outline: none !important;
+  /* 确保完美的圆形 */
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  /* 移除任何可能的内边距 */
+  padding: 0 !important;
+  /* 确保内容居中 */
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 /* 侧边栏链接手型指针样式 */
@@ -301,7 +328,7 @@ body {
   margin: 3px 0 !important;
 }
 
-/* 确保按钮位置正确 - 桌面端 */
+/* 确保按钮位置固定在左下角 - 桌面端 */
 @media screen and (min-width: 769px) {
   .sidebar-toggle {
     bottom: 20px !important;
@@ -309,8 +336,9 @@ body {
     position: fixed !important;
   }
   
+  /* 侧边栏收起时按钮保持在原位 */
   body.close .sidebar-toggle {
-    left: 270px !important; /* 250px侧边栏宽度 + 20px间距 */
+    left: 20px !important; /* 保持固定在左下角 */
   }
 }
 
