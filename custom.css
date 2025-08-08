@@ -16,8 +16,10 @@ body {
   color: #34495e;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  padding: 2rem;
-  margin: 1rem;
+  padding: 2.5rem 3rem;
+  margin: 1rem 1rem 1rem 1.5rem;
+  font-size: 16px; /* 基础字体大小提升 */
+  line-height: 1.7; /* 行高优化 */
 }
 
 /* 移动端优化 */
@@ -136,6 +138,7 @@ body {
   .markdown-section {
     padding: 1rem 0.8rem;
     margin: 0.5rem;
+    font-size: 14px; /* 移动端保持较小字体 */
   }
   
   .sidebar {
@@ -166,12 +169,22 @@ body {
 /* 代码块样式 */
 .markdown-section pre {
   border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .markdown-section code {
   border-radius: 3px;
   font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
   -webkit-font-smoothing: auto;
+  font-size: 0.9em;
+}
+
+/* 行内代码 */
+.markdown-section p code,
+.markdown-section li code {
+  padding: 2px 6px;
+  margin: 0 2px;
 }
 
 
@@ -193,10 +206,18 @@ body {
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  width: 100%;
+  margin-bottom: 1.5em;
 }
 
 .markdown-section tr:nth-child(2n) {
   background-color: #f8f8f8;
+}
+
+.markdown-section th,
+.markdown-section td {
+  padding: 12px 16px;
 }
 
 .markdown-section th {
@@ -222,15 +243,49 @@ body {
 }
 
 /* 标题样式 */
-.markdown-section h1,
-.markdown-section h2,
-.markdown-section h3,
+.markdown-section h1 {
+  font-size: 2.2em;
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.markdown-section h2 {
+  font-size: 1.8em;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.markdown-section h3 {
+  font-size: 1.4em;
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
 .markdown-section h4,
 .markdown-section h5,
 .markdown-section h6 {
+  font-size: 1.2em;
   margin-top: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   font-weight: 600;
+}
+
+/* 段落和列表优化 */
+.markdown-section p {
+  margin-bottom: 1.2em;
+}
+
+.markdown-section ul,
+.markdown-section ol {
+  padding-left: 2em;
+  margin-bottom: 1.2em;
+}
+
+.markdown-section li {
+  margin-bottom: 0.5em;
 }
 
 /* 侧边栏样式 */
@@ -773,7 +828,16 @@ aside.toc-nav::-webkit-scrollbar-thumb:hover,
 /* 调整主内容区域，避免被目录遮挡 */
 @media screen and (min-width: 1301px) {
   .markdown-section {
-    margin-right: 240px;
+    margin-right: 260px; /* 留出 30px 的间距给目录 */
+    max-width: calc(100% - 280px); /* 动态宽度 */
+  }
+}
+
+/* 中等屏幕优化 */
+@media screen and (min-width: 769px) and (max-width: 1300px) {
+  .markdown-section {
+    margin-right: 200px;
+    font-size: 15px;
   }
 }
 
