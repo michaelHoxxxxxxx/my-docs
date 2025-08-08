@@ -1830,41 +1830,12 @@ pre button[onclick*="Copy"],
   cursor: pointer !important;
 }
 
-/* 优化的点击复制提示标签 - 只显示"点击复制" */
+/* 移除点击复制悬停提示 - 保持界面简洁，只保留点击复制功能 */
 .markdown-section pre[data-click-copy-added]::after {
-  content: '点击复制';
-  position: absolute;
-  top: -10px;
-  left: 15px;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 20;
-  transform: translateY(-2px);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 悬停时显示提示 - 仅桌面端 */
-@media (hover: hover) and (pointer: fine) {
-  .markdown-section pre[data-click-copy-added]:hover::after {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 暗色模式优化提示样式 */
-[data-theme="dark"] .markdown-section pre[data-click-copy-added]::after {
-  background: rgba(255, 255, 255, 0.9);
-  color: #1a1a1a;
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  /* 完全隐藏悬停提示，让界面更简洁 */
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
 }
 
 .copy-success-toast.show {
@@ -2276,10 +2247,7 @@ pre button[onclick*="Copy"],
     box-shadow: inherit;
   }
   
-  /* 移动设备上不显示悬停提示，保持简洁 */
-  .markdown-section pre[data-click-copy-added]::after {
-    display: none !important;
-  }
+  /* 移动设备上不显示悬停提示，保持简洁 - 已在全局设置中隐藏 */
 }
 
 /* 键盘导航支持 */
