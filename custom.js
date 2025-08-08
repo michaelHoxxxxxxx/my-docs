@@ -185,6 +185,70 @@ if (typeof window.tocDebug === 'undefined') {
   window.tocDebug = false;
 }
 
+// 移除插件生成的主题切换按钮
+function removePluginThemeButton() {
+  // 查找并移除所有可能的插件按钮
+  var selectors = [
+    '.darkmode-toggle',
+    'button.darkmode-toggle', 
+    '#dark-mode-toggle-button',
+    'button[onclick*="switchTheme"]',
+    'button[style*="position: fixed"][style*="right"]',
+    'body > button[style*="fixed"]'
+  ];
+  
+  selectors.forEach(function(selector) {
+    var elements = document.querySelectorAll(selector);
+    elements.forEach(function(el) {
+      // 排除我们的自定义按钮
+      if (el.id !== 'theme-toggle' && el.id !== 'custom-back-to-top') {
+        el.remove();
+      }
+    });
+  });
+}
+
+// 在多个时机尝试移除插件按钮
+window.addEventListener('DOMContentLoaded', function() {
+  setTimeout(removePluginThemeButton, 100);
+  setTimeout(removePluginThemeButton, 500);
+  setTimeout(removePluginThemeButton, 1000);
+});
+
+window.addEventListener('load', function() {
+  setTimeout(removePluginThemeButton, 100);
+  setTimeout(removePluginThemeButton, 1500);
+  setTimeout(removePluginThemeButton, 3000);
+});
+
+// 使用 MutationObserver 监听新按钮的添加
+if (typeof MutationObserver !== 'undefined') {
+  var buttonObserver = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes) {
+        mutation.addedNodes.forEach(function(node) {
+          if (node.nodeType === 1 && node.tagName === 'BUTTON') {
+            // 检查是否是主题切换按钮
+            if (node.classList.contains('darkmode-toggle') || 
+                (node.style && node.style.position === 'fixed' && 
+                 node.id !== 'theme-toggle' && node.id !== 'custom-back-to-top')) {
+              node.remove();
+            }
+          }
+        });
+      }
+    });
+  });
+  
+  // 开始观察
+  if (document.body) {
+    buttonObserver.observe(document.body, {
+      childList: true,
+      subtree: false // 只观察 body 的直接子元素
+    });
+  }
+}
+
 // 文章目录自动滚动跟随功能
 function initTOCScrollFollow() {
   // 更全面地查找目录元素，包括插件生成的所有可能选择器
