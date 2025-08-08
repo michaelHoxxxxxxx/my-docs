@@ -284,12 +284,40 @@ body {
   color: #42b983 !important;
 }
 
+/* 侧边栏切换按钮优化 */
 .sidebar-toggle {
   background-color: rgba(255,255,255,0.8) !important;
+  width: 36px !important;
+  padding: 10px !important;
+  border-radius: 0 4px 4px 0 !important;
+  transition: all 0.3s ease !important;
 }
 
 .sidebar-toggle span {
   background-color: #42b983 !important;
+  width: 16px !important;
+  height: 2px !important;
+  display: block !important;
+  margin: 3px 0 !important;
+}
+
+/* 确保按钮位置正确 - 桌面端 */
+@media screen and (min-width: 769px) {
+  .sidebar-toggle {
+    bottom: 20px !important;
+    left: 20px !important;
+    position: fixed !important;
+  }
+  
+  body.close .sidebar-toggle {
+    left: 270px !important; /* 250px侧边栏宽度 + 20px间距 */
+  }
+}
+
+/* 悬停效果 */
+.sidebar-toggle:hover {
+  background-color: rgba(255,255,255,1) !important;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.15) !important;
 }
 
 .markdown-section h2 {
