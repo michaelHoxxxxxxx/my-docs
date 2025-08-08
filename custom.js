@@ -799,12 +799,59 @@
     
     // 增强复制按钮
     enhanceCopyButton: function() {
-      // 监听复制事件
+      // 监听复制事件 - 支持多种复制按钮选择器
       document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('docsify-copy-code-button')) {
+        const isCopyButton = e.target.classList.contains('docsify-copy-code-button') ||
+                           e.target.closest('.docsify-copy-code-button') ||
+                           e.target.matches('[data-copy-code]') ||
+                           (e.target.textContent && e.target.textContent.includes('复制'));
+        
+        if (isCopyButton) {
           this.showCopySuccessToast();
         }
       });
+      
+      // 使用 MutationObserver 监听新增的代码块
+      if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1 && node.tagName === 'PRE') {
+                setTimeout(() => {
+                  this.addLanguageLabels();
+                  this.enhanceCopyButtonVisibility(node);
+                }, 100);
+              }
+            });
+          });
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+    },
+    
+    // 增强复制按钮可见性
+    enhanceCopyButtonVisibility: function(preElement) {
+      if (!preElement) return;
+      
+      const copyButton = preElement.querySelector('.docsify-copy-code-button');
+      if (copyButton) {
+        // 确保复制按钮样式正确
+        copyButton.style.opacity = '0.8';
+        copyButton.style.transition = 'all 0.3s ease';
+        
+        // 鼠标悬停增强可见性
+        preElement.addEventListener('mouseenter', () => {
+          copyButton.style.opacity = '1';
+        });
+        
+        preElement.addEventListener('mouseleave', () => {
+          copyButton.style.opacity = '0.8';
+        });
+      }
     },
     
     // 显示复制成功提示
@@ -818,14 +865,14 @@
       // 创建新的提示
       const toast = document.createElement('div');
       toast.className = 'copy-success-toast';
-      toast.textContent = '代码已复制';
+      toast.innerHTML = '<span style="margin-right: 6px;">✓</span>代码已复制';
       
       document.body.appendChild(toast);
       
       // 显示动画
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         toast.classList.add('show');
-      }, 10);
+      });
       
       // 隐藏动画
       setTimeout(() => {
@@ -835,7 +882,12 @@
             toast.parentNode.removeChild(toast);
           }
         }, 300);
-      }, 2000);
+      }, 1800);
+      
+      // 触觉反馈（如果支持）
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
     },
     
     // 绑定事件

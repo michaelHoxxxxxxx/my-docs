@@ -1713,18 +1713,29 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* 复制按钮增强 */
+/* 复制按钮增强 - 确保可见性 */
 .docsify-copy-code-button {
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
   color: #333 !important;
   border-radius: 6px !important;
   border: 1px solid #e0e0e0 !important;
   font-size: 12px !important;
-  padding: 6px 12px !important;
+  padding: 8px 14px !important;
   transition: all 0.3s ease !important;
   backdrop-filter: blur(10px) !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
   font-weight: 600 !important;
+  position: absolute !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+  opacity: 0.8 !important;
+}
+
+/* 代码块悬停时显示复制按钮 */
+.markdown-section pre:hover .docsify-copy-code-button {
+  opacity: 1 !important;
 }
 
 .docsify-copy-code-button:hover {
@@ -1748,15 +1759,15 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   border-color: var(--link-color, #64b5f6) !important;
 }
 
-/* 复制成功提示 */
+/* 复制成功提示 - 增强版本 */
 .copy-success-toast {
   position: fixed;
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%) translateY(-20px);
   background: rgba(76, 175, 80, 0.95);
   color: white;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border-radius: 25px;
   font-size: 14px;
   font-weight: 600;
@@ -1766,6 +1777,9 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
   pointer-events: none;
+  min-width: 120px;
+  text-align: center;
+  border: 1px solid rgba(76, 175, 80, 0.8);
 }
 
 .copy-success-toast.show {
@@ -1966,6 +1980,25 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  
+  /* 移动端复制按钮优化 */
+  .docsify-copy-code-button {
+    font-size: 14px !important;
+    padding: 10px 16px !important;
+    top: 6px !important;
+    right: 6px !important;
+    opacity: 1 !important; /* 移动端始终显示 */
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+  }
+  
+  /* 移动端复制提示优化 */
+  .copy-success-toast {
+    top: 15% !important;
+    font-size: 16px !important;
+    padding: 16px 24px !important;
+    min-width: 140px !important;
   }
   
   /* 链接点击区域扩大 */
