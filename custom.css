@@ -445,7 +445,7 @@ section.cover a {
 .page_toc {
   position: fixed;
   top: 100px;
-  right: 20px;
+  right: 15px;
   width: 200px;
   max-height: calc(100vh - 140px);
   overflow-y: auto !important; /* 允许垂直滚动 */
@@ -617,7 +617,7 @@ aside.toc-nav,
 .toc-nav {
   position: fixed !important;
   top: 100px !important;
-  right: 20px !important;
+  right: 15px !important;
   width: 200px !important;
   max-height: calc(100vh - 140px) !important;
   overflow-y: auto !important;
@@ -771,7 +771,7 @@ aside.toc-nav::-webkit-scrollbar-thumb:hover,
   .page_toc {
     position: fixed;
     top: 60px;
-    right: 10px;
+    right: 8px;
     width: 160px;
     max-height: calc(100vh - 80px);
     font-size: 11px;
@@ -829,15 +829,15 @@ aside.toc-nav::-webkit-scrollbar-thumb:hover,
 /* 调整主内容区域，避免被目录遮挡 */
 @media screen and (min-width: 1301px) {
   .markdown-section {
-    margin-right: 220px; /* 留出合适的间距给目录 */
-    max-width: calc(100% - 240px); /* 动态宽度，让内容区域更宽 */
+    margin-right: 170px; /* 进一步减少间距，让内容更接近目录 */
+    max-width: calc(100% - 190px); /* 动态宽度，显著扩展内容区域 */
   }
 }
 
 /* 中等屏幕优化 */
 @media screen and (min-width: 769px) and (max-width: 1300px) {
   .markdown-section {
-    margin-right: 180px;
+    margin-right: 140px; /* 中等屏幕也减少间距 */
     font-size: 16px;
   }
 }
