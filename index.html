@@ -54,7 +54,6 @@
       <li>持续更新中</li>
     </ul>
     <div style="margin-top: 20px;">
-      <a href="https://github.com/michaelHoxxxxxxx/my-docs" target="_blank" style="margin-right: 20px; color: #42b983; text-decoration: none;">GitHub</a>
       <button id="start-reading-btn" style="background-color: #42b983; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-size: 16px; min-height: 44px; min-width: 100px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; transition: all 0.2s ease;">开始阅读</button>
     </div>
   </div>
@@ -85,13 +84,11 @@
     </svg>
   </div>
   
-  <!-- 在github上编辑插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
   <script>
     window.$docsify = {
       name: '学习文档', // 文档标题，会显示在侧边栏顶部
       nameLink: '/', // 点击文档标题后的跳转地址
-      repo: 'michaelHoxxxxxxx/my-docs', // 有repo属性则右上角会展示github图标，点击可进入
+      // repo 属性已移除 - 不再显示右上角GitHub图标
       loadSidebar: '_sidebar.md', // 明确指定侧边栏路径
       homepage: 'README.md', // 指定首页文件
       alias: {
@@ -162,17 +159,7 @@
         crossChapter: true,
       },
       plugins: [
-        EditOnGithubPlugin.create(
-          'https://github.com/michaelHoxxxxxxx/my-docs/blob/master/docs/',
-          null,
-          function ( file ) {
-            if ( file.indexOf( 'en' ) === -1 ) {
-              return '在 GitHub 上编辑'
-            } else {
-              return 'Edit on Github'
-            }
-          }
-        )
+// EditOnGithubPlugin 插件已移除
       ],
       themeColor: "#42b983" // 主题色
     }

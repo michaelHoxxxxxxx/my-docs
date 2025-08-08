@@ -1765,7 +1765,6 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   top: 20%;
   left: 50%;
   transform: translate(-50%, -50%) translateY(-20px);
-  background: rgba(76, 175, 80, 0.95);
   color: white;
   padding: 14px 28px;
   border-radius: 25px;
@@ -1775,11 +1774,100 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
   pointer-events: none;
   min-width: 120px;
   text-align: center;
+}
+
+.copy-success-toast.success {
+  background: rgba(76, 175, 80, 0.95);
+  box-shadow: 0 8px 32px rgba(76, 175, 80, 0.3);
   border: 1px solid rgba(76, 175, 80, 0.8);
+}
+
+.copy-success-toast.error {
+  background: rgba(244, 67, 54, 0.95);
+  box-shadow: 0 8px 32px rgba(244, 67, 54, 0.3);
+  border: 1px solid rgba(244, 67, 54, 0.8);
+}
+
+/* 代码块点击反馈效果 */
+.code-click-feedback {
+  animation: codeBlockFlash 0.3s ease !important;
+  position: relative;
+}
+
+@keyframes codeBlockFlash {
+  0% { 
+    background-color: rgba(66, 185, 131, 0.1);
+    transform: scale(1);
+  }
+  50% { 
+    background-color: rgba(66, 185, 131, 0.2);
+    transform: scale(1.01);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+/* 暗色模式下的点击反馈 */
+[data-theme="dark"] .code-click-feedback {
+  animation: codeBlockFlashDark 0.3s ease !important;
+}
+
+@keyframes codeBlockFlashDark {
+  0% { 
+    background-color: rgba(100, 181, 246, 0.1);
+    transform: scale(1);
+  }
+  50% { 
+    background-color: rgba(100, 181, 246, 0.2);
+    transform: scale(1.01);
+  }
+  100% { 
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+/* 代码块悬停效果增强 */
+.markdown-section pre[data-click-copy-added] {
+  position: relative;
+  transition: all 0.2s ease !important;
+}
+
+.markdown-section pre[data-click-copy-added]:hover {
+  cursor: pointer !important;
+}
+
+/* 点击复制提示标签 */
+.markdown-section pre[data-click-copy-added]::after {
+  content: '点击复制';
+  position: absolute;
+  top: -8px;
+  left: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+.markdown-section pre[data-click-copy-added]:hover::after {
+  opacity: 1;
+}
+
+[data-theme="dark"] .markdown-section pre[data-click-copy-added]::after {
+  background: rgba(255, 255, 255, 0.8);
+  color: #1a1a1a;
 }
 
 .copy-success-toast.show {
@@ -1787,11 +1875,7 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   transform: translate(-50%, -50%) translateY(0);
 }
 
-.copy-success-toast::before {
-  content: '✓';
-  margin-right: 8px;
-  font-size: 16px;
-}
+/* 图标已在 JavaScript 中处理 */
 
 /* 代码行号增强 */
 .markdown-section pre code {
@@ -1999,6 +2083,18 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
     font-size: 16px !important;
     padding: 16px 24px !important;
     min-width: 140px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+  }
+  
+  .copy-success-toast.success {
+    background: rgba(76, 175, 80, 0.98) !important;
+    backdrop-filter: blur(15px) !important;
+  }
+  
+  .copy-success-toast.error {
+    background: rgba(244, 67, 54, 0.98) !important;
+    backdrop-filter: blur(15px) !important;
   }
   
   /* 链接点击区域扩大 */
@@ -2178,17 +2274,30 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   #custom-back-to-top:active,
   .sidebar-nav a:active,
   .search-result-item:active,
-  .history-item:active {
-    transform: scale(0.95);
+  .history-item:active,
+  .markdown-section pre[data-click-copy-added]:active {
+    transform: scale(0.98);
     transition: transform 0.1s ease;
   }
   
   /* 移除悬停效果，使用触摸状态 */
   .theme-toggle:hover,
   #custom-back-to-top:hover,
-  .sidebar-nav a:hover {
+  .sidebar-nav a:hover,
+  .markdown-section pre[data-click-copy-added]:hover {
     transform: none;
     box-shadow: inherit;
+  }
+  
+  /* 移动设备上显示点击提示 */
+  .markdown-section pre[data-click-copy-added]::after {
+    opacity: 0.7 !important;
+    font-size: 11px !important;
+    top: -6px !important;
+  }
+  
+  .markdown-section pre[data-click-copy-added]:active::after {
+    opacity: 1 !important;
   }
 }
 

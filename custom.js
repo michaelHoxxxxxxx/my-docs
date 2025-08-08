@@ -708,6 +708,7 @@
     init: function() {
       this.addLanguageLabels();
       this.enhanceCopyButton();
+      this.addClickToCopy(); // 添加点击代码块复制功能
       this.bindEvents();
       return this;
     },
@@ -807,7 +808,7 @@
                            (e.target.textContent && e.target.textContent.includes('复制'));
         
         if (isCopyButton) {
-          this.showCopySuccessToast();
+          this.showCopySuccessToast('复制成功');
         }
       });
       
@@ -854,8 +855,174 @@
       }
     },
     
+    // 添加点击代码块复制功能
+    addClickToCopy: function() {
+      // 为所有代码块添加点击复制功能（支持触摸设备）
+      const handleCodeClick = (e) => {
+        // 检查点击的是否是代码块内容区域
+        const codeElement = e.target.closest('pre code');
+        const preElement = e.target.closest('pre');
+        
+        if (codeElement && preElement) {
+          // 确保不是点击复制按钮
+          if (e.target.closest('.docsify-copy-code-button')) {
+            return; // 如果是复制按钮，让原有逻辑处理
+          }
+          
+          // 添加点击视觉反馈
+          this.addClickFeedback(preElement);
+          
+          // 复制代码
+          const codeText = codeElement.textContent || codeElement.innerText;
+          this.copyToClipboard(codeText)
+            .then(() => {
+              this.showCopySuccessToast('点击复制成功');
+            })
+            .catch((err) => {
+              console.warn('复制失败:', err);
+              this.showCopySuccessToast('复制失败', 'error');
+            });
+        }
+      };
+      
+      // 添加点击和触摸事件监听
+      document.addEventListener('click', handleCodeClick);
+      
+      // 移动设备触摸支持
+      document.addEventListener('touchend', (e) => {
+        // 防止触摸滚动时触发复制
+        if (e.changedTouches && e.changedTouches.length === 1) {
+          const touch = e.changedTouches[0];
+          const element = document.elementFromPoint(touch.clientX, touch.clientY);
+          if (element && element.closest('pre code')) {
+            handleCodeClick({
+              target: element,
+              preventDefault: () => e.preventDefault()
+            });
+          }
+        }
+      }, { passive: false });
+      
+      // 为代码块添加悬停提示
+      this.addHoverIndicator();
+    },
+    
+    // 复制到剪贴板
+    copyToClipboard: async function(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        // 现代浏览器使用 Clipboard API
+        return navigator.clipboard.writeText(text);
+      } else {
+        // 降级到传统方法
+        return new Promise((resolve, reject) => {
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          textArea.style.position = 'absolute';
+          textArea.style.opacity = '0';
+          textArea.style.left = '-999999px';
+          textArea.style.top = '-999999px';
+          document.body.appendChild(textArea);
+          
+          try {
+            textArea.focus();
+            textArea.select();
+            const result = document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            if (result) {
+              resolve();
+            } else {
+              reject(new Error('execCommand复制失败'));
+            }
+          } catch (err) {
+            document.body.removeChild(textArea);
+            reject(err);
+          }
+        });
+      }
+    },
+    
+    // 添加点击视觉反馈
+    addClickFeedback: function(preElement) {
+      // 移除已存在的反馈效果
+      preElement.classList.remove('code-click-feedback');
+      
+      // 添加反馈效果
+      preElement.classList.add('code-click-feedback');
+      
+      // 短暂后移除效果
+      setTimeout(() => {
+        preElement.classList.remove('code-click-feedback');
+      }, 300);
+    },
+    
+    // 添加悬停指示器
+    addHoverIndicator: function() {
+      // 使用 MutationObserver 监听新增的代码块
+      if (typeof MutationObserver !== 'undefined') {
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+              if (node.nodeType === 1 && node.tagName === 'PRE') {
+                this.addCodeBlockIndicator(node);
+              }
+            });
+          });
+        });
+        
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      }
+      
+      // 为现有代码块添加指示器
+      document.querySelectorAll('pre code').forEach(codeElement => {
+        const preElement = codeElement.closest('pre');
+        if (preElement) {
+          this.addCodeBlockIndicator(preElement);
+        }
+      });
+    },
+    
+    // 为代码块添加悬停指示器
+    addCodeBlockIndicator: function(preElement) {
+      if (preElement.hasAttribute('data-click-copy-added')) {
+        return; // 避免重复添加
+      }
+      
+      preElement.setAttribute('data-click-copy-added', 'true');
+      preElement.style.cursor = 'pointer';
+      preElement.title = '点击复制代码';
+      
+      // 添加悬停效果
+      const originalTransition = preElement.style.transition;
+      preElement.style.transition = 'all 0.2s ease';
+      
+      preElement.addEventListener('mouseenter', () => {
+        preElement.style.transform = 'translateY(-1px)';
+        preElement.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+      });
+      
+      preElement.addEventListener('mouseleave', () => {
+        preElement.style.transform = '';
+        preElement.style.boxShadow = '';
+      });
+      
+      // 移动设备触摸反馈
+      preElement.addEventListener('touchstart', () => {
+        preElement.style.backgroundColor = 'rgba(66, 185, 131, 0.05)';
+      }, { passive: true });
+      
+      preElement.addEventListener('touchend', () => {
+        setTimeout(() => {
+          preElement.style.backgroundColor = '';
+        }, 150);
+      }, { passive: true });
+    },
+    
     // 显示复制成功提示
-    showCopySuccessToast: function() {
+    showCopySuccessToast: function(message = '已复制', type = 'success') {
       // 移除现有的提示
       const existingToast = document.querySelector('.copy-success-toast');
       if (existingToast) {
@@ -864,8 +1031,10 @@
       
       // 创建新的提示
       const toast = document.createElement('div');
-      toast.className = 'copy-success-toast';
-      toast.innerHTML = '<span style="margin-right: 6px;">✓</span>代码已复制';
+      toast.className = `copy-success-toast ${type === 'error' ? 'error' : 'success'}`;
+      
+      const icon = type === 'error' ? '✗' : '✓';
+      toast.innerHTML = `<span style="margin-right: 6px;">${icon}</span>${message}`;
       
       document.body.appendChild(toast);
       
@@ -882,11 +1051,11 @@
             toast.parentNode.removeChild(toast);
           }
         }, 300);
-      }, 1800);
+      }, type === 'error' ? 2500 : 1800); // 错误提示显示更久
       
       // 触觉反馈（如果支持）
-      if (navigator.vibrate) {
-        navigator.vibrate(50);
+      if (navigator.vibrate && type === 'success') {
+        navigator.vibrate([50]); // 成功时的轻微震动
       }
     },
     
