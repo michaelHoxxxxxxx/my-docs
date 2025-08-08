@@ -75,108 +75,14 @@ window.addEventListener('load', function() {
   }
 });
 
-// 自定义明暗模式切换功能
+// 给侧边栏文档链接添加手型指针样式
 window.addEventListener('load', function() {
-  // 等待更长时间确保 Docsify 完全加载
   setTimeout(function() {
-    // 获取元素
-    var themeToggle = document.getElementById('theme-toggle');
-    var lightIcon = document.querySelector('.light-icon');
-    var darkIcon = document.querySelector('.dark-icon');
-    
-    if (!themeToggle || !lightIcon || !darkIcon) {
-      return; // 静默退出，避免错误日志
-    }
-    
-    // 初始更新图标状态
-    updateThemeIcons();
-    
-    // 添加点击事件
-    themeToggle.addEventListener('click', function() {
-      // 尝试找到并点击 Docsify 的原生主题切换按钮
-      var darkmodeToggle = document.querySelector('.darkmode-toggle');
-      if (darkmodeToggle) {
-        darkmodeToggle.click();
-      } else {
-        // 如果找不到原生按钮，就手动切换
-        manualToggleTheme();
-      }
-      
-      // 更新图标状态
-      setTimeout(updateThemeIcons, 100);
-    });
-    
-    // 手动切换主题
-    function manualToggleTheme() {
-      // 检查当前主题
-      var currentTheme = localStorage.getItem('DARK_LIGHT_THEME') || 'light';
-      var newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      
-      // 切换主题
-      localStorage.setItem('DARK_LIGHT_THEME', newTheme);
-      
-      // 应用主题
-      if (newTheme === 'dark') {
-        document.body.classList.add('dark');
-        document.body.classList.remove('light');
-      } else {
-        document.body.classList.add('light');
-        document.body.classList.remove('dark');
-      }
-      
-      // 应用主题样式
-      applyThemeStyles(newTheme);
-    }
-    
-    // 应用主题样式
-    function applyThemeStyles(theme) {
-      // 获取主题配置
-      var config = window.$docsify.darklightTheme;
-      if (!config) return;
-      
-      var themeConfig = theme === 'dark' ? config.dark : config.light;
-      if (!themeConfig) return;
-      
-      // 应用所有主题样式
-      document.documentElement.style.setProperty('--theme-color', themeConfig.accent || '#42b983');
-      document.documentElement.style.setProperty('--background', themeConfig.background || '#ffffff');
-      document.documentElement.style.setProperty('--text-color', themeConfig.textColor || '#34495e');
-      
-      // 触发主题变化事件
-      var event = new Event('themeChange');
-      document.dispatchEvent(event);
-    }
-    
-    // 监听主题变化
-    var observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.attributeName === 'class') {
-          updateThemeIcons();
-        }
-      });
-    });
-    
-    observer.observe(document.body, { attributes: true });
-    
-    // 更新图标状态
-    function updateThemeIcons() {
-      var isDark = document.body.classList.contains('dark');
-      
-      if (isDark) {
-        lightIcon.style.display = 'none';
-        darkIcon.style.display = 'block';
-      } else {
-        lightIcon.style.display = 'block';
-        darkIcon.style.display = 'none';
-      }
-    }
-    
-    // 给侧边栏文档链接添加手型指针样式
     var sidebarLinks = document.querySelectorAll('.sidebar-nav a');
     sidebarLinks.forEach(function(link) {
       link.style.cursor = 'pointer';
     });
-  }, 3000); // 增加等待时间到 3 秒
+  }, 1000);
 });
 
 // 调试开关 - 在控制台输入 window.tocDebug = true 来开启调试
@@ -185,69 +91,6 @@ if (typeof window.tocDebug === 'undefined') {
   window.tocDebug = false;
 }
 
-// 移除插件生成的主题切换按钮
-function removePluginThemeButton() {
-  // 查找并移除所有可能的插件按钮
-  var selectors = [
-    '.darkmode-toggle',
-    'button.darkmode-toggle', 
-    '#dark-mode-toggle-button',
-    'button[onclick*="switchTheme"]',
-    'button[style*="position: fixed"][style*="right"]',
-    'body > button[style*="fixed"]'
-  ];
-  
-  selectors.forEach(function(selector) {
-    var elements = document.querySelectorAll(selector);
-    elements.forEach(function(el) {
-      // 排除我们的自定义按钮
-      if (el.id !== 'theme-toggle' && el.id !== 'custom-back-to-top') {
-        el.remove();
-      }
-    });
-  });
-}
-
-// 在多个时机尝试移除插件按钮
-window.addEventListener('DOMContentLoaded', function() {
-  setTimeout(removePluginThemeButton, 100);
-  setTimeout(removePluginThemeButton, 500);
-  setTimeout(removePluginThemeButton, 1000);
-});
-
-window.addEventListener('load', function() {
-  setTimeout(removePluginThemeButton, 100);
-  setTimeout(removePluginThemeButton, 1500);
-  setTimeout(removePluginThemeButton, 3000);
-});
-
-// 使用 MutationObserver 监听新按钮的添加
-if (typeof MutationObserver !== 'undefined') {
-  var buttonObserver = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      if (mutation.addedNodes) {
-        mutation.addedNodes.forEach(function(node) {
-          if (node.nodeType === 1 && node.tagName === 'BUTTON') {
-            // 检查是否是主题切换按钮
-            if (node.classList.contains('darkmode-toggle') || 
-                (node.style && node.style.position === 'fixed' && 
-                 node.id !== 'theme-toggle' && node.id !== 'custom-back-to-top')) {
-              node.remove();
-            }
-          }
-        });
-      }
-    });
-  });
-  
-  // 开始观察
-  if (document.body) {
-    buttonObserver.observe(document.body, {
-      childList: true,
-      subtree: false // 只观察 body 的直接子元素
-    });
-  }
-}
 
 // 文章目录自动滚动跟随功能
 function initTOCScrollFollow() {

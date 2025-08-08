@@ -17,9 +17,6 @@
   <meta property="og:type" content="website">
   <!-- vue主题样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <!-- 暗黑主题插件样式 -->
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/style.min.css"
-    title="docsify-darklight-theme" type="text/css" />
   <!-- 自定义样式 -->
   <link rel="stylesheet" href="./custom.css">
   <!-- 自定义脚本，必须在 Docsify 初始化之前加载 -->
@@ -52,23 +49,6 @@
     </svg>
   </div>
   
-  <!-- 自定义明暗模式切换按钮 -->
-  <div id="theme-toggle" class="theme-toggle-button">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="light-icon">
-      <circle cx="12" cy="12" r="5"></circle>
-      <line x1="12" y1="1" x2="12" y2="3"></line>
-      <line x1="12" y1="21" x2="12" y2="23"></line>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-      <line x1="1" y1="12" x2="3" y2="12"></line>
-      <line x1="21" y1="12" x2="23" y2="12"></line>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-    </svg>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dark-icon" style="display: none;">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-  </div>
   <!-- 在github上编辑插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-edit-on-github"></script>
   <script>
@@ -146,43 +126,7 @@
           }
         )
       ],
-      themeColor: "#42b983", // 暗黑模式主题色
-      darklightTheme: {
-        siteFont: "PT Sans",
-        defaultTheme: 'light',
-        codeFontFamily: 'Roboto Mono, Monaco, courier, monospace',
-        bodyFontSize: '17px',
-        dark: {
-          accent: '#42b983',
-          toggleBackground: '#ffffff',
-          background: '#091a28',
-          textColor: '#b4b4b4',
-          codeTextColor: '#ffffff',
-          codeBackgroudColor: '#0e2233',
-          borderColor: '#0d2538',
-          blockQuoteColour: '#858585',
-          highlightColor: '#d22778',
-          sidebarSublink: '#b4b4b4',
-          codeTypeColor: '#ffffff',
-          coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
-          toggleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/sun.svg)'
-        },
-        light: {
-          accent: '#42b983',
-          toggleBackground: '#091a28',
-          background: '#ffffff',
-          textColor: '#34495e',
-          codeTextColor: '#525252',
-          codeBackgroudColor: '#f8f8f8',
-          borderColor: 'rgba(0, 0, 0, 0.07)',
-          blockQuoteColor: '#858585',
-          highlightColor: '#d22778',
-          sidebarSublink: '#b4b4b4',
-          codeTypeColor: '#091a28',
-          coverBackground: 'linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%)',
-          toggleImage: 'url(https://cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/icons/moon.svg)'
-        }
-      }
+      themeColor: "#42b983" // 主题色
     }
   </script>
   
@@ -199,8 +143,6 @@
   <!--图片缩放插件-->
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <!-- 阅读进度条插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-darklight-theme@latest/dist/index.min.js"></script>
-  <!-- 暗黑主题切换插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
   <!-- 选项卡插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
