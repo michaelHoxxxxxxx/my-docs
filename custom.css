@@ -393,25 +393,27 @@ body.dark .markdown-section h2 {
   box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
-/* 自定义明暗模式切换按钮 */
+/* 自定义明暗模式切换按钮 - 确保是唯一显示的主题切换按钮 */
 #theme-toggle {
-  position: fixed;
-  top: 15px;
-  right: 70px; /* 向左移动，避免遮挡 GitHub 图标 */
-  width: 40px;
-  height: 40px;
+  position: fixed !important;
+  top: 15px !important;
+  right: 70px !important; /* 向左移动，避免遮挡 GitHub 图标 */
+  width: 40px !important;
+  height: 40px !important;
   border-radius: 50%;
   background-color: #ffffff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  display: flex;
+  display: flex !important;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 100; /* 降低 z-index，确保不会遮挡其他元素 */
+  z-index: 1000 !important; /* 提高 z-index，确保在最上层 */
   transition: all 0.3s ease;
   border: none;
   outline: none;
   padding: 0;
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 /* 明暗模式图标样式 */
@@ -429,9 +431,23 @@ body.dark .markdown-section h2 {
   color: #ffffff;
 }
 
-/* 隐藏原生主题切换按钮 */
-.darkmode-toggle {
-  z-index: -1 !important;
+/* 隐藏原生主题切换按钮 - 全面增强规则 */
+.darkmode-toggle,
+#dark-mode-toggle-button,
+button.darkmode-toggle,
+div.darkmode-toggle,
+[class*="darkmode-toggle"],
+[id*="darkmode-toggle"],
+/* docsify-darklight-theme 插件可能的选择器 */
+.docsify-darklight-theme-toggle,
+#docsify-darklight-theme-toggle-btn,
+button[onclick*="theme"],
+button[aria-label*="theme"],
+button[aria-label*="Theme"],
+/* 右上角区域的主题按钮 */
+.markdown-section > button:first-of-type,
+body > button[style*="fixed"] {
+  z-index: -9999 !important;
   opacity: 0 !important;
   visibility: hidden !important;
   display: none !important;
@@ -439,6 +455,10 @@ body.dark .markdown-section h2 {
   position: absolute !important;
   top: -9999px !important;
   left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  transform: scale(0) !important;
 }
 
 /* 隐藏原生返回顶部按钮 */
