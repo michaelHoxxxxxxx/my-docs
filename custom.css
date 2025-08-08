@@ -1713,50 +1713,38 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* 复制按钮增强 - 确保可见性 */
-.docsify-copy-code-button {
-  background: rgba(255, 255, 255, 0.95) !important;
-  color: #333 !important;
-  border-radius: 6px !important;
-  border: 1px solid #e0e0e0 !important;
-  font-size: 12px !important;
-  padding: 8px 14px !important;
-  transition: all 0.3s ease !important;
-  backdrop-filter: blur(10px) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15) !important;
-  font-weight: 600 !important;
+/* 完全隐藏所有复制按钮 - 禁用 docsify-copy-code 插件效果 */
+.docsify-copy-code-button,
+[class*="copy-code"],
+[data-copy-code],
+.copy-to-clipboard,
+button[title*="复制"],
+button[title*="Copy"],
+pre .copy-btn,
+pre .copy-button,
+pre button[onclick*="copy"],
+pre button[onclick*="Copy"],
+.markdown-section pre > button,
+.code-copy-btn {
+  /* 强制隐藏所有可能的复制按钮 */
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
   position: absolute !important;
-  top: 8px !important;
-  right: 8px !important;
-  z-index: 10 !important;
-  cursor: pointer !important;
-  opacity: 0.8 !important;
-}
-
-/* 代码块悬停时显示复制按钮 */
-.markdown-section pre:hover .docsify-copy-code-button {
-  opacity: 1 !important;
-}
-
-.docsify-copy-code-button:hover {
-  background: var(--theme-color, #42b983) !important;
-  color: white !important;
-  border-color: var(--theme-color, #42b983) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* 暗色模式复制按钮 */
-[data-theme="dark"] .docsify-copy-code-button {
-  background: rgba(45, 45, 48, 0.9) !important;
-  color: #e4e4e7 !important;
-  border-color: #404040 !important;
-}
-
-[data-theme="dark"] .docsify-copy-code-button:hover {
-  background: var(--link-color, #64b5f6) !important;
-  color: #1a1a1a !important;
-  border-color: var(--link-color, #64b5f6) !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  z-index: -9999 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
 }
 
 /* 复制成功提示 - 增强版本 */
@@ -1842,32 +1830,41 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   cursor: pointer !important;
 }
 
-/* 点击复制提示标签 */
+/* 优化的点击复制提示标签 - 只显示"点击复制" */
 .markdown-section pre[data-click-copy-added]::after {
   content: '点击复制';
   position: absolute;
-  top: -8px;
+  top: -10px;
   left: 15px;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   color: white;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: 500;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
   white-space: nowrap;
-  z-index: 10;
+  z-index: 20;
+  transform: translateY(-2px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.markdown-section pre[data-click-copy-added]:hover::after {
-  opacity: 1;
+/* 悬停时显示提示 - 仅桌面端 */
+@media (hover: hover) and (pointer: fine) {
+  .markdown-section pre[data-click-copy-added]:hover::after {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* 暗色模式优化提示样式 */
 [data-theme="dark"] .markdown-section pre[data-click-copy-added]::after {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   color: #1a1a1a;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
 .copy-success-toast.show {
@@ -2056,7 +2053,6 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
   .sidebar-nav a,
   .theme-toggle,
   #custom-back-to-top,
-  .docsify-copy-code-button,
   .search-result-item,
   .history-item {
     min-height: 44px;
@@ -2066,16 +2062,7 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
     justify-content: center;
   }
   
-  /* 移动端复制按钮优化 */
-  .docsify-copy-code-button {
-    font-size: 14px !important;
-    padding: 10px 16px !important;
-    top: 6px !important;
-    right: 6px !important;
-    opacity: 1 !important; /* 移动端始终显示 */
-    touch-action: manipulation !important;
-    -webkit-tap-highlight-color: transparent !important;
-  }
+  /* 移动端代码块交互优化 - 复制按钮已完全移除 */
   
   /* 移动端复制提示优化 */
   .copy-success-toast {
@@ -2289,15 +2276,9 @@ div[class*="progress"]:not(#reading-progress):not(.progress-percentage) {
     box-shadow: inherit;
   }
   
-  /* 移动设备上显示点击提示 */
+  /* 移动设备上不显示悬停提示，保持简洁 */
   .markdown-section pre[data-click-copy-added]::after {
-    opacity: 0.7 !important;
-    font-size: 11px !important;
-    top: -6px !important;
-  }
-  
-  .markdown-section pre[data-click-copy-added]:active::after {
-    opacity: 1 !important;
+    display: none !important;
   }
 }
 

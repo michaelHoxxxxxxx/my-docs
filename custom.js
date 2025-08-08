@@ -707,7 +707,6 @@
     // 初始化代码块增强
     init: function() {
       this.addLanguageLabels();
-      this.enhanceCopyButton();
       this.addClickToCopy(); // 添加点击代码块复制功能
       this.bindEvents();
       return this;
@@ -798,62 +797,9 @@
       });
     },
     
-    // 增强复制按钮
-    enhanceCopyButton: function() {
-      // 监听复制事件 - 支持多种复制按钮选择器
-      document.addEventListener('click', (e) => {
-        const isCopyButton = e.target.classList.contains('docsify-copy-code-button') ||
-                           e.target.closest('.docsify-copy-code-button') ||
-                           e.target.matches('[data-copy-code]') ||
-                           (e.target.textContent && e.target.textContent.includes('复制'));
-        
-        if (isCopyButton) {
-          this.showCopySuccessToast('复制成功');
-        }
-      });
-      
-      // 使用 MutationObserver 监听新增的代码块
-      if (typeof MutationObserver !== 'undefined') {
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            mutation.addedNodes.forEach((node) => {
-              if (node.nodeType === 1 && node.tagName === 'PRE') {
-                setTimeout(() => {
-                  this.addLanguageLabels();
-                  this.enhanceCopyButtonVisibility(node);
-                }, 100);
-              }
-            });
-          });
-        });
-        
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      }
-    },
+    // 复制按钮已完全移除 - 保留此处作为占位符，专注于点击复制功能
     
-    // 增强复制按钮可见性
-    enhanceCopyButtonVisibility: function(preElement) {
-      if (!preElement) return;
-      
-      const copyButton = preElement.querySelector('.docsify-copy-code-button');
-      if (copyButton) {
-        // 确保复制按钮样式正确
-        copyButton.style.opacity = '0.8';
-        copyButton.style.transition = 'all 0.3s ease';
-        
-        // 鼠标悬停增强可见性
-        preElement.addEventListener('mouseenter', () => {
-          copyButton.style.opacity = '1';
-        });
-        
-        preElement.addEventListener('mouseleave', () => {
-          copyButton.style.opacity = '0.8';
-        });
-      }
-    },
+    // 复制按钮功能已移除，专注于点击复制体验
     
     // 添加点击代码块复制功能
     addClickToCopy: function() {
@@ -864,10 +810,7 @@
         const preElement = e.target.closest('pre');
         
         if (codeElement && preElement) {
-          // 确保不是点击复制按钮
-          if (e.target.closest('.docsify-copy-code-button')) {
-            return; // 如果是复制按钮，让原有逻辑处理
-          }
+          // 复制按钮已完全移除，直接处理点击复制
           
           // 添加点击视觉反馈
           this.addClickFeedback(preElement);
