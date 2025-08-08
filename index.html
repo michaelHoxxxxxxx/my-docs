@@ -15,6 +15,16 @@
   <meta property="og:title" content="kiki's docs">
   <meta property="og:description" content="个人技术学习文档，包含多种技术栈的学习笔记">
   <meta property="og:type" content="website">
+  
+  <!-- 资源预加载优化 -->
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" as="style">
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/docsify@4" as="script">
+  <link rel="preload" href="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js" as="script">
+  <link rel="preconnect" href="//cdn.jsdelivr.net">
+  <link rel="preconnect" href="//unpkg.com">
+  <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="//unpkg.com">
+  
   <!-- vue主题样式 -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <!-- 自定义样式 -->
@@ -24,6 +34,15 @@
 </head>
 
 <body>
+  <!-- Skip links for accessibility -->
+  <a href="#main-content" class="skip-link">跳转到主要内容</a>
+  
+  <!-- 手势导航覆盖层 -->
+  <div class="gesture-overlay" id="gesture-overlay"></div>
+  
+  <!-- 侧滑提示 -->
+  <div class="swipe-hint" id="swipe-hint">侧滑打开菜单</div>
+  
   <!-- 自定义封面 -->
   <div id="custom-cover" style="position: fixed; z-index: 999; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to left bottom, hsl(118, 100%, 85%) 0%,hsl(181, 100%, 85%) 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
     <img src="https://docsify.js.org/_media/icon.svg" alt="logo" style="width: 100px; height: 100px; margin-bottom: 20px;">
@@ -40,7 +59,24 @@
     </div>
   </div>
   
-  <div id="app">loading...</div>
+  <div id="app" role="main" aria-label="文档内容">
+    <div id="main-content">loading...</div>
+  </div>
+  
+  <!-- 阅读进度条 -->
+  <div id="reading-progress">
+    <div id="reading-progress-bar">
+      <div class="chapter-indicators"></div>
+    </div>
+  </div>
+  
+  <!-- 进度百分比显示 -->
+  <div class="progress-percentage" id="progress-percentage">0%</div>
+  
+  <!-- 主题切换按钮 -->
+  <button id="theme-toggle" class="theme-toggle" title="切换主题">
+    <span class="theme-icon">🌓</span>
+  </button>
   
   <!-- 自定义返回顶部按钮 -->
   <div id="custom-back-to-top" style="position: fixed; bottom: 20px; right: 20px; width: 40px; height: 40px; background-color: #42b983; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.3); opacity: 0; transition: opacity 0.3s;">
@@ -97,10 +133,17 @@
         tabComments: true,
         tabHeadings: true
       }, // 选项卡配置
-      search: { // 搜索插件配置
+      search: { // 增强搜索插件配置
         paths: 'auto',
-        placeholder: '🔍 搜索',
-        noData: '😞 没有结果!'
+        placeholder: '搜索文档内容...',
+        noData: '未找到相关内容',
+        depth: 6, // 增加搜索深度
+        maxAge: 86400000, // 缓存一天
+        hideOtherSidebarContent: false,
+        namespace: 'kiki-docs-search',
+        pathNamespaces: ['/docs'],
+        searchMaxParagraphs: 8, // 增加搜索段落数
+        searchMaxWords: 200, // 增加单次搜索的词数限制
       },
       count: { // 字数统计插件配置
         countable: true,
@@ -130,38 +173,71 @@
     }
   </script>
   
-  <!-- Docsify 核心和插件 -->
-  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <!-- 关键插件优先加载 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  
+  <!-- 核心功能插件 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <!--全局搜索插件-->
-  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
-  <!--字数统计插件-->
-  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
-  <!--代码段复制插件-->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-  <!--图片缩放插件-->
-  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
-  <!-- 阅读进度条插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
-  <!-- 选项卡插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-progress@latest/dist/progress.min.js"></script>
-  <!-- 阅读进度条插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
-  <!-- 外部脚本插件 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify-updated/src/time-updater.min.js"></script>
-  <!-- 文档更新时间插件 -->
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js"></script>
-  <!-- 返回顶部按钮 -->
-  <script src="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js"></script>
-  <!-- 文章目录插件 -->
-  <link rel="stylesheet" href="https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css">
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-javascript.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-rust.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
-  <!-- 代码高亮支持更多语言 -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  
+  <!-- 次要插件 - 延迟加载 -->
+  <script>
+    // 延迟加载次要插件以提升首屏性能
+    window.addEventListener('load', function() {
+      const plugins = [
+        '//unpkg.com/docsify-count/dist/countable.js',
+        '//cdn.jsdelivr.net/npm/docsify-copy-code',
+        '//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js',
+        '//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js',
+        '//cdn.jsdelivr.net/npm/docsify-tabs@1',
+        '//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js',
+        '//cdn.jsdelivr.net/npm/docsify-updated/src/time-updater.min.js',
+        '//cdn.jsdelivr.net/npm/docsify-scroll-to-top/dist/docsify-scroll-to-top.min.js',
+        'https://unpkg.com/docsify-plugin-toc@1.3.1/dist/docsify-plugin-toc.min.js'
+      ];
+      
+      // 批量加载插件
+      plugins.forEach((src, index) => {
+        setTimeout(() => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = true;
+          document.head.appendChild(script);
+        }, index * 50); // 间隔加载避免阻塞
+      });
+      
+      // 加载TOC样式
+      setTimeout(() => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://unpkg.com/docsify-plugin-toc@1.3.1/dist/light.css';
+        document.head.appendChild(link);
+      }, 200);
+      
+      // 延迟加载代码高亮语言
+      setTimeout(() => {
+        const codeLanguages = [
+          'prism-bash',
+          'prism-javascript', 
+          'prism-python',
+          'prism-rust',
+          'prism-json',
+          'prism-typescript',
+          'prism-css',
+          'prism-yaml'
+        ];
+        
+        codeLanguages.forEach((lang, index) => {
+          setTimeout(() => {
+            const script = document.createElement('script');
+            script.src = `//cdn.jsdelivr.net/npm/prismjs@1/components/${lang}.min.js`;
+            script.async = true;
+            document.head.appendChild(script);
+          }, index * 30);
+        });
+      }, 500);
+    });
+  </script>
 </body>
 
 </html>
