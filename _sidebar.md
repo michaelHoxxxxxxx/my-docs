@@ -244,3 +244,16 @@
     - [5.2 CLI connect.ts - 沙箱连接命令](docs/e2b_cli_connect.md)
     - [5.3 CLI list.ts - 沙箱列表命令](docs/e2b_cli_list.md)
     - [5.4 CLI kill.ts - 沙箱终止命令](docs/e2b_cli_kill.md)
+
+- **🏗️ E2B Infrastructure 分析 (五步显化法)**
+  - **6. 基础设施架构总览**
+    - [14. E2B Infrastructure 项目总览](docs/14_e2b_infra_overview.md)
+    - [21. E2B 架构洞察与总结](docs/21_e2b_architecture_insights.md)
+  - **7. 核心服务模块**
+    - [15. Orchestrator 服务协调中心](docs/15_e2b_orchestrator.md)
+    - [16. API Service 网关服务](docs/16_e2b_api_service.md)
+    - [17. FC-Control 虚拟机控制器](docs/17_e2b_fccontrol.md)
+    - [18. Envd 环境守护进程](docs/18_e2b_envd.md)
+  - **8. 基础设施服务**
+    - [19. Consul Agent 服务发现](docs/19_e2b_consul.md)
+    - [20. Nomad 工作负载调度器](docs/20_e2b_nomad.md)
