@@ -257,3 +257,21 @@
   - **8. 基础设施服务**
     - [19. Consul Agent 服务发现](docs/19_e2b_consul.md)
     - [20. Nomad 工作负载调度器](docs/20_e2b_nomad.md)
+
+- **📚 Code Interpreter 深度解析 (五步显化法)**
+  - **9. 项目总览与架构设计**
+    - [22. Code Interpreter 项目总览](docs/22_code_interpreter_overview.md)
+    - [23. Code Interpreter 架构设计](docs/23_code_interpreter_architecture.md)
+  - **10. JavaScript SDK 核心实现**
+    - [24. JavaScript SDK 核心模块](docs/24_code_interpreter_js_sdk_index.md)
+    - [25. Sandbox 类详解](docs/25_code_interpreter_js_sandbox.md)
+    - [26. 消息系统详解](docs/26_code_interpreter_js_messaging.md)
+    - [27. 图表系统详解](docs/27_code_interpreter_js_charts.md)
+  - **11. Python SDK 核心实现**
+    - [28. Python SDK 核心模块](docs/28_code_interpreter_python_sdk_index.md)
+    - [29. 数据模型详解](docs/29_code_interpreter_python_models.md)
+    - [30. 同步异步实现对比](docs/30_code_interpreter_python_sync_async.md)
+  - **12. API 设计与最佳实践**
+    - [31. API 设计哲学](docs/31_code_interpreter_api_design.md)
+    - [32. 最佳实践指南](docs/32_code_interpreter_best_practices.md)
+    - [33. Chart Data Extractor 深度解析](docs/code-interpreter/33_chart_data_extractor.md)
