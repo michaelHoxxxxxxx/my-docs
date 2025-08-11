@@ -121,4 +121,4 @@ Python SDK 的同步异步双模式设计为开发者提供了灵活的选择，
 
 ---
 
-**下一篇文档**: [API 设计哲学](31_code_interpreter_api_design.md)
+**下一篇文档**: [API 设计哲学](docs/31_code_interpreter_api_design.md)

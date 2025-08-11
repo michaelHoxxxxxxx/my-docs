@@ -119,4 +119,4 @@ Code Interpreter 的 API 设计体现了现代API设计的最佳实践，通过�
 
 ---
 
-**下一篇文档**: [最佳实践指南](32_code_interpreter_best_practices.md)
+**下一篇文档**: [最佳实践指南](docs/32_code_interpreter_best_practices.md)

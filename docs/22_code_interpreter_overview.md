@@ -567,4 +567,4 @@ Code Interpreter 项目通过现代化的架构设计和全面的功能规划，
 
 ---
 
-**下一篇文档**: [架构设计](23_code_interpreter_architecture.md) - 深入解析 Code Interpreter 的技术架构和设计决策
+**下一篇文档**: [架构设计](docs/23_code_interpreter_architecture.md) - 深入解析 Code Interpreter 的技术架构和设计决策

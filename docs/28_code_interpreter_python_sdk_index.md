@@ -180,4 +180,4 @@ Python SDK 通过 Pythonic 的设计理念，为 Python 开发者提供了直观
 
 ---
 
-**下一篇文档**: [数据模型详解](29_code_interpreter_python_models.md)
+**下一篇文档**: [数据模型详解](docs/29_code_interpreter_python_models.md)

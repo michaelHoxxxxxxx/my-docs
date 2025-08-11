@@ -1327,4 +1327,4 @@ Code Interpreter 的消息系统展现了现代实时通信系统的完整架构
 
 ---
 
-**下一篇文档**: [图表系统详解](27_code_interpreter_js_charts.md) - 深入分析数据可视化和图表渲染系统
+**下一篇文档**: [图表系统详解](docs/27_code_interpreter_js_charts.md) - 深入分析数据可视化和图表渲染系统

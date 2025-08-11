@@ -946,4 +946,4 @@ JavaScript SDK 的核心模块体现了现代 SDK 设计的最佳实践：
 
 ---
 
-**下一篇文档**: [Sandbox 类详解](25_code_interpreter_js_sandbox.md) - 深入分析沙箱管理的核心实现
+**下一篇文档**: [Sandbox 类详解](docs/25_code_interpreter_js_sandbox.md) - 深入分析沙箱管理的核心实现

@@ -988,4 +988,4 @@ Code Interpreter 的架构设计体现了现代云原生应用的最佳实践：
 
 ---
 
-**下一篇文档**: [JavaScript SDK 核心模块](24_code_interpreter_js_sdk_index.md) - 深入分析 JavaScript SDK 的核心实现
+**下一篇文档**: [JavaScript SDK 核心模块](docs/24_code_interpreter_js_sdk_index.md) - 深入分析 JavaScript SDK 的核心实现

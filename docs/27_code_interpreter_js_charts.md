@@ -126,4 +126,4 @@ sequenceDiagram
 
 ---
 
-**下一篇文档**: [Python SDK 核心模块](28_code_interpreter_python_sdk_index.md)
+**下一篇文档**: [Python SDK 核心模块](docs/28_code_interpreter_python_sdk_index.md)

@@ -187,4 +187,4 @@ Python SDK 的数据模型通过 Pydantic 提供了强大的类型安全和数�
 
 ---
 
-**下一篇文档**: [同步异步实现对比](30_code_interpreter_python_sync_async.md)
+**下一篇文档**: [同步异步实现对比](docs/30_code_interpreter_python_sync_async.md)

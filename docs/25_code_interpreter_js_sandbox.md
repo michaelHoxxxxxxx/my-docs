@@ -1178,4 +1178,4 @@ Sandbox 类作为 Code Interpreter JavaScript SDK 的核心组件，体现了以
 
 ---
 
-**下一篇文档**: [消息系统详解](26_code_interpreter_js_messaging.md) - 深入分析实时通信和事件处理机制
+**下一篇文档**: [消息系统详解](docs/26_code_interpreter_js_messaging.md) - 深入分析实时通信和事件处理机制
