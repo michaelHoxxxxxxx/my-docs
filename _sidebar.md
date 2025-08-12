@@ -96,6 +96,8 @@
   - [8. 团队协作配置](docs/claude-code_team.md)
 
 - **🦀 SoulBox 项目文档**
+  - **🚀 产品介绍**
+    - [🌟 SoulBox 产品指南](docs/soulbox_product_guide.md)
   - **⭐ 开发指南**
     - [📌 开发优先级总览（必看）](docs/soulbox_priority_guide.md)
     - [🔄 模块依赖关系图](docs/soulbox_module_dependencies.md)
