@@ -201,7 +201,7 @@
   
   - **🏗️ 3. 技术架构**
     - [3.1 技术架构详细设计](docs/soulbox_architecture_design.md)
-    - [3.2 基础设施架构设计（五步显化法）](docs/soulbox_infrastructure_architecture_design.md)
+    - [3.2 ⭐ 基础设施架构设计（五步显化法）](docs/soulbox_infrastructure_architecture_design.md)
     - [3.3 高级功能使用指南](docs/soulbox_advanced_features.md)
   
   - **🔧 4. 部署与运维**
