@@ -84,6 +84,7 @@
   - [14. E2B AI 框架集成指南](docs/11_e2b_ai_frameworks.md)
   - [15. E2B 自托管部署指南](docs/12_e2b_self_hosting.md)
   - [16. E2B 实际应用案例详解](docs/13_e2b_real_world_applications.md)
+  - [17. 🔥 Open Lovable E2B 沙箱集成开发指南](open-lovable-e2b-guide.md)
 
 - **📖 Claude Code 学习文档**
   - [1. Claude Code 简介](docs/claude-code_intro.md)
