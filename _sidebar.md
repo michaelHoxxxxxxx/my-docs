@@ -1,3 +1,10 @@
+- **🔥 Open Lovable 项目专题**
+  - [项目架构总览](open-lovable/architecture-overview.md)
+  - [E2B 沙箱集成分析](open-lovable/e2b-integration-analysis.md)
+  - [API 参考文档](open-lovable/api-reference.md)
+  - [前端实现分析](open-lovable/frontend-analysis.md)
+  - [工作流程指南](open-lovable/workflow-guide.md)
+
 - **🧪 功能测试**
   - [代码复制功能测试](test-code-copy.md)
 
