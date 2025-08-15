@@ -282,4 +282,4 @@ A:
 *最后更新：2025-01-07*  
 *版本：1.0*
 
-如有其他问题，请访问 [完整文档](./soulbox_billing_system_design.md) 或联系支持团队。
+如有其他问题，请访问 [完整文档](soulbox_billing_system_design.md) 或联系支持团队。

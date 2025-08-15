@@ -2,7 +2,7 @@
 
 ## 概述
 
-本文档提供SoulBox计费系统的详细实施指南，包括技术选型、代码实现、测试策略和部署方案。这是对[计费系统设计方案](./soulbox_billing_system_design.md)的具体实现指导。
+本文档提供SoulBox计费系统的详细实施指南，包括技术选型、代码实现、测试策略和部署方案。这是对[计费系统设计方案](soulbox_billing_system_design.md)的具体实现指导。
 
 ## 1. 技术栈选择
 
