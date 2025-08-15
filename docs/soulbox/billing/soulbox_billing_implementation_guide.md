@@ -11,7 +11,7 @@
 | 组件 | 技术选择 | 理由 |
 |------|---------|------|
 | 计量收集 | Rust + Tokio | 高性能、低延迟 |
-| 时序数据库 | TimescaleDB | PostgreSQL扩展，易于集成 |
+| 多模型数据库 | SurrealDB | 时序、文档、图数据库一体化 |
 | 缓存层 | Redis | 实时计数、高并发 |
 | 消息队列 | Redis Streams | 轻量级、易部署 |
 | 支付网关 | Stripe | 成熟、文档完善 |
@@ -29,7 +29,7 @@ rust_decimal_macros = "1.35"
 stripe-rust = "0.13"
 
 # 时序数据
-sqlx = { version = "0.8", features = ["postgres", "chrono", "decimal", "runtime-tokio"] }
+surrealdb = { version = "1.5", features = ["protocol-ws", "protocol-http", "kv-rocksdb"] }
 redis = { version = "0.27", features = ["tokio-comp", "streams"] }
 
 # 监控
@@ -229,7 +229,7 @@ impl ContainerRuntime {
 
 ```rust
 // src/billing/usage_aggregator.rs
-use sqlx::{PgPool, postgres::PgPoolOptions};
+use surrealdb::{Surreal, engine::remote::ws::Client};
 use rust_decimal::Decimal;
 
 pub struct UsageAggregator {
@@ -250,7 +250,7 @@ impl UsageAggregator {
         })
     }
 
-    /// 聚合Redis中的原始事件到PostgreSQL
+    /// 聚合实时事件到SurrealDB时序数据
     pub async fn aggregate_usage(&self, user_id: &str, period: Period) -> Result<()> {
         // 1. 从Redis获取用户所有沙箱的指标流
         let sandbox_ids = self.get_user_sandboxes(user_id).await?;
@@ -262,7 +262,7 @@ impl UsageAggregator {
             // 3. 计算使用量
             let usage = self.calculate_usage(metrics)?;
             
-            // 4. 存储到PostgreSQL
+            // 4. 存储到SurrealDB
             self.store_usage(&sandbox_id, user_id, &usage, &period).await?;
         }
         
@@ -580,7 +580,7 @@ impl StripeService {
 
 ## 5. 数据库架构
 
-### 5.1 PostgreSQL + TimescaleDB
+### 5.1 SurrealDB 时序数据
 
 ```sql
 -- 启用TimescaleDB扩展
@@ -1000,7 +1000,12 @@ services:
       context: .
       dockerfile: Dockerfile.billing
     environment:
-      DATABASE_URL: postgresql://billing_user:${DB_PASSWORD}@timescaledb:5432/soulbox_billing
+      SURREALDB_HOST: surrealdb
+      SURREALDB_PORT: 8000
+      SURREALDB_NS: soulbox_billing
+      SURREALDB_DB: main
+      SURREALDB_USER: ${DB_USERNAME}
+      SURREALDB_PASS: ${DB_PASSWORD}
       REDIS_URL: redis://redis:6379
       STRIPE_API_KEY: ${STRIPE_API_KEY}
       STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}

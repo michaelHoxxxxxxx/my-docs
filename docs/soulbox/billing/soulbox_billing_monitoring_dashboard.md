@@ -229,7 +229,7 @@
 ### 4.2 Top 10 高消费用户
 
 ```sql
--- Grafana PostgreSQL 数据源查询
+-- Grafana SurrealDB 数据源查询
 SELECT 
   user_id,
   SUM(cpu_cost + memory_cost + network_cost + storage_cost) as total_cost,

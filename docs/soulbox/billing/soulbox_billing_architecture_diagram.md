@@ -24,8 +24,7 @@ graph TB
     end
 
     subgraph "数据层"
-        TS[(TimescaleDB<br/>时序数据)]
-        PG[(PostgreSQL<br/>业务数据)]
+        SDB[(SurrealDB<br/>多模型数据库)]
         RD[(Redis<br/>缓存)]
         MQ[Redis Streams<br/>消息队列]
     end
@@ -103,7 +102,7 @@ sequenceDiagram
     participant Q as Message Queue
     participant B as Billing Engine
     participant T as TimescaleDB
-    participant P as PostgreSQL
+    participant SDB as SurrealDB
     participant R as Redis Cache
 
     Q->>B: 消费使用事件
@@ -126,7 +125,7 @@ sequenceDiagram
     participant W as Web Dashboard
     participant S as Subscription Service
     participant ST as Stripe
-    participant P as PostgreSQL
+    participant SDB as SurrealDB
     participant E as Email Service
 
     U->>W: 选择订阅计划
@@ -219,7 +218,7 @@ FROM resource_usage
 GROUP BY hour, user_id;
 ```
 
-#### PostgreSQL（业务数据）
+#### SurrealDB（多模型数据库）
 
 ```sql
 -- 订阅表
@@ -321,7 +320,7 @@ TimescaleDB:
   - 每天全量备份
   - 保留30天
 
-PostgreSQL:
+SurrealDB:
   - 主从复制（异步）
   - 每4小时备份
   - 异地备份
