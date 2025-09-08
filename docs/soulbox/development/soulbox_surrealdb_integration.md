@@ -26,7 +26,7 @@ SurrealDB 已被选为 SoulBox 的主要数据库解决方案，取代了之前�
 - **性能**：直接 Rust SDK 的最小开销
 
 #### 4. **简化运维**
-- **单一数据库**：消除对多种数据库技术的需求（PostgreSQL + Redis + TimescaleDB）
+- **单一数据库**：目标态为单一数据库；迁移期与 PostgreSQL 并行，读写按迁移进度路由
 - **嵌入式模式**：简化开发和测试环境
 - **分布式模式**：生产工作负载的水平扩展
 - **架构演进**：无需迁移的灵活架构变更
@@ -156,7 +156,7 @@ DEFINE INDEX idx_usage_user_period ON usage_aggregates COLUMNS user_id, period U
 
 ```sql
 -- 定义实体之间的关系
-DEFINE TABLE user_sandbox SCHEMAFULL AS SELECT * FROM user->owns->sandbox;
+DEFINE TABLE user_sandbox SCHEMAFULL AS SELECT * FROM users->owns->sandbox;
 DEFINE TABLE sandbox_execution SCHEMAFULL AS SELECT * FROM sandbox->runs->execution;
 DEFINE TABLE execution_metrics SCHEMAFULL AS SELECT * FROM execution->generates->resource_metrics;
 
@@ -892,7 +892,7 @@ USE DB production;
 -- 定义访问控制
 DEFINE ACCESS customer_access ON DATABASE TYPE RECORD
 SIGNIN (
-    SELECT * FROM user WHERE email = $email AND crypto::argon2::compare(password_hash, $password)
+    SELECT * FROM users WHERE email = $email AND crypto::argon2::compare(password_hash, $password)
 )
 SIGNUP (
     CREATE user SET email = $email, password_hash = crypto::argon2::generate($password)
@@ -909,15 +909,10 @@ SIGNUP (
         subscription_tier = "free"
 )
 SIGNIN (
-    SELECT * FROM user WHERE email = $email AND crypto::argon2::compare(password_hash, $password)
+    SELECT * FROM users WHERE email = $email AND crypto::argon2::compare(password_hash, $password)
 );
 
--- 行级安全
-DEFINE EVENT user_access_control ON TABLE sandboxes WHEN $before = NONE THEN (
-    UPDATE sandboxes SET user_id = $auth.id WHERE id = $after.id
-);
-
--- 防止用户访问其他用户的数据
+-- 防止用户访问其他用户的数据（创建时必须携带 user_id == $auth.id）
 DEFINE FIELD user_id ON TABLE sandboxes PERMISSIONS 
     FOR select WHERE user_id = $auth.id
     FOR create WHERE $value = $auth.id
@@ -1116,6 +1111,9 @@ encryption_enabled = true
 encryption_key = "${ENCRYPTION_KEY}"
 audit_logging = true
 jwt_secret = "${JWT_SECRET}"
+
+# 认证模型说明：后端使用 JWT（或 Surreal SCOPE token）为主；
+# WebSocket 在握手时通过 Header 承载，不再在消息体里传 api_key/user_id
 
 [performance]
 read_replica_count = 3

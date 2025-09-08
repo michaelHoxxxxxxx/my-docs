@@ -212,6 +212,8 @@ pub enum Language {
 }
 
 impl Language {
+    /// 获取语言对应的解释器命令
+    /// 注：当前 get_interpreter() 返回 None 的语言不视为执行兼容
     pub fn get_interpreter(&self) -> Option<&'static str> {
         match self {
             Language::Python => Some("python3"),
@@ -221,7 +223,7 @@ impl Language {
             Language::Shell => Some("bash"),
             Language::R => Some("Rscript"),
             Language::Julia => Some("julia"),
-            _ => None,
+            _ => None,  // TypeScript, Rust, Go, Java 等待适配
         }
     }
     
@@ -260,7 +262,7 @@ pub struct SandboxConfig {
     #[serde(default = "default_cpu_quota")]
     pub cpu_quota: f32,
     
-    /// 执行超时时间
+    /// 执行超时时间（默认超时 30s；API 层允许在不超过全局上限（60s）范围内覆盖）
     #[serde(with = "humantime_serde", default = "default_timeout")]
     pub timeout: Duration,
     

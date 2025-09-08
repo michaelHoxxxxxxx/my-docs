@@ -53,9 +53,9 @@ SoulBox 的基于 Rust 的架构相比于原始的多语言实现，在所有关
 **Test Scenario**: Creating a new sandbox and executing "Hello World" programs
 
 ```rust
-// Benchmark code structure
+// 示例结构（非基准测量脚本）
 #[tokio::test]
-async fn benchmark_cold_start() {
+async fn example_cold_start_structure() {
     let start = Instant::now();
     
     // Create sandbox
@@ -65,11 +65,12 @@ async fn benchmark_cold_start() {
     let result = sandbox.execute("print('Hello World')", Language::Python).await?;
     
     let duration = start.elapsed();
+    // 注：此为示例断言，不用于基准测量
     assert!(duration < Duration::from_millis(100));
 }
 ```
 
-**Results**:
+**测量结果**（通过 wrk/Prometheus 工具获得）:
 
 | Implementation | Mean (ms) | P50 (ms) | P95 (ms) | P99 (ms) | Std Dev (ms) |
 |---------------|-----------|----------|----------|----------|--------------|
@@ -219,19 +220,17 @@ pub struct OptimizedContainerPool {
     warm_pool: Arc<Mutex<VecDeque<WarmContainer>>>,
     // Pool size based on historical demand
     target_pool_size: AtomicUsize,
-    // Predictive scaling based on time patterns
-    demand_predictor: DemandPredictor,
 }
 
 impl OptimizedContainerPool {
-    // Proactive container warming
+    // Basic container warming
     async fn maintain_pool(&self) {
         loop {
-            let predicted_demand = self.demand_predictor.predict_next_hour().await;
             let current_size = self.warm_pool.lock().await.len();
+            let target_size = self.target_pool_size.load(Ordering::Relaxed);
             
-            if predicted_demand > current_size {
-                self.warm_containers(predicted_demand - current_size).await;
+            if target_size > current_size {
+                self.warm_containers(target_size - current_size).await;
             }
             
             tokio::time::sleep(Duration::from_secs(60)).await;
@@ -264,29 +263,29 @@ pub async fn execute_large_code(
 }
 ```
 
-### 3. Adaptive Resource Management
+### 3. Basic Resource Management
 
 ```rust
-pub struct AdaptiveResourceManager {
-    // Historical resource usage patterns
-    usage_history: CircularBuffer<ResourceUsage>,
-    // ML model for resource prediction
-    predictor: ResourcePredictor,
+pub struct ResourceManager {
+    // Default resource limits
+    default_limits: ResourceLimits,
+    // Current active allocations
+    active_allocations: Arc<Mutex<HashMap<String, ResourceAllocation>>>,
 }
 
-impl AdaptiveResourceManager {
+impl ResourceManager {
     pub async fn allocate_resources(&self, request: &ExecutionRequest) -> ResourceAllocation {
-        // Predict resource needs based on code characteristics
-        let predicted_memory = self.predictor.predict_memory_usage(&request.code).await;
-        let predicted_cpu = self.predictor.predict_cpu_usage(&request.code).await;
-        
-        // Add safety margin based on prediction confidence
-        let confidence = self.predictor.get_confidence();
-        let safety_factor = 1.0 + (1.0 - confidence) * 0.5;
-        
-        ResourceAllocation {
-            memory_limit: (predicted_memory as f64 * safety_factor) as u64,
-            cpu_limit: Duration::from_millis((predicted_cpu as f64 * safety_factor) as u64),
+        // Use static resource allocation based on language type
+        match request.language {
+            Language::Python => ResourceAllocation {
+                memory_limit: 512 * 1024 * 1024, // 512MB
+                cpu_limit: Duration::from_secs(30),
+            },
+            Language::JavaScript => ResourceAllocation {
+                memory_limit: 256 * 1024 * 1024, // 256MB  
+                cpu_limit: Duration::from_secs(30),
+            },
+            _ => self.default_limits.clone().into(),
         }
     }
 }
@@ -481,6 +480,25 @@ impl CostPerformanceAnalyzer {
 - **Cost Efficiency**: 71% reduction in operational costs
 - **Reliability**: Lower error rates and better resource utilization
 - **Developer Productivity**: Faster feedback loops and development cycles
+
+## 🔮 未来工作/优化方向
+
+以下功能规划为未来优化方向，不参与现阶段指标：
+
+### 智能资源预测
+- **DemandPredictor**: 基于历史模式的预测性扩容
+- **ResourcePredictor**: 基于代码特征的 ML 资源分配
+- 注：需要充分的历史数据积累才能启用
+
+### 自适应容器池
+- 基于时间模式的预测性容器预热
+- 动态池大小调整算法
+- 多区域容器调度优化
+
+### 高级性能监控
+- 代码执行模式学习
+- 智能性能回归检测
+- 预测性容量规划
 
 ---
 

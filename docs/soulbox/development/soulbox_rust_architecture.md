@@ -22,7 +22,7 @@ use tokio::io::{AsyncRead, AsyncWrite};
 pub struct ExecutionRequest {
     code: Bytes,           // 零拷贝字节缓冲区
     language: Language,    // 枚举，栈分配
-    config: &'static ExecutionConfig, // 静态引用
+    config: Arc<ExecutionConfig>, // 按值或共享所有权（如 Arc）传入
 }
 ```
 
@@ -50,7 +50,7 @@ pub struct ResourceLimits {
 }
 
 impl ResourceLimits {
-    // 资源限制的编译时验证
+    // 提供可用于编译期断言的 const fn；需在 const 上下文或类型层校验中使用
     const fn validate(&self) -> bool {
         self.max_memory > 0 && 
         self.max_cpu_time.as_millis() > 0
@@ -313,7 +313,7 @@ pub async fn execute_code(
         .await
         .map_err(|e| ApiError::RateLimited(e))?;
     
-    // 带超时执行代码
+    // 带超时执行代码（全局上限60s，API层可在此范围内覆盖）
     let result = tokio::time::timeout(
         Duration::from_secs(60),
         state.interpreter.execute_code(

@@ -330,21 +330,35 @@ impl WebSocketHandler {
 
 ### 第六阶段：集成测试 ✅
 
-创建协议间互操作性测试：
+创建最小可证的互操作验收测试：
 
 ```rust
 // tests/protocol_integration_tests.rs
 #[tokio::test]
-async fn test_protocol_coexistence() {
-    // 验证gRPC和WebSocket协议可以共存
+async fn test_protocol_interoperability() {
+    // 最小可证的互操作验收测试
+    // 1. 启动 gRPC 与 WebSocket（使用随机端口）
+    let grpc_port = get_random_port();
+    let ws_port = get_random_port();
+    
     let grpc_service = SoulBoxServiceImpl::new();
-    let streaming_service = StreamingServiceImpl::new();
     let ws_server = WebSocketServer::new();
     
-    // 验证所有服务都能正常实例化
-    assert!(std::mem::size_of::<SoulBoxServiceImpl>() > 0);
-    assert!(std::mem::size_of::<StreamingServiceImpl>() > 0);
-    assert!(std::mem::size_of::<WebSocketServer>() > 0);
+    // 2. 执行握手
+    let grpc_client = connect_grpc(grpc_port).await;
+    let ws_client = connect_websocket(ws_port).await;
+    
+    // 3. 各执行一次最小 RPC/消息
+    let grpc_response = grpc_client.health_check().await;
+    let ws_response = ws_client.send_message(json!({"type": "ping"})).await;
+    
+    // 4. 断言输出
+    assert!(grpc_response.is_ok());
+    assert_eq!(ws_response["type"], "pong");
+    
+    // 5. 关闭连接
+    grpc_client.close().await;
+    ws_client.close().await;
 }
 
 #[tokio::test]
@@ -458,7 +472,7 @@ tests/
 - **并发安全**: 使用Arc<Mutex>保证线程安全
 
 #### WebSocket协议层  
-- **结构化消息系统**: JSON格式的类型化消息
+- **结构化消息系统**: 结构化 JSON 消息，r#type 字段取值来自『消息类型枚举表』（详见协议文档）
 - **连接生命周期管理**: 完整的连接建立、认证、清理流程
 - **实时流处理**: 支持终端、代码执行、文件监控等多种流类型
 - **身份认证**: 基于API Key的会话管理
@@ -469,6 +483,28 @@ tests/
 - **异步架构**: 完全基于tokio的异步运行时
 - **资源管理**: 自动连接清理和资源释放
 - **可扩展性**: 模块化设计支持功能扩展
+
+#### WebSocket 消息类型注册表（只读）
+
+| 消息类型 (r#type) | Payload 约束 | 描述 |
+|-------------------|--------------|------|
+| authenticate | `{}` | JWT 认证（通过 Header 传递，非消息体） |
+| terminal_init | `{ sandbox_id: String, cols?: u16, rows?: u16 }` | 初始化终端会话 |
+| terminal_data | `{ sandbox_id: String, data: String }` | 终端输入数据 |
+| terminal_resize | `{ sandbox_id: String, cols: u16, rows: u16 }` | 调整终端大小 |
+| code_execute | `{ sandbox_id: String, code: String, language?: String }` | 执行代码 |
+| file_read | `{ sandbox_id: String, path: String }` | 读取文件 |
+| file_write | `{ sandbox_id: String, path: String, content: String }` | 写入文件 |
+| file_watch | `{ sandbox_id: String, path: String }` | 监控文件变化 |
+| process_spawn | `{ sandbox_id: String, command: String, args?: [String] }` | 启动进程 |
+| process_kill | `{ sandbox_id: String, pid: u32 }` | 终止进程 |
+| sandbox_create | `{ template?: String, env_vars?: Object }` | 创建沙箱 |
+| sandbox_destroy | `{ sandbox_id: String }` | 销毁沙箱 |
+| sandbox_info | `{ sandbox_id: String }` | 获取沙箱信息 |
+| error | `{ code: String, message: String }` | 错误响应 |
+| success | `{ data: Any }` | 成功响应 |
+
+*注：此表为协议规范，用于防止 runtime 漂移。实际实现时需确保类型严格匹配。*
 
 ## 性能指标
 
@@ -488,34 +524,36 @@ tests/
 - **gRPC响应时间**: < 1ms (mock实现)
 - **WebSocket连接处理**: 支持并发连接管理
 - **流式数据处理**: 支持大数据量流式传输
+
+**免责声明**: 所有 mock 指标不代表生产端到端指标，不可与 P95/P99 混用。生产性能数据需通过实际部署环境测量获得。
 - **错误处理延迟**: < 5ms 错误响应时间
 
 ## E2B API兼容性覆盖
 
 ### 核心功能映射
 
-| E2B功能 | SoulBox实现 | 覆盖率 | 备注 |
-|---------|-------------|--------|------|
-| 沙箱创建 | CreateSandbox RPC | ✅ 100% | 支持模板和配置 |
-| 代码执行 | ExecuteCode RPC | ✅ 100% | 同步和异步执行 |
-| 流式执行 | StreamExecuteCode RPC | ✅ 100% | 实时输出流 |
-| 文件上传 | UploadFile RPC | ✅ 100% | 流式文件上传 |
-| 文件下载 | DownloadFile RPC | ✅ 100% | 流式文件下载 |
-| 文件列表 | ListFiles RPC | ✅ 100% | 完整文件元数据 |
-| 终端连接 | TerminalStream RPC | ✅ 100% | 双向终端交互 |
-| 资源监控 | HealthCheck RPC | ✅ 100% | 系统健康状态 |
-| 沙箱管理 | CRUD Operations | ✅ 100% | 完整生命周期管理 |
+| E2B功能 | SoulBox实现 | 覆盖率 | 覆盖层级 | 备注 |
+|---------|-------------|--------|----------|------|
+| 沙箱创建 | CreateSandbox RPC | ✅ 100% | 接口/协议桩 | 支持模板和配置 |
+| 代码执行 | ExecuteCode RPC | ✅ 100% | 接口/协议桩 | 同步和异步执行 |
+| 流式执行 | StreamExecuteCode RPC | ✅ 100% | 接口/协议桩 | 实时输出流 |
+| 文件上传 | UploadFile RPC | ✅ 100% | 接口/协议桩 | 流式文件上传 |
+| 文件下载 | DownloadFile RPC | ✅ 100% | 接口/协议桩 | 流式文件下载 |
+| 文件列表 | ListFiles RPC | ✅ 100% | 接口/协议桩 | 完整文件元数据 |
+| 终端连接 | TerminalStream RPC | ✅ 100% | 接口/协议桩 | 双向终端交互 |
+| 资源监控 | HealthCheck RPC | ✅ 100% | 接口/协议桩 | 系统健康状态 |
+| 沙箱管理 | CRUD Operations | ✅ 100% | 接口/协议桩 | 完整生命周期管理 |
 
 ### WebSocket事件支持
 
-| 事件类型 | WebSocket实现 | 覆盖率 | 功能 |
-|---------|--------------|--------|------|
-| connection | 连接管理 | ✅ 100% | 建立/断开连接 |
-| authentication | 身份认证 | ✅ 100% | API Key验证 |
-| terminal | 终端交互 | ✅ 100% | 命令执行和输出 |
-| execution | 代码执行 | ✅ 100% | 实时执行流 |
-| file_watcher | 文件监控 | ✅ 100% | 文件系统事件 |
-| error | 错误处理 | ✅ 100% | 错误消息和恢复 |
+| 事件类型 | WebSocket实现 | 覆盖率 | 覆盖层级 | 功能 |
+|---------|--------------|--------|----------|------|
+| connection | 连接管理 | ✅ 100% | 接口/协议桩 | 建立/断开连接 |
+| authentication | 身份认证 | ✅ 100% | 接口/协议桩 | JWT 认证 |
+| terminal | 终端交互 | ✅ 100% | 接口/协议桩 | 命令执行和输出 |
+| execution | 代码执行 | ✅ 100% | 接口/协议桩 | 实时执行流 |
+| file_watcher | 文件监控 | ✅ 100% | 接口/协议桩 | 文件系统事件 |
+| error | 错误处理 | ✅ 100% | 接口/协议桩 | 错误消息和恢复 |
 
 ## TDD方法论效果评估
 
