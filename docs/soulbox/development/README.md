@@ -1,58 +1,63 @@
 # SoulBox 开发指南
 
-开发者必读文档，包括快速入门、开发路线图和实施指南。
+完整的开发文档，包括架构设计、实施指南、计费系统和开发路线图。
 
-## 文档列表
+## 文档结构
 
-### 快速入门
-- [**开发优先级指南**](soulbox_priority_guide.md) - 按实际开发顺序组织的快速参考指南 ⭐
-- [**快速入门指南**](soulbox_quickstart.md) - 快速开始使用 SoulBox
+### 📚 [架构设计](architecture/)
+系统技术架构和高级功能设计
+- [系统架构设计](architecture/system-design.md) - 核心技术架构详解
+- [基础设施设计](architecture/infrastructure-design.md) - 五步显化法设计
+- [完整架构指南](architecture/complete-guide.md) - 架构完整说明
+- [高级功能指南](architecture/advanced-features.md) - 高级功能使用
 
-### 迁移策略与架构
-- [**迁移策略文档**](soulbox_migration_strategy.md) - 统一架构方法和三项目迁移计划 🔥
-- [**Rust 架构设计**](soulbox_rust_architecture.md) - 模块化 Rust 架构技术详解 🔥
-- [**SurrealDB 集成指南**](soulbox_surrealdb_integration.md) - 多模型数据库架构和实现方案 🔥
-- [**性能基准测试**](soulbox_performance_benchmarks.md) - 10x 性能提升和资源效率分析 🔥
-- [**实施路线图**](soulbox_implementation_roadmap.md) - 28 周开发阶段详细计划 🔥
-- [**迁移风险评估**](soulbox_migration_risk_assessment.md) - 技术和业务风险及缓解策略 🔥
+### 🚀 [实施指南](implementation/)
+开发实施、迁移策略和技术方案
+- [28周开发计划](implementation/roadmap-28weeks.md) - 模块化开发路线
+- [迁移策略文档](implementation/migration-strategy.md) - 三项目迁移计划
+- [Rust架构设计](implementation/rust-architecture.md) - 模块化架构详解
+- [SurrealDB集成](implementation/surrealdb-integration.md) - 数据库架构方案
+- [性能基准测试](implementation/performance-benchmarks.md) - 10x性能提升分析
+- [风险评估](implementation/risk-assessment.md) - 技术风险缓解策略
+- [模块依赖关系](implementation/module-dependencies.md) - 系统依赖分析
+- [实施路线图](implementation/implementation-roadmap.md) - 28周详细计划
 
-### 开发规划
-- [**28周开发计划**](soulbox_development_roadmap.md) - 模块化开发路线指南
-- [**模块依赖关系图**](soulbox_module_dependencies.md) - 系统模块依赖关系分析
-- [**终极开发指南**](soulbox_ultimate_development_guide.md) - 52个功能的完整开发指南
+### 💰 [计费系统](billing/)
+企业级计费系统设计和实施
+- [系统设计](billing/system-design.md) - 计费系统详细架构
+- [实施指南](billing/implementation-guide.md) - 实施步骤和技术细节
+- [架构图解](billing/architecture-diagram.md) - 计费架构可视化
+- [监控仪表板](billing/monitoring-dashboard.md) - 监控管理界面
+- [常见问题](billing/faq.md) - FAQ和解答
 
-### 实施报告
-- [**模块2 TDD实施报告**](soulbox_module2_tdd_implementation_report.md) - 测试驱动开发实施报告
+### 📖 [开发指南](guides/)
+完整开发手册和实施报告
+- [终极开发指南](guides/ultimate-guide.md) - 52个功能完整指南
+- [TDD实施报告](guides/tdd-implementation.md) - 测试驱动开发报告
 
-## 📖 推荐阅读顺序
+## 快速入门
 
-### 迁移分析师路径 (Migration Analyst)
-1. [**迁移策略文档**](soulbox_migration_strategy.md) - 了解整体迁移策略
-2. [**Rust 架构设计**](soulbox_rust_architecture.md) - 理解技术架构详情
-3. [**SurrealDB 集成指南**](soulbox_surrealdb_integration.md) - 掌握数据库架构设计 🔥
-4. [**性能基准测试**](soulbox_performance_benchmarks.md) - 评估性能改进目标
-5. [**实施路线图**](soulbox_implementation_roadmap.md) - 制定详细时间表
-6. [**迁移风险评估**](soulbox_migration_risk_assessment.md) - 了解风险和缓解策略
+### 核心文档
+- [**开发优先级指南**](priority-guide.md) - 按开发顺序的快速参考 ⭐
+- [**快速入门指南**](getting-started.md) - 快速开始使用SoulBox
+
+## 🛤️ 学习路径
 
 ### 开发者路径 (Developer)
-1. [**开发优先级指南**](soulbox_priority_guide.md) - 了解开发优先级 ⭐
-2. [**Rust 架构设计**](soulbox_rust_architecture.md) - 掌握架构设计原理
-3. [**SurrealDB 集成指南**](soulbox_surrealdb_integration.md) - 学习数据库集成开发 🔥
-4. [**28周开发计划**](soulbox_development_roadmap.md) - 参考模块化开发路线
-5. [**终极开发指南**](soulbox_ultimate_development_guide.md) - 使用功能开发手册
+1. [开发优先级指南](priority-guide.md) - 了解开发优先级 ⭐
+2. [Rust架构设计](implementation/rust-architecture.md) - 掌握架构原理
+3. [SurrealDB集成](implementation/surrealdb-integration.md) - 数据库开发
+4. [28周开发计划](implementation/roadmap-28weeks.md) - 参考开发路线
+5. [终极开发指南](guides/ultimate-guide.md) - 功能开发手册
+
+### 架构师路径 (Architect)
+1. [系统架构设计](architecture/system-design.md) - 核心架构
+2. [基础设施设计](architecture/infrastructure-design.md) - 设施架构
+3. [Rust架构设计](implementation/rust-architecture.md) - 技术实现
+4. [计费系统设计](billing/system-design.md) - 业务架构
 
 ### 项目经理路径 (Project Manager)
-1. [**实施路线图**](soulbox_implementation_roadmap.md) - 了解项目时间线
-2. [**迁移风险评估**](soulbox_migration_risk_assessment.md) - 掌握风险管理
-3. [**性能基准测试**](soulbox_performance_benchmarks.md) - 理解性能目标
-4. [**迁移策略文档**](soulbox_migration_strategy.md) - 制定迁移计划
-
-## 🔥 重点文档
-
-新增的迁移分析文档（标记 🔥）包含：
-- 从三个源项目到统一 Rust 架构的完整迁移策略
-- 详细的 Rust 模块化架构设计和性能优化
-- **SurrealDB 多模型数据库集成指南和最佳实践**
-- 预期 10x 性能提升的详细基准测试分析
-- 28 周实施阶段的详细路线图和里程碑
-- 全面的技术和业务风险评估及缓解策略
+1. [实施路线图](implementation/implementation-roadmap.md) - 项目时间线
+2. [风险评估](implementation/risk-assessment.md) - 风险管理
+3. [性能基准测试](implementation/performance-benchmarks.md) - 性能目标
+4. [迁移策略文档](implementation/migration-strategy.md) - 迁移计划
