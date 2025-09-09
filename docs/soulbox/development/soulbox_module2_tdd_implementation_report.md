@@ -281,7 +281,7 @@ impl WebSocketMessage {
     pub fn sandbox_stream_init(sandbox_id: &str, stream_type: &str) -> Self { /* ... */ }
     pub fn terminal_init(sandbox_id: &str, config: TerminalConfig) -> Self { /* ... */ }
     pub fn execute_code(sandbox_id: &str, code: &str, language: &str) -> Self { /* ... */ }
-    pub fn authenticate(api_key: &str, user_id: &str) -> Self { /* ... */ }
+    // 注：认证通过 WebSocket 握手时的 Header 传递，不使用消息体
 }
 ```
 
@@ -317,7 +317,7 @@ impl WebSocketHandler {
     
     async fn process_websocket_message<S>(&self, /* ... */) -> Result<()> {
         match message.r#type.as_str() {
-            "authenticate" => self.handle_authentication(/* ... */).await?,
+            // 注：认证在 WebSocket 握手时完成，不作为消息处理
             "terminal_init" => self.handle_terminal_init(/* ... */).await?,
             "execute_code" => self.handle_code_execution(/* ... */).await?,
             "file_watcher_init" => self.handle_file_watcher_init(/* ... */).await?,
@@ -429,7 +429,7 @@ test result: ok. 24 passed; 0 failed; 0 ignored
 | 服务实例化 | test_grpc_service_instantiation | ✅ | 100% |
 | 消息创建 | test_websocket_message_creation | ✅ | 100% |
 | 服务器功能 | test_websocket_server_basic_functionality | ✅ | 100% |
-| 协议共存 | test_protocol_coexistence | ✅ | 100% |
+| 协议互操作 | test_protocol_interoperability | ✅ | 100% |
 | 并发操作 | test_concurrent_protocol_operations | ✅ | 100% |
 | 模块编译 | test_protocol_modules_compilation | ✅ | 100% |
 
@@ -472,10 +472,10 @@ tests/
 - **并发安全**: 使用Arc<Mutex>保证线程安全
 
 #### WebSocket协议层  
-- **结构化消息系统**: 结构化 JSON 消息，r#type 字段取值来自『消息类型枚举表』（详见协议文档）
+- **结构化消息系统**: 结构化 JSON 消息，r#type 字段取值来自『消息类型枚举表』（详见协议文档），以避免 runtime 漂移
 - **连接生命周期管理**: 完整的连接建立、认证、清理流程
 - **实时流处理**: 支持终端、代码执行、文件监控等多种流类型
-- **身份认证**: 基于API Key的会话管理
+- **身份认证**: JWT（或带作用域的访问令牌）通过 Header 传递
 - **错误恢复**: 优雅的错误处理和连接恢复
 
 #### 系统集成特性
@@ -623,7 +623,7 @@ SoulBox Module 2的TDD实施获得了**完全成功**：
 
 - ✅ **24个测试用例 100%通过率**
 - ✅ **完整的gRPC和WebSocket协议实现** 
-- ✅ **E2B API完全兼容覆盖**
+- ✅ **E2B API协议/接口层映射覆盖目标：100%（运行时执行兼容度以各语言解释器适配为准）**
 - ✅ **生产级别的错误处理和资源管理**
 - ✅ **可扩展的模块化架构**
 
