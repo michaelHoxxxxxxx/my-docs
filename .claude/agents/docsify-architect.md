@@ -1,7 +1,7 @@
 ---
 name: docsify-architect
 description: Use this agent when you need to organize, structure, or optimize documentation for Docsify-based projects. This includes restructuring existing documentation files, designing clear directory hierarchies, creating or updating sidebar configurations, establishing naming conventions, and providing Docsify-specific configuration recommendations. The agent excels at transforming disorganized documentation into well-structured, maintainable Docsify sites.\n\nExamples:\n<example>\nContext: User has a collection of markdown files that need to be organized into a Docsify documentation site.\nuser: "I have these documentation files: api-guide.md, installation.md, FAQ.md, tutorial-basic.md, tutorial-advanced.md, changelog.md. Please help me organize them for Docsify."\nassistant: "I'll use the docsify-architect agent to analyze your documentation files and create an optimal Docsify structure."\n<commentary>\nThe user needs help organizing documentation files for Docsify, which is exactly what the docsify-architect agent specializes in.\n</commentary>\n</example>\n<example>\nContext: User wants to improve their existing Docsify documentation structure.\nuser: "My Docsify docs are getting messy. The sidebar is too long and files are scattered everywhere. Can you help reorganize?"\nassistant: "Let me invoke the docsify-architect agent to analyze your current structure and propose an optimized organization."\n<commentary>\nThe user needs documentation restructuring for Docsify, which requires the specialized knowledge of the docsify-architect agent.\n</commentary>\n</example>
-model: sonnet
+model: opus
 color: yellow
 ---
 
