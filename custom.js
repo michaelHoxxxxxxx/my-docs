@@ -3,7 +3,7 @@
   'use strict';
 
   // TODO: 修改为你自己的密码
-  const ACCESS_PASSWORD = 'docpass-2025';
+  const ACCESS_PASSWORD = 'rcity-2025';
   const STORAGE_KEY = 'docsify-access-granted';
   const OVERLAY_ID = 'docs-password-overlay';
 
