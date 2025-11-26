@@ -185,3 +185,6 @@
   - [1. llm-chain 简介](docs/llm-chain_intro.md)
   - [2. llm-chain 安装与配置](docs/llm-chain_install.md)
   - [3. llm-chain 基础概念](docs/llm-chain_basic-concepts.md)
+
+- **🎮 ThePlayer 测试文档** (2025-11-26)
+  - [终极玩家操作流程](docs/thePlayer/tests/测试说明.md)
