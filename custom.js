@@ -1,3 +1,176 @@
+// ========== 全局访问密码 ==========
+(function() {
+  'use strict';
+
+  // TODO: 修改为你自己的密码
+  const ACCESS_PASSWORD = 'docpass-2025';
+  const STORAGE_KEY = 'docsify-access-granted';
+  const OVERLAY_ID = 'docs-password-overlay';
+
+  // 如果未配置密码则跳过
+  if (!ACCESS_PASSWORD) return;
+
+  const storage = {
+    get() {
+      try {
+        return localStorage.getItem(STORAGE_KEY) === 'true';
+      } catch (e) {
+        console.warn('无法读取本地存储', e);
+        return false;
+      }
+    },
+    set(val) {
+      try {
+        localStorage.setItem(STORAGE_KEY, val ? 'true' : 'false');
+      } catch (e) {
+        console.warn('无法写入本地存储', e);
+      }
+    }
+  };
+
+  const blurContent = () => {
+    const app = document.getElementById('app');
+    if (app) {
+      app.style.filter = 'blur(6px)';
+      app.setAttribute('aria-hidden', 'true');
+    }
+    const cover = document.getElementById('custom-cover');
+    if (cover) {
+      cover.style.filter = 'blur(6px)';
+    }
+  };
+
+  const unblurContent = () => {
+    const app = document.getElementById('app');
+    if (app) {
+      app.style.filter = '';
+      app.removeAttribute('aria-hidden');
+    }
+    const cover = document.getElementById('custom-cover');
+    if (cover) {
+      cover.style.filter = '';
+    }
+  };
+
+  const removeOverlay = () => {
+    const overlay = document.getElementById(OVERLAY_ID);
+    if (overlay) {
+      overlay.remove();
+    }
+    document.body.style.overflow = '';
+  };
+
+  const handleUnlock = (input, hint) => {
+    if (input.value === ACCESS_PASSWORD) {
+      storage.set(true);
+      unblurContent();
+      removeOverlay();
+    } else {
+      hint.textContent = '密码错误，请重试';
+      hint.style.color = '#e53935';
+      input.value = '';
+      input.focus();
+    }
+  };
+
+  const renderOverlay = () => {
+    if (storage.get()) return;
+
+    blurContent();
+    document.body.style.overflow = 'hidden';
+
+    const overlay = document.createElement('div');
+    overlay.id = OVERLAY_ID;
+    overlay.style.cssText = `
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 20% 20%, rgba(66,185,131,0.15), rgba(0,0,0,0.8)),
+                  radial-gradient(circle at 80% 80%, rgba(66,133,244,0.15), rgba(0,0,0,0.8));
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+    `;
+
+    const card = document.createElement('div');
+    card.style.cssText = `
+      background: rgba(28,28,30,0.9);
+      color: #e8eaed;
+      padding: 28px;
+      border-radius: 14px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-family: "Helvetica Neue", Arial, sans-serif;
+    `;
+
+    const title = document.createElement('h2');
+    title.textContent = '访问验证';
+    title.style.cssText = 'margin: 0 0 12px; font-size: 22px;';
+
+    const desc = document.createElement('p');
+    desc.textContent = '请输入访问密码查看文档';
+    desc.style.cssText = 'margin: 0 0 16px; color: #b0b3b8;';
+
+    const input = document.createElement('input');
+    input.type = 'password';
+    input.placeholder = '输入密码';
+    input.autocomplete = 'off';
+    input.style.cssText = `
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: #e8eaed;
+      outline: none;
+      font-size: 15px;
+      margin-bottom: 12px;
+    `;
+
+    const hint = document.createElement('div');
+    hint.style.cssText = 'height: 20px; font-size: 13px; color: #9aa0a6; margin-bottom: 12px;';
+
+    const btn = document.createElement('button');
+    btn.textContent = '解锁';
+    btn.style.cssText = `
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      background: linear-gradient(120deg, #42b983, #36a1f2);
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      font-weight: 600;
+    `;
+
+    btn.addEventListener('click', () => handleUnlock(input, hint));
+    input.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') {
+        handleUnlock(input, hint);
+      }
+    });
+
+    card.appendChild(title);
+    card.appendChild(desc);
+    card.appendChild(input);
+    card.appendChild(hint);
+    card.appendChild(btn);
+    overlay.appendChild(card);
+    document.body.appendChild(overlay);
+
+    setTimeout(() => input.focus(), 50);
+  };
+
+  if (!storage.get()) {
+    document.addEventListener('DOMContentLoaded', renderOverlay);
+  }
+})();
+
 // ========== 暗色模式功能 ==========
 (function() {
   'use strict';
