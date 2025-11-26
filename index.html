@@ -89,12 +89,8 @@
       name: '学习文档', // 文档标题，会显示在侧边栏顶部
       nameLink: '/', // 点击文档标题后的跳转地址
       // repo 属性已移除 - 不再显示右上角GitHub图标
-      loadSidebar: '_sidebar.md', // 明确指定侧边栏路径
-      homepage: 'README.md', // 指定首页文件
-      alias: {
-        '/docs/_sidebar.md': '/_sidebar.md', // 重定向docs下的sidebar到根目录
-        '/.*/_sidebar.md': '/_sidebar.md',   // 所有路径下的sidebar都使用根目录的
-      },
+      loadSidebar: false, // 关闭侧边栏，仅展示指定页面
+      homepage: 'docs/thePlayer/tests/测试说明.md', // 指定首页文件
       subMaxLevel: 2, 
       sidebarCollapse: {
         collapse: true,   // 默认折叠
@@ -130,29 +126,14 @@
         tabComments: true,
         tabHeadings: true
       }, // 选项卡配置
-      search: { // 增强搜索插件配置
-        paths: 'auto',
-        placeholder: '搜索文档内容...',
-        noData: '未找到相关内容',
-        depth: 6, // 增加搜索深度
-        maxAge: 86400000, // 缓存一天
-        hideOtherSidebarContent: false,
-        namespace: 'kiki-docs-search',
-        pathNamespaces: ['/docs'],
-        searchMaxParagraphs: 8, // 增加搜索段落数
-        searchMaxWords: 200, // 增加单次搜索的词数限制
-      },
+      search: false, // 关闭搜索，防止导航到其他文档
       count: { // 字数统计插件配置
         countable: true,
         fontsize: '0.9em',
         color: 'rgb(90,90,90)',
         language: 'chinese'
       },
-      pagination: { // 分页插件配置
-        previousText: '上一章节',
-        nextText: '下一章节',
-        crossChapter: true,
-      },
+      pagination: false, // 关闭分页，避免跳转到其他文档
       plugins: [
 // EditOnGithubPlugin 插件已移除
       ],

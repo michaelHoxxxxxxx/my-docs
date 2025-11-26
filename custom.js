@@ -171,6 +171,22 @@
   }
 })();
 
+// ========== 路由访问限制（仅允许 ThePlayer 文档） ==========
+(function() {
+  'use strict';
+  const ALLOWED_HASH = '#/docs/thePlayer/tests/测试说明';
+
+  function enforceRoute() {
+    const current = window.location.hash || '#/';
+    if (!current.startsWith(ALLOWED_HASH)) {
+      window.location.hash = ALLOWED_HASH;
+    }
+  }
+
+  window.addEventListener('hashchange', enforceRoute);
+  document.addEventListener('DOMContentLoaded', enforceRoute);
+})();
+
 // ========== 暗色模式功能 ==========
 (function() {
   'use strict';
@@ -1659,6 +1675,8 @@ window.addEventListener('load', function() {
   if (startButton) {
     // 处理开始阅读功能
     function handleStartReading() {
+      // 跳转到唯一允许的文档
+      window.location.hash = '#/docs/thePlayer/tests/测试说明';
       var customCover = document.getElementById('custom-cover');
       
       if (customCover) {
