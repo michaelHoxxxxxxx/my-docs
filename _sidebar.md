@@ -1,3 +1,6 @@
+- **🎮 ThePlayer 测试文档** (2025-11-26)
+  - [终极玩家操作流程](docs/thePlayer/tests/测试说明.md)
+
 - **🔥 Open Lovable 项目专题** (2025-08-14)
   - [项目架构总览](open-lovable/architecture-overview.md)
   - [E2B 沙箱集成分析](open-lovable/e2b-integration-analysis.md)
@@ -185,6 +188,3 @@
   - [1. llm-chain 简介](docs/llm-chain_intro.md)
   - [2. llm-chain 安装与配置](docs/llm-chain_install.md)
   - [3. llm-chain 基础概念](docs/llm-chain_basic-concepts.md)
-
-- **🎮 ThePlayer 测试文档** (2025-11-26)
-  - [终极玩家操作流程](docs/thePlayer/tests/测试说明.md)
